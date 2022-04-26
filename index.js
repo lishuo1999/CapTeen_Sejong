@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
-//getting static files
-app.use(express.static('/htmls'));
+//allowing which folder can be serviced to users
+app.use(express.static(__dirname+'/htmls'));
 
 //routing definition
 app.get("/", (req, res)=>{
