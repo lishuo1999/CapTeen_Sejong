@@ -8,7 +8,6 @@ router.get('/sign_up', function(req, res, next) {
   res.render("user/signup");
 });
 
-
 router.post("/sign_up", async function(req,res,next){
     let body = req.body;
 
