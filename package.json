@@ -2,7 +2,7 @@
   "name": "capteen",
   "version": "1.0.0",
   "description": "Sejong Univ. CapTeen Project Repository",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
