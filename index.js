@@ -1,12 +1,15 @@
-const express = require("express");
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 
 //allowing which folder can be serviced to users
-app.use(express.static(__dirname+'/htmls'));
+app.use(express.json())
+app.use(express.static(__dirname+'public/htmls'));
+app.use(bodyParser.urlencoded({extended:true}));
 
-//routing definition
-app.get("/", (req, res)=>{
+//respond with the file when a GET request is made to the / page
+app.post("/", (req, res)=>{
     res.sendFile(__dirname+"/index.html");
 });
 
