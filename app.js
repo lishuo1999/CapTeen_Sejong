@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const indexRouter = require('./routes/index')
+
+//port configuration
 const PORT = 3000;
 
 //allowing which folder can be serviced to users
