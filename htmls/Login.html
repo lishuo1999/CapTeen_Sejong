@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <title>로그인</title>
+    <style>@import url('Login_style.css');</style>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="Login_.js"></script>
+</head>
+<body>
+    <div id="title">
+        <span>기업의 정보보안 위험관리 평가 도구</span>
+    </div>
+    <div class="login-form">
+        <h1>로그인</h1>
+        <form id="login" action="" method="post"> <!--form data가 도착할 URL! -> 서버쪽에서 입력할 것-->
+            <div class="int-area">
+                <input type="text" name="userId" id="id" autocomplete="off" placeholder="아이디" required>
+            </div>
+            <div class="int-area">
+                <input type="password" name="userpw" id="pw" autocomplete="off" placeholder="비밀번호" required>
+            </div>
+            <div class="btn-area">
+                <button type="submit">로그인</button>
+            </div>
+        </form>
+        <div class="sign_up">
+            <a href="" >회원가입</a>
+        </div>
+    </div>
+</body>
+</html>
