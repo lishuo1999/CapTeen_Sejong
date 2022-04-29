@@ -1,0 +1,194 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+body {
+    font-family: 'NanumSquare', sans-serif;
+    justify-content: center;
+    background-color:#F8F7F7;
+    display: flex;
+    height:100%;
+}
+h3 {
+    font-weight: 900;
+    position:fixed;
+    left: 10px;
+    top: 10px;
+}
+.title {
+    height: 10%;
+    width: 100%;
+    display: flex;
+}
+.title > a {
+    position:fixed;
+    top: 10px;
+    right: 10px;
+    float: right;
+}
+.container_left {
+    display: flex;
+    height: 90%;
+    width: 50%;
+    flex-direction: row;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    margin: auto;
+}
+.con_left_1 {
+    display: flex;
+    width : 100%;
+    height : 20%;
+    left: 0px;
+    position: absolute;
+    margin:auto;
+}
+
+#search_title {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 100%;
+    margin-top: 25px;
+    height: 20px;
+    border-left: 5px solid #ED7D31;
+    font-weight: 900;
+}
+#search_table {
+    height: 20%;
+    margin-top: 60px;
+    border: 1px solid black;
+    border-radius: 2px;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#search_button {
+    background-color: black;
+    width: 70px;
+    height: 30px;
+    border: none;
+}
+#search_button:hover {
+    background-color: #ED7D31;
+}
+#sel_1 {
+    text-align: center;
+    width: 100%;
+    height: 30px;
+}
+.con_left_2 {
+    display: flex;
+    width: 100%;
+    height: 80%;
+    bottom: 0px;
+    left: 0px;
+    position: absolute;
+    margin:auto;
+}
+.asset_list {
+    border: 1px solid black;
+    overflow: auto;
+    margin-left:10px;
+    margin-right:10px;
+    width: 100%;
+    height: 380px;
+}
+#asset_list_table { /*Datatable*/
+    table-layout:fixed;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    border: 1px solid black;
+    transform: none;
+}
+#collect { /*부모태그 : asset_list*/
+    position:absolute;
+    background-color: transparent;
+    border-color: transparent;
+    color: black;
+    font-size: 20px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 900;
+    bottom: 140px;
+    left: 315px;
+    margin:auto;
+}
+#collect:hover {
+    color: #ED7D31;
+    cursor: pointer;
+}
+.container_right {
+    width: 50%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin: auto;
+}
+.con_right_1 {
+    display:inline-block;
+    display: flex;
+    width : 100%;
+    height : 20%;
+}
+.con_right_2 {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    bottom: 0px;
+    right: 0px;
+    margin:auto;
+}
+#asset_table {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    table-layout:fixed;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 100%;
+    transform: none;
+}
+.users_title {
+    margin-top: 35px;
+    height: 20px;
+    border-left: 5px solid #ED7D31;
+    font-weight: 900;
+}
+.users_asset_list {
+    border: 1px solid black;
+    overflow: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 90%;
+    height: 380px;
+}
+.footer {
+    position:fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 90px;
+}
+#next{
+    width: 80px;
+    height: 40px;
+    background:black;
+    color: white;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 900;
+    justify-content: center;
+}
+#next:hover {
+    background-color: #ED7D31;
+    cursor: pointer;
+}
