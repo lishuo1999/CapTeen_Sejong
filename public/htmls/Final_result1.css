@@ -1,0 +1,61 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+html,body,div,video {margin:0;padding:0;}
+
+html{overflow: hidden;}
+html, body{width: 100%; height: 100%; }
+
+body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px; background-color:white; }  
+
+body{
+    font-family: 'NanumSquare',sans-serif;
+}
+
+a { text-decoration:none;}
+
+
+.content{
+    width: 100%; height: 100%;
+    position: relative;
+    overflow:hidden; /*얘를 써줘야 영상이 안삐져나옴*/
+    background-color:black;
+}
+
+#loading {
+    position: absolute;
+    top:45%;
+    left:47%;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    
+  }
+  
+  @keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+
+#next{
+
+    text-align:center;
+    color:black;
+    background-color:white;
+    width:100px;
+    height:50px;
+    font-size:15px;
+    font-weight:700;
+    border-radius:30px;
+    cursor:pointer;
+    border:none;
+}
+
+#next:hover{
+    background-color:#ED7D31;
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="index.css" type="text/css" rel="stylesheet">    
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+</head>
+
+<body>
+    <script>AOS.init();</script>
+    <script src="scroll.js"></script>
+    <!--1page-->
+    <div class="content">    
+        <div class='container'>
+            <video width="100%" height="100%" autoplay loop muted>
+               <source src="indexvideo.mp4" type="video/mp4" style="opacity: 0.8;">
+                영상 재생이 되지 않는 브라우저입니다.
+            </video></div>
+        <!--도구 명-->
+        <div style="position: absolute; left: 2%; top: 15%; color:white; font-size:60px; font-weight:900;">
+            <p>기업의 정보보안<br> 위험관리 평가 도구</p></div>
+        <!--도구 짧은 설명-->
+        <div style="position: absolute; left: 2%; top: 43%; color:white; font-size:15px;">
+            <strong>기업의 위험관리를 약식으로 제공하는 도구입니다.<br>누구나 사용이 가능합니다.</strong></div>
+        <!--로그인-->
+        <div style="position: absolute; left: 96%; top: 1%; font-size:15px; font-weight:700;">
+            <p><a href="./Login.html" style="color:white;">로그인</a></p></div>
+        <!--화살표-->
+        <div class="arrow">
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
+        </div>
+    </div>
+
+    <!--2page-->
+        <div class="content">
+            <!--로그인-->
+            <div style="position: absolute; left: 96%; top: 1%; font-size:15px; font-weight:700;">
+                <p><a href="./Login.html" style="color:white;">로그인</a></p>
+            </div>
+            <div style="position:absolute; left:5%; top:20%; color:white; font-size:70px; font-weight:900;">
+                <p data-aos="fade-right" data-aos-duration="1000">위험 분석</p>
+            </div>
+            <div style="position:absolute; left:5%; top:37%; color:white; font-size:25px;">
+                <p data-aos="fade-right" data-aos-duration="1000">조직에 존재하는 위험이 어떠한 것들이 있는지 분석합니다.</p>
+            </div>
+            <div class="moveTopBtn" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'})"><p>TOP</p>
+            </div>
+        </div>
+
+        <!--3page-->
+        <div class="content">
+            <!--로그인-->
+            <div style="position: absolute; left: 96%; top: 1%; font-size:15px; font-weight:700;">
+                <p><a href="./Login.html" style="color:white;">로그인</a></p>
+            </div>
+            <div style="position:absolute; left:78%; top:20%; color:white; font-size:70px; font-weight:900;">
+                <p data-aos="fade-left" data-aos-duration="1000">위험 평가</p>
+            </div>
+            <div style="position:absolute; left:60%; top:37%; color:white; font-size:25px;">
+                <p data-aos="fade-left" data-aos-duration="1000">수용 가능한 위험 수준을 결정하여 위험을 평가합니다.</p>
+            </div>
+            <div class="moveTopBtn" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'})"><p>TOP</p>
+            </div>
+        </div>
+
+        <!--4page-->
+        <div class="content">
+            <!--로그인-->
+            <div style="position: absolute; left: 96%; top: 1%; font-size:15px; font-weight:700;">
+                <p><a href="./Login.html" style="color:white;">로그인</a></p>
+            </div>
+            <div style="position:absolute; left:5%; top:20%; color:white; font-size:70px; font-weight:900;">
+                <p data-aos="fade-right" data-aos-duration="1000">위험 처리</p>
+            </div>
+            <div style="position:absolute; left:5%; top:37%; color:white; font-size:25px;">
+                <p data-aos="fade-right" data-aos-duration="1000">위험에 따른 처리 방법을 결정합니다.</p>
+            </div>        
+            <div class="moveTopBtn" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'})"><p>TOP</p>
+            </div>
+        </div>
+
+        <!--5page-->
+        <div class="content">
+            <!--로그인-->
+            <div style="position: absolute; left: 96%; top: 1%; font-size:15px; font-weight:700;">
+                <p><a href="./Login.html" style="color:black;">로그인</a></p>
+            </div>
+            <div style="position:absolute; left:12%; top:30%; color:black; font-size:90px; font-weight:900;">
+                <p data-aos="fade-up" data-aos-duration="1000">위험 관리를 시작하시겠습니까?</p>
+            </div>
+            <div style="position:absolute; left:45%; top:60%;">
+                <button type="button" id="start" onclick="window.location.href='./Login.html'" data-aos="fade-up" data-aos-duration="1000">시작</button>
+            </div> <!--여기 링크 석이랑 얘기해보기-->      
+            <div class="moveTopBtn" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'})"><p>TOP</p>
+            </div>
+
+        </div>
+
+
+</body>
+
+</html>

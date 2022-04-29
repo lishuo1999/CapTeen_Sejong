@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="Anal_3.css" type="text/css" rel="stylesheet">    
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+</head>
+
+<body>
+    <script>AOS.init();</script>
+    <script src="Anal_3.js"></script>
+
+    <!--1page-->
+    <div class="content">    
+        <!--메시지-->
+        <div style="position: absolute; left: 25%; top: 32%; color:white; font-size:80px; font-weight:800;">
+            <p id='ing'>위험 평가 실행 중</p>
+            <div class='loading' style="position:fixed; left:63%; top:40%;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div style="position: absolute; left: 27%; top: 32%; color:white; font-size:80px; font-weight:800;">
+            <p id='fin'>위험 평가 실행 완료</p>
+        </div>
+
+
+        <!--로그아웃-->
+        <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
+            <p><a href="./Login.html" style="color:white;">로그아웃</a></p></div>
+        
+            <div style="position:absolute; left:46%; top:60%;">
+            <button type="button" id="next" style="display:none" onclick="window.location.href='./Proc_1.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
+        </div> 
+
+    </div>
+
+
+</body>
+
+</html>

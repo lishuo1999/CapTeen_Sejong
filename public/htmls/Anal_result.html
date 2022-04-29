@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="Anal_result.css" type="text/css" rel="stylesheet">    
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+</head>
+
+<body>
+    <script>AOS.init();</script>
+
+    <script src="Anal_result.js"></script>
+    <div class="content">    
+        <!--왼쪽 상단-->
+        <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:700;">
+            <p style="color:black;">위험 분석 결과</></p>
+        </div> 
+        <!--로그아웃-->
+        <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
+            <p><a href="./Login.html" style="color:black;">로그아웃</a></p></div>
+        <!--다음-->
+        <div style="position:absolute; left:46%; top:80%;">
+            <button type="button" id="Next" onclick="window.location.href='./Eval_1.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
+        </div>  
+
+        <!--파이차트-->
+        <div><canvas id="pie-chart" width="300" height="300" style="position:absolute; left:10%; top:20%;" data-aos="fade-right" data-aos-duration="1000"></canvas>
+        </div>
+
+        <!--등급별 개수 표-->
+        <table id="gradeTable" style="position:absolute; left:9%; top:65%;" data-aos="fade-right" data-aos-duration="1000">
+            <thead>
+              <tr>
+                <th>위험도</th><th>1등급</th><th>2등급</th><th>3등급</th><th>4등급</th><th>5등급</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>개수</td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+    </div>
+
+</body>
+
+</html>
