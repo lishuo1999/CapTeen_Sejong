@@ -11,6 +11,11 @@ console.log(datas);
 window.onload = function () {
     pieChartDraw(); //차트 그래프 그리기 
     createGradetable(); //등급 표 만들기
+    $(".tooltip1").tooltip();
+    $(".tooltip2").tooltip();
+    $(".tooltip3").tooltip();
+    $(".tooltip4").tooltip();
+    $(".tooltip5").tooltip(); //tooltip show (bootstrap)
 }
 
 let pieChartData = {
