@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const routes = require('./routes');
+const routes = require('./routes/index');
 
 //port configuration
 const PORT = 3000;
@@ -11,7 +11,6 @@ app.use(express.json())
 
 
 // allowing which folder can be serviced to users
-// https://{serverIpAddress}/ request will be directed to indexRouter
 app.use(express.static(__dirname+'public/htmls'));
 app.use(bodyParser.urlencoded({extended:true}));
 
