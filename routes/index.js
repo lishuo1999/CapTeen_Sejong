@@ -12,7 +12,7 @@ router.use('/join', join);
 router.use('/login ', login);
 
 //if https://url.com/ then route to /main
-app.get('/main', function(req, res) {
+router.get('/', function(req, res) {
     res.send(main);
   });
 

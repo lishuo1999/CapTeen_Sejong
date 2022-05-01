@@ -13,8 +13,6 @@ app.use(express.json())
 // allowing which folder can be serviced to users
 app.use(express.static(__dirname+'public/htmls'));
 app.use(bodyParser.urlencoded({extended:true}));
-
-// by manipulating router/index.js you can control urls and apis
 app.use('/', routes);
 
 //starting server
