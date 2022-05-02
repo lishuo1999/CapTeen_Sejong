@@ -9,8 +9,11 @@ console.log(datas);
 
 
 window.onload = function () {
+    $("#table_right").hide();
+    $("#caption").hide();
     pieChartDraw(); //차트 그래프 그리기 
     createGradetable(); //등급 표 만들기
+    $(".tooltip0").tooltip();
     $(".tooltip1").tooltip();
     $(".tooltip2").tooltip();
     $(".tooltip3").tooltip();
@@ -51,3 +54,49 @@ let createGradetable=function(){
         
     }
 };
+
+//지금은 1등급만 기능 넣어놓음 
+$(function(){
+    $('#head .tooltip1').on('click',function(){ //1등급
+        $("#caption").text("1등급");
+        $("#caption").fadeIn(1000);
+        $("#table_right").fadeIn(1000);
+        $("#totalTable").DataTable({
+
+            info:false,
+            paging:false,
+            autoWidth:false,
+            destroy:true, //다시 클릭하면 다시 로드 
+            order:[[0,"desc"]], //이건 나중에 위험도 내림차순때문에 지정
+            ajax:{
+                type: "get",
+                url: 'https://jsonplaceholder.typicode.com/comments',
+                dataSrc: '',
+                dataType: 'json',
+            },
+            columns:[
+                {data:"id",width:10},
+                {data:"postId",width:30},
+                {data:"name",width:15},
+                {data:"email",width:20},
+                {data:"body",width:20}
+            ],
+            //scrollX:false,
+            //scrollY:350
+
+
+
+            //columnDefs: [
+            //   
+            //    { targets: 0, width: 5 },
+            //    { targets: 1, width: 5 },
+            //    { targets: 2, width: 15 },
+            //    { targets: 3, width: 20 },
+            //    { targets: 4, width: 25 }
+            //]
+
+        });
+
+    });
+
+});
