@@ -4,6 +4,7 @@
   "description": "Sejong Univ. CapTeen Project Repository",
   "main": "app.js",
   "scripts": {
+    "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +18,12 @@
   },
   "homepage": "https://github.com/touBVa/CapTeen#readme",
   "dependencies": {
-    "express": "^4.18.0",
-    "nodemon": "^2.0.15"
+    "cookie-parser": "^1.4.6",
+    "debug": "^4.3.4",
+    "express": "^4.18.1",
+    "http-errors": "^2.0.0",
+    "jade": "^1.11.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.16"
   }
 }
