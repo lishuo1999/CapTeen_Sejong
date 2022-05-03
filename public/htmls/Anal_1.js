@@ -7,7 +7,7 @@ $(function(){
 
         $.ajax({
             type: 'POST',   //post방식으로 명시
-            url : 'https://rrymupe.request.dreamhack.games',  //서버 주소 
+            url : '/analysis/business',  //서버 주소 
             dataType:'json',
             data:({
                 "value":value
