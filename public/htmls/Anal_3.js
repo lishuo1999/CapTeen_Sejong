@@ -24,11 +24,7 @@ $(function(){
 
     $.ajax({
         type: 'get',   //get방식으로 명시
-<<<<<<< HEAD
-        url : 'https://jsonplaceholder.typicode.com/posts',  //서버 주소 
-=======
         url : '/analysis/result',  //서버 주소를 /analysis/result
->>>>>>> cfbe0a9e64673ab015c42b3a32e4b84140017dcc
         dataType:'json',
         success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
             console.log("success");
