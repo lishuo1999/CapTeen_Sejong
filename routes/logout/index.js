@@ -1,7 +1,7 @@
 // 문제없이 잘 돌아감
 const express = require('express');
 const router = express.Router();
-const controller = require('./main.controller');
+const controller = require('./logout.controller.js');
 
 // GET home page request
 // you can use functions in other file like this

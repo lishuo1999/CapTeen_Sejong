@@ -7,7 +7,6 @@ var logger = require('morgan');
 var app = express();
 
 var routes = require('./routes');
-const morgan = require('morgan');
 
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,11 +18,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
 //port configuration
-const PORT = 3000;
-
-//let requests wrote in json without any problem
-app.use(express.json())
-
+//const PORT = 3000;
 
 // allowing which folder can be serviced to users
 app.use(express.static(path.join(__dirname,'/public/htmls')));
@@ -46,9 +41,9 @@ app.use(function(err, req, res, next){
 })
 
 //starting server
-app.listen(PORT, () =>{
-    console.log(`Listen : ${PORT}`);
-});
+// app.listen(PORT, () =>{
+//     console.log(`Listen : ${PORT}`);
+// });
 
 
 module.exports = app;
