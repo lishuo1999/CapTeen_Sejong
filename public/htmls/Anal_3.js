@@ -23,17 +23,9 @@ $(function(){
     $('#next').on('click',function(){            
 
     $.ajax({
-        type: 'post',   //get방식으로 명시
-        url : 'https://jsonplaceholder.typicode.com/posts',  //서버 주소 
+        type: 'get',   //get방식으로 명시
+        url : '/analysis/result',  //서버 주소를 /analysis/result
         dataType:'json',
-        data:({
-                "1":3,
-                "2":4,
-                "3":5,
-                "4":6,
-                "5":0
-            }
-        ),
         success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
             console.log("success");
             localStorage.setItem("data",JSON.stringify(data));
