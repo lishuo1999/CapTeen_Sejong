@@ -2,7 +2,7 @@ $(document).ready(function () { //로그인 버튼 클릭 시
     $('#login').submit(function (event) {
         $.ajax({ //서버로 id, pw 보냄
             type: "post",
-            url: "/", //서버url -> 서버쪽에서 입력할 것
+            url: "/login", //서버url -> 서버쪽에서 입력할 것
             datatype: "json", //서버로 부터 수신할 데이터 타입
 		    contentType : "application/json", //전송할 테이터 타입
             success: function(){ 
