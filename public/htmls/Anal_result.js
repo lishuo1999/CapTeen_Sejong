@@ -1,7 +1,7 @@
 var real=JSON.parse(localStorage.getItem("data"));
 var result=Object.keys(real); //전송받은 데이터 result 변수에 저장~ 
 var datas=[]
-for(var i=0;i<result.length-1;i++){ //맨뒤에 id값이 추가되니까 length-1 ..
+for(var i=0;i<5;i++){ 
     var key=result[i];
     datas[i]=parseInt(real[key]); //문자를 정수형 숫자로 변환
 }
