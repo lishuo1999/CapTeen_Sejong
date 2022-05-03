@@ -1,13 +1,15 @@
+//문제없이 값 제대로 받아옴
 const express = require("express");
 const router = express.Router();
 const controller = require('./join.controller');
 
-//회원가입 요청은 POST로 온다.
-//통신은 https로 해주고
-//가입요청으로 들어온 유저 정보(비밀번호, 아이디 등)은 DB에 저장하되 비번은 해시해서 저장 SHA-256?
-
-//POST로 들어온 요청 중 /join url을 요청하면 request의 body에 저장된 데이터를 가져오는 함수로 연결
-router.post('/join', controller.getJoinInfo);
+//Login.html에서 회원가입 버튼을 누르면 Join.html으로 다이렉션.
+//Join.html에서 회원가입 버튼을 누르면 폼에 작성한 데이터가 post로 옴.
+//app.js에서 /를 가지고 router로 보내줬고
+//router에서 /join을 가지고 여기로 보내줬으니까
+//이제 남은 건 / 뿐이겠죠
+//들어온 URL이 /join 즉 /join/이니까 (앞에서부터 차근차근 떼어가면서 판별=라우팅 하는 개념)
+router.post('/', controller.getJoinInfo);
 
 
 module.exports = router;
