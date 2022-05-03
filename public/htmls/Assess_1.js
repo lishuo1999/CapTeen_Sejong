@@ -5,7 +5,7 @@ $(function(){
         value1=$("#input1").val(); //value값 가져오기
         if(value1.trim()==''){
             alert('모든 항목을 입력하세요');
-            location.href='./Proc_1.html'
+            location.href='./Assess_1.html'
             return;
         }
         console.log(value1);
@@ -13,7 +13,7 @@ $(function(){
         value2=$("#input2").val(); //value값 가져오기
         if(value2.trim()==''){
             alert('모든 항목을 입력하세요');
-            location.href='./Proc_1.html'
+            location.href='./Assess_1.html'
             return;
         }
         console.log(value2);
@@ -21,7 +21,7 @@ $(function(){
         value3=$("#input3").val(); //value값 가져오기
         if(value3.trim()==''){
             alert('모든 항목을 입력하세요');
-            location.href='./Proc_1.html'
+            location.href='./Assess_1.html'
             return;
         }
         console.log(value3);
