@@ -28,7 +28,7 @@ $(function(){
     
         $.ajax({
             type: 'post',   //get방식으로 명시
-            url : 'https://iangvxk.request.dreamhack.games',  //이동할 jsp 파일 주소
+            url : '/assess/userInput',  //이동할 jsp 파일 주소
             dataType:'json',   //문자형식으로 받기
         
             data:{'income':value1,'security':value2,'others':value3},

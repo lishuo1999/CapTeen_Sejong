@@ -9,6 +9,7 @@ const login = require('./login/index');
 const logout = require('./logout/index');
 const analysis = require('./analysis/index');
 const eval=require('./eval/index');
+const assess=require('./assess/index');
 
 router.use('/main', main);
 router.use('/login', login);
@@ -16,5 +17,6 @@ router.use('/logout', logout);
 router.use('/join', join);
 router.use('/analysis', analysis);
 router.use('/eval', eval);
+router.use('/assess', assess);
 
 module.exports = router;

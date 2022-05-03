@@ -29,7 +29,7 @@
         </div>
         <!--로그아웃-->
         <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
-            <p><a href="./Login.html" style="color:white;">로그아웃</a></p></div>
+            <p><a href="/logout" style="color:white;">로그아웃</a></p></div>
         <!--화살표-->
         <div class="arrow">
             <div class="scroll-arrow"></div>
@@ -42,7 +42,7 @@
     <div class="content" style="background-color: white;">
         <!--로그인-->
         <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
-            <p><a href="./Login.html" style="color:black;">로그아웃</a></p>
+            <p><a href="/logout" style="color:black;">로그아웃</a></p>
         </div>
         <!--왼쪽 상단-->
         <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:700;">
@@ -51,7 +51,7 @@
         <!--입력1. 연수익-->
         <div>
             <p style= "position:absolute; left:33%; top:30%; color:black; font-size:50px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">1. 연수익을 입력하세요.</p>
-            <form action="---서버 주소?---" method="POST">
+            <form action="/assess/userInput" method="POST">
                 <input id="input1" type="text" style= "position:absolute; left:37%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000"/>
                 <p style= "position:absolute; left:58%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">단위:만원</p>
             </form>
@@ -64,7 +64,7 @@
     <div class="content" style="background-color: white;">
         <!--로그인-->
         <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
-            <p><a href="./Login.html" style="color:black;">로그아웃</a></p>
+            <p><a href="/logout" style="color:black;">로그아웃</a></p>
         </div>
         <!--왼쪽 상단-->
         <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:700;">
@@ -74,9 +74,9 @@
         <div>
             <p style= "position:absolute; left:16%; top:30%; color:black; font-size:50px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">2. 연수익 대비 보안 예산 투자 비율을 입력하세요.
             </p>
-            <form action="---서버 주소?---" method="POST">
+            <form action="/assess/userInput" method="POST">
                 <input id="input2" type="text" style= "position:absolute; left:37%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000"/>
-                <p style= "position:absolute; left:58%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">단위:정수</p>
+                <p style= "position:absolute; left:58%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">단위:%</p>
             </form>
         </div>
         <div class="moveTopBtn" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'})"><p>TOP</p>
@@ -87,7 +87,7 @@
     <div class="content" style="background-color: white;">
         <!--로그인-->
         <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
-            <p><a href="./Login.html" style="color:black;">로그아웃</a></p>
+            <p><a href="logout" style="color:black;">로그아웃</a></p>
         </div>
         <!--왼쪽 상단-->
         <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:700;">
@@ -97,7 +97,7 @@
         <div>
             <p style= "position:absolute; left:10%; top:30%; color:black; font-size:50px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">3. 위험 처리를 외주에 맡긴다면, 투자할 비용을 입력하세요.
             </p>
-            <form action="---서버의 url ---" method="POST">
+            <form action="/assess/userInput" method="POST">
                 <input id="input3" type="text" style= "position:absolute; left:37%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000"/>
                 <p style= "position:absolute; left:58%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">단위:만원</p>
             </form>
