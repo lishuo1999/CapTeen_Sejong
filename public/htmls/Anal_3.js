@@ -23,7 +23,7 @@ $(function(){
     $('#next').on('click',function(){            
 
     $.ajax({
-        type: 'post',   //get방식으로 명시
+        type: 'get',   //get방식으로 명시
         url : 'https://jsonplaceholder.typicode.com/posts',  //서버 주소 
         dataType:'json',
         data:({
@@ -36,8 +36,8 @@ $(function(){
         ),
         success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
             console.log("success");
+            console.log(data);
             localStorage.setItem("data",JSON.stringify(data));
-
         },
         error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
             console.log(error);
