@@ -40,20 +40,22 @@
         <!--로그아웃-->
         <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:900;">
             <p><a href="./Login.html" style="color:black;">로그아웃</a></p></div>
-        <!--다음-->
-        <div style="position:absolute; left:47%; top:85%;">
-            <button type="button" id="Next" onclick="window.location.href='./Eval_1.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
+
+        <div>
+          <button type="button" id="Next" onclick="window.location.href='./Eval_1.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
         </div>  
 
-        <div class='box1' data-aos="fade-right" data-aos-duration="1000"></div>
+
+      <div class='container'>        
+        <div class='box1' data-aos="fade-right" data-aos-duration="1000">
           <div><p id='title1' data-aos="fade-right" data-aos-duration="1000">위험도 등급별 분포</p></div>
 
           <!--파이차트-->
-          <div><canvas id="pie-chart" width="400" height="400" style="position:absolute; left:13.5%; top:15%;" data-aos="fade-right" data-aos-duration="1000"></canvas>
+          <div><canvas id="pie-chart" width="300" height="300" data-aos="fade-right" data-aos-duration="1000"></canvas>
           </div>
 
           <!--등급별 개수 표-->
-          <table id="gradeTable" style="position:absolute; left:11.5%; top:65%;" data-aos="fade-right" data-aos-duration="1000">
+          <table id="gradeTable" data-aos="fade-right" data-aos-duration="1000">
             <thead>
               <tr id='head'>
                 <th class="tooltip0" title="위험분석 결과 측정된 위험도 등급입니다.">위험 등급</th> 
@@ -70,9 +72,9 @@
               </tr>
             </tbody>
           </table>
-      
+      </div>
 
-        <div class='box2'></div>
+        <div class='box2'>
           <div><p id='caption'></p></div>
           <div id='table_right'>
             <table id="totalTable">
@@ -85,7 +87,8 @@
               </tbody>
             </table>
           </div>
-        
+        </div>
+
     </div>
 
 </body>

@@ -15,7 +15,8 @@ a { text-decoration:none;}
 
 
 .content{
-    width: 100%; height: 100%;
+    width: 100%; 
+    height: 100%;
     position: relative;
     overflow:hidden; /*얘를 써줘야 영상이 안삐져나옴*/
    /* background-color:white;*/
@@ -23,17 +24,22 @@ a { text-decoration:none;}
 
 
 #Next{
+    position:fixed;
+    left:47%;
+    bottom:10%;
     text-align:center;
     color:white;
     background-color:black;
     width:100px;
     height:50px;
+
     font-size:15px;
     font-weight:700;
     border-radius:30px;
     cursor:pointer;
     border:none;
 }
+
 
 #Next:hover{
     background-color:#ED7D31;
@@ -49,19 +55,19 @@ table {
 }
 
 th,td{
-    padding:20px;
+    padding:15px;
 }
 
 thead{
     background:#F0F0F0;
     color:black;
-    font-size:17px;
+    font-size:15px;
     border-top:2px solid #CFCFCF;
 }
 
 tbody{
     background:white;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 #head:hover{
@@ -74,14 +80,73 @@ tbody{
     border-spacing:0;
 }
 
+.box1{
+    display:flex;
+    flex-direction:column;
+    position:absolute;
+    margin:auto;
+    justify-content: space-evenly;
+    align-items: center;
+    top:5%;
+    left:3%;
+    width: 45%;
+    height: 90%;
+    background-color: #FBFBFB;
+    border:2px lightgray solid;
+    border-radius:50px;
+    box-shadow: 2px 2px 0.5px -0.5px lightgray;
+}
+
+#title1{
+    position:absolute;
+    font-weight:900;
+    font-size:20px;
+    margin:auto;
+    left:38%;
+    width:100%;
+    height:10%;
+    top:5%;
+}
+
+#pie-chart{
+    position:absolute; 
+    width:100%;
+    top:13%;
+    height:60%;
+    left:24%;
+}
+
+#gradeTable{
+    position:absolute; 
+    width:90%;
+    height:20%;
+    bottom:5%;
+}
+
+.box2{
+    display:flex;
+    flex-direction:column;
+    position:absolute;
+    margin:auto;
+    justify-content: space-evenly;
+    align-items: center;
+    top:5%;
+    right:3%;
+    width: 45%;
+    height: 90%;
+    background-color: #FBFBFB;
+    border:2px lightgray solid;
+    border-radius:50px;
+    box-shadow: 2px 2px 0.5px -0.5px lightgray;
+}
 
 #table_right{
     overflow:auto;
     position:absolute;
-    left:53.5%;
-    top:16%;
-    width:40%;
-    height:65%;
+    left:2%;
+    top:10%;
+    width:95%;
+    height:85%;
     /*border: 2px solid #CFCFCF;*/
     border-spacing:0;
 }
@@ -95,40 +160,20 @@ tbody{
 
 #caption{
     position:absolute;
-    left:72%;
-    top:9%;
+    left:48%;
+    top:5%;
     font-size:20px;
     font-weight:900;
 }
 
-.box1{
-    position:absolute;
-    left:6%;
-    top:13%;
-    width: 700px;
-    height: 600px;
-    background-color: #FBFBFB;
-    border:2px lightgray solid;
-    border-radius:50px;
-    box-shadow: 2px 2px 0.5px -0.5px lightgray;
-}
-
-#title1{
-    top:9%;
-    left:22%;
-    position:absolute;
-    font-weight:900;
-    font-size:20px;
-}
-
-.box2{
-    position:absolute;
-    left:53%;
-    top:13%;
-    width: 700px;
-    height: 600px;
-    background-color: #FBFBFB;
-    border:2px lightgray solid;
-    border-radius:50px;
-    box-shadow: 2px 2px 0.5px -0.5px lightgray;
+.container{
+    display:flex;
+    flex-direction:row;
+    height: 80%;
+    width: 90%;
+    position: absolute;
+    left:5%;
+    top:7%;
+    margin: auto;
+    /*background-color:gray;*/
 }
