@@ -5,7 +5,7 @@ html,body,div,video {margin:0;padding:0;}
 html{overflow: hidden;}
 html, body{width: 100%; height: 100%; }
 
-body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px; background-color:white; }  
+body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px;}  
 
 body{
     font-family: 'NanumSquare',sans-serif;
@@ -14,12 +14,29 @@ body{
 a { text-decoration:none;}
 
 
-.content{
+.content1{
     width: 100%; height: 100%;
     position: relative;
     overflow:hidden; /*얘를 써줘야 영상이 안삐져나옴*/
-    background-color:thistle;
+    background-color:black;
 }
+
+.content3{
+    width: 100%; height: 100%;
+    position: relative;
+    overflow:hidden; /*얘를 써줘야 영상이 안삐져나옴*/
+    background-color:black;
+}
+
+.content2{
+    width: 100%; height: 100%;
+    position: relative;
+    overflow:hidden; /*얘를 써줘야 영상이 안삐져나옴*/
+    background-color:black;
+    background-image:url('stock.jpg');
+    background-attachment:fixed;
+}
+
 
 /* 스크룔 화살표 */
 .arrow{position:absolute; left:50%; text-align:center; animation:arrow_down 1.5s infinite;}
@@ -59,11 +76,11 @@ a { text-decoration:none;}
 #start{
 
     text-align:center;
-    color:white;   
-    background-color:black;
+    color:black;   
+    background-color:white;
     width:100px;
     height:50px;
-    font-size:15px;
+    font-size:20px;
     font-weight:700;
     border-radius:30px;
     cursor:pointer;
