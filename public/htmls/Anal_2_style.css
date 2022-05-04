@@ -1,34 +1,41 @@
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
-html, body {
+
+html,
+body {
     margin: 0;
     height: 100%;
     width: 100%;
     overflow: hidden;
 }
+
 body {
     font-family: 'NanumSquare', sans-serif;
     justify-content: center;
-    background-color:#F8F7F7;
+    background-color: #F8F7F7;
     display: flex;
-    height:100%;
+    height: 100%;
 }
+
 h3 {
     font-weight: 900;
-    position:fixed;
+    position: fixed;
     left: 10px;
     top: 10px;
 }
+
 .title {
     height: 10%;
     width: 100%;
     display: flex;
 }
-.title > a {
-    position:fixed;
+
+.title>a {
+    position: fixed;
     top: 10px;
     right: 10px;
     float: right;
 }
+
 .container_left {
     display: flex;
     height: 90%;
@@ -39,13 +46,14 @@ h3 {
     bottom: 0px;
     margin: auto;
 }
+
 .con_left_1 {
     display: flex;
-    width : 100%;
-    height : 20%;
+    width: 100%;
+    height: 20%;
     left: 0px;
     position: absolute;
-    margin:auto;
+    margin: auto;
 }
 
 #search_title {
@@ -58,6 +66,7 @@ h3 {
     border-left: 5px solid #ED7D31;
     font-weight: 900;
 }
+
 #search_table {
     height: 20%;
     margin-top: 60px;
@@ -67,20 +76,30 @@ h3 {
     margin-left: 10px;
     margin-right: 10px;
 }
+
 #search_button {
     background-color: black;
     width: 70px;
     height: 30px;
     border: none;
 }
+
 #search_button:hover {
     background-color: #ED7D31;
 }
+
 #sel_1 {
     text-align: center;
     width: 100%;
     height: 30px;
 }
+
+#sel_2 {
+    text-align: center;
+    width: 100%;
+    height: 30px;
+}
+
 .con_left_2 {
     display: flex;
     width: 100%;
@@ -88,40 +107,40 @@ h3 {
     bottom: 0px;
     left: 0px;
     position: absolute;
-    margin:auto;
+    margin: auto;
 }
+
 .asset_list {
     border: 1px solid black;
     overflow: auto;
-    margin-left:10px;
-    margin-right:10px;
+    margin-left: 10px;
+    margin-right: 10px;
     width: 100%;
     height: 380px;
 }
-#asset_list_table { /*Datatable*/
-    table-layout:fixed;
+
+#asset_list_table {
+    /*Datatable*/
+    table-layout: fixed;
     border-collapse: collapse;
     border-spacing: 0px;
     border: 1px solid black;
     transform: none;
 }
-#collect { /*부모태그 : asset_list*/
-    position:absolute;
-    background-color: transparent;
-    border-color: transparent;
-    color: black;
-    font-size: 20px;
+
+#collect {
+    /*부모태그 : asset_list*/
+    background-color: black;
+    width: 70px;
+    height: 30px;
     border: none;
-    border-radius: 25px;
-    font-weight: 900;
-    bottom: 140px;
-    left: 315px;
-    margin:auto;
 }
+
 #collect:hover {
-    color: #ED7D31;
+    background-color: #ED7D31;
     cursor: pointer;
 }
+
 .container_right {
     width: 50%;
     height: 90%;
@@ -132,55 +151,89 @@ h3 {
     right: 0px;
     margin: auto;
 }
+
 .con_right_1 {
-    display:inline-block;
+    display: inline-block;
     display: flex;
-    width : 100%;
-    height : 20%;
+    width: 100%;
+    height: 9%;
 }
 .con_right_2 {
     display: flex;
     position: absolute;
     width: 100%;
-    height: 80%;
+    height: 91%;
     bottom: 0px;
     right: 0px;
-    margin:auto;
+    margin: auto;
 }
+
 #asset_table {
     position: absolute;
     left: 0px;
     top: 0px;
-    table-layout:fixed;
+    table-layout: fixed;
     border-collapse: collapse;
     border-spacing: 0px;
     width: 100%;
     transform: none;
 }
+
 .users_title {
-    margin-top: 35px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 100%;
+    margin-top: 25px;
     height: 20px;
     border-left: 5px solid #ED7D31;
     font-weight: 900;
 }
+
 .users_asset_list {
-    border: 1px solid black;
+    border: none;
     overflow: auto;
     margin-left: 10px;
     margin-right: 10px;
-    width: 90%;
-    height: 380px;
+    width: 100%;
+    height: 455px;
+
+}
+.users_asset_list_table {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    height: 100%;
+    width: 100%;
+}
+table.users_asset_list_table thead th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+    background: #ED7D31;
+    margin: 20px 10px;
+}
+table.users_asset_list_table td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
 }
 .footer {
-    position:fixed;
+    position: fixed;
     bottom: 0px;
     width: 100%;
     height: 90px;
 }
-#next{
+
+#next {
     width: 80px;
     height: 40px;
-    background:black;
+    background: black;
     color: white;
     font-size: 15px;
     border: none;
@@ -188,6 +241,7 @@ h3 {
     font-weight: 900;
     justify-content: center;
 }
+
 #next:hover {
     background-color: #ED7D31;
     cursor: pointer;

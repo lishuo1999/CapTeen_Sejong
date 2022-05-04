@@ -12,7 +12,9 @@
     <!--Datatable 적용-->
     <script type="text/javascript" src="http://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
-    
+    <!--aos 적용-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <body>
@@ -38,23 +40,22 @@
                         <td style="text-align: center;">
                             <select id="sel_1">
                                 <option value="0" selected>-선택-</option>
-                                <option value="전자정보">전자정보</option>
-                                <option value="문서">문서</option>
-                                <option value="소프트웨어>">소프트웨어</option>
-                                <option value="하드웨어">하드웨어</option>
-                                <option value="인력">인력</option>
+                                <option value="1">전자정보</option>
+                                <option value="2">문서</option>
+                                <option value="3">소프트웨어</option>
+                                <option value="4">하드웨어</option>
+                                <option value="5">인력</option>
                             </select>
                         </td>
                         <th style="font-size:15px">자산그룹명</th>
                         <td style="text-align: center;">
-                            <select id="sel_1">
+                            <select id="sel_2">
                                 <option value="0" selected>-선택-</option>
                             </select>
                         </td>
-                        <th>
-                            <button type="submit" id="search_button"><a style="color:white;">조회</a></button>
+                        <th><button type="submit" id="search_button"><a style="color:white;">조회</a></button></th>
                         <td>
-                            <button type="submit" id="collect"><a style="color:white;">담기</a></button></th>
+                            <button type="submit" id="collect"><a style="color:white;">담기</a></button>
                         </td>
                     </tr>
                 </tbody>
@@ -86,14 +87,34 @@
         </div>
         <div class="con_right_2">
             <div class="users_asset_list">
-
+                <table class="users_asset_list_table">
+                    <thead>
+                        <tr>
+                            <th scope="cols" style="width: 150px;">자산분류</th>
+                            <th scope="cols" style="width: 150px;">그룹명</th>
+                            <th scope="cols" style="width: 150px;">자산명</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--<tr>
+                            <td>test1</td>
+                            <td>test2</td>
+                            <td>test3</td>
+                        </tr>
+                        <tr>
+                            <td>test1</td>
+                            <td>test2</td>
+                            <td>test3</td>
+                        </tr>-->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <!--<footer class="footer">
+    <footer class="footer">
         <div style="width:80px; margin:auto;"><button type="submit" id="next">다음</button></div>
-    </footer>-->
+    </footer>
 </body>
 
 </html>
