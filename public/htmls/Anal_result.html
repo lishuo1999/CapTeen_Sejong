@@ -14,9 +14,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
     <!--tooltip 적용-->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    
+    <!--tether-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <!--Bootstrap-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+  
     <!--DataTable 적용-->
     <script type="text/javascript" src="http://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />    
@@ -31,23 +34,26 @@
     
     <div class="content">    
         <!--왼쪽 상단-->
-        <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:700;">
+        <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:900;">
             <p style="color:black;">위험 분석 결과</p>
         </div> 
         <!--로그아웃-->
-        <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
+        <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:900;">
             <p><a href="./Login.html" style="color:black;">로그아웃</a></p></div>
         <!--다음-->
-        <div style="position:absolute; left:46%; top:80%;">
+        <div style="position:absolute; left:47%; top:85%;">
             <button type="button" id="Next" onclick="window.location.href='./Eval_1.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
         </div>  
 
-        <!--파이차트-->
-        <div><canvas id="pie-chart" width="300" height="300" style="position:absolute; left:10%; top:20%;" data-aos="fade-right" data-aos-duration="1000"></canvas>
-        </div>
+        <div class='box1' data-aos="fade-right" data-aos-duration="1000"></div>
+          <div><p id='title1' data-aos="fade-right" data-aos-duration="1000">위험도 등급별 분포</p></div>
 
-        <!--등급별 개수 표-->
-        <table id="gradeTable" style="position:absolute; left:7%; top:65%;" data-aos="fade-right" data-aos-duration="1000">
+          <!--파이차트-->
+          <div><canvas id="pie-chart" width="400" height="400" style="position:absolute; left:13.5%; top:15%;" data-aos="fade-right" data-aos-duration="1000"></canvas>
+          </div>
+
+          <!--등급별 개수 표-->
+          <table id="gradeTable" style="position:absolute; left:11.5%; top:65%;" data-aos="fade-right" data-aos-duration="1000">
             <thead>
               <tr id='head'>
                 <th class="tooltip0" title="위험분석 결과 측정된 위험도 등급입니다.">위험 등급</th> 
@@ -64,19 +70,22 @@
               </tr>
             </tbody>
           </table>
+      
+
+        <div class='box2'></div>
+          <div><p id='caption'></p></div>
+          <div id='table_right'>
+            <table id="totalTable">
+              <thead>
+                <tr>
+                  <th>위험도</th><th>위험</th><th>자산</th><th>취약성</th><th>위협</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
         
-        <div><p id='caption'></p></div>
-        <div id='table_right'>
-          <table id="totalTable">
-            <thead>
-              <tr>
-                <th>위험도</th><th>위험</th><th>자산</th><th>취약성</th><th>위협</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
     </div>
 
 </body>
