@@ -7,11 +7,9 @@ $(document).ready(function () { //로그인 버튼 클릭 시
 		    contentType : "application/json", //전송할 테이터 타입
             success: function(){ 
                 console.log(data);
-                alert("success");
             },
             error: function() {
                 console.log(error);
-                alert('error');
             }
         });
     });

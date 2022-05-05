@@ -1,7 +1,6 @@
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
-html,
-body {
+html,body {
     margin: 0;
     height: 100%;
     width: 100%;
@@ -21,6 +20,7 @@ h3 {
     position: fixed;
     left: 10px;
     top: 10px;
+    margin: 0px;
 }
 
 .title {

@@ -46,11 +46,9 @@ $(function () {
          datatype: "json", //서버로 부터 수신할 데이터 타입
          contentType: "application/json", //전송할 테이터 타입
          success: function (data) {
-            alert('success');
             console.log(data);
          },
          error: function () {
-            alert('error')
             console.log(error);
          }
       });
