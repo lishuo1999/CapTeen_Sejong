@@ -92,9 +92,9 @@ tbody{
     width: 45%;
     height: 90%;
     background-color: #FBFBFB;
-    border:2px lightgray solid;
+    border:2px white solid;
     border-radius:50px;
-    box-shadow: 2px 2px 0.5px -0.5px lightgray;
+    box-shadow: 2px 2px 3px 3px #EEEEEE;
 }
 
 #title1{
@@ -135,9 +135,9 @@ tbody{
     width: 45%;
     height: 90%;
     background-color: #FBFBFB;
-    border:2px lightgray solid;
+    border:2px white solid;
     border-radius:50px;
-    box-shadow: 2px 2px 0.5px -0.5px lightgray;
+    box-shadow: 2px 2px 3px 3px #EEEEEE;
 }
 
 #table_right{

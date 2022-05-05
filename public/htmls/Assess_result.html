@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="Assess_result.css" type="text/css" rel="stylesheet">    
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+</head>
+
+<body>
+    <script>AOS.init();</script>
+    <script src="Assess_result.js"></script>
+
+
+    <div class="content">    
+        <!--로그아웃-->
+        <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
+            <p><a href="/logout" style="color:black;">로그아웃</a></p></div>
+        <!--왼쪽 상단-->
+        <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:700;">
+            <p style="color:black;">위험 처리 결과</></p>
+        </div>
+        <div>
+            <button type="button" id="next" onclick="window.location.href='./Final_result1.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
+        </div> 
+
+        <div class="bigbox" data-aos="fade-right" data-aos-duration="1000">
+            <div id="box1">
+                <p id="text1">위험 수용</p><p id='text2'>보호 대책 비용이 손실 처리 비용보다<br> 더 큰 경우, 위험을 수용한다.</p>
+            </div>
+            <div id="box2">
+                <p id="text1">위험 전가</p><p id='text2'>전가 비용보다 손실 처리 비용이<br> 더 큰 경우, 위험을 제3자에 전가한다.</p>
+            </div>
+            <div id="box3">
+                <p id="text1">위험 회피</p><p id='text2'>핵심 프로세스가 아닌 경우,<br> 위험을 회피하여 손실을 줄인다.</p>                
+            </div>
+            <div id="box4">
+                <p id="text1">위험 감소</p><p id='text2'>고 위험에 대해 보안대책을 적용하여<br> 그 수치를 낮춘다.</p>      
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

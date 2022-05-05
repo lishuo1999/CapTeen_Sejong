@@ -1,0 +1,137 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+html,body,div,video {margin:0;padding:0;}
+
+html{overflow: hidden;}
+html, body{width: 100%; height: 100%; }
+
+body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px; background-color:white; }  
+
+body{
+    font-family: 'NanumSquare',sans-serif;
+}
+
+a { text-decoration:none;}
+
+
+
+#next{
+    position:fixed;
+    left:47%;
+    bottom:11%;
+    text-align:center;
+    color:white;
+    background-color:black;
+    width:100px;
+    height:50px;
+    font-size:15px;
+    font-weight:700;
+    border-radius:30px;
+    cursor:pointer;
+    border:none;
+}
+
+#next:hover{
+    background-color:#ED7D31;
+}
+
+
+.bigbox{
+    display:flex;
+    flex-direction:row;
+    position:absolute;
+    margin:auto;
+    justify-content: space-evenly;
+    align-items: center;
+    top:5%;
+    left:5%;
+    width: 90%;
+    height: 80%;
+    /*background-color: #FBFBFB;
+    border:2px lightgray solid;
+    border-radius:50px;
+    box-shadow: 2px 2px 0.5px -0.5px lightgray;*/
+}
+
+#box1{
+    position:absolute;
+    top:25%;
+    height: 50%;
+    width:20%;
+    left:4%;
+    background-color: #FBFBFB;
+    border:2px white solid;
+    border-radius:50px;
+    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    /*가운데 정렬을 위한 조건들 */
+    display:flex;
+    flex-direction:column;
+    justify-content:center; 
+    align-items : center;
+}
+
+#box2{
+    position:absolute;
+    top:25%;
+    height: 50%;
+    width:20%;
+    left:28%;
+    background-color: #FBFBFB;
+    border:2px white solid;
+    border-radius:50px;
+    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    /*가운데 정렬을 위한 조건들 */
+    display:flex;
+    flex-direction:column;
+    justify-content:center; 
+    align-items : center;
+}
+
+#box3{
+    position:absolute;
+    top:25%;
+    height:50%;
+    width:20%;
+    left:52%;
+    background-color: #FBFBFB;
+    border:2px white solid;
+    border-radius:50px;
+    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    /*가운데 정렬을 위한 조건들 */
+    display:flex;
+    flex-direction:column;
+    justify-content:center; 
+    align-items : center;
+}
+
+#box4{
+    position:absolute;
+    top:25%;
+    height:50%;
+    width:20%;
+    left:76%;
+    background-color: #FBFBFB;
+    border:2px white solid;
+    border-radius:50px;
+    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    /*가운데 정렬을 위한 조건들 */
+    display:flex;
+    flex-direction:column;
+    justify-content:center; 
+    align-items : center;
+}
+
+.bigbox p{
+    text-align:center;
+    
+}
+
+#text1{
+    font-size:20px;
+    font-weight:900;
+}
+
+#text2{
+    color:gray;
+}
+
