@@ -1,0 +1,196 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'NanumSquare', sans-serif;
+    justify-content: center;
+    background-color: #F8F7F7;
+    height: 100%;
+}
+
+h3 {
+    font-weight: 900;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    margin: 0px;
+}
+
+.title {
+    height: 10%;
+    width: 100%;
+    display: flex;
+}
+
+.title>a {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    float: right;
+}
+
+.con_top {
+    height: 14%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.con_mid {
+    height: 38%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart_con {
+    position: fixed;
+    width: 16%;
+    height: 16%;
+    margin-left: 40px;
+}
+
+.con_bot {
+    height: 38%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.con_top_all {
+    width: 100%;
+    height: auto;
+    margin: 10px 10px 10px 0px;
+    background-color: white;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: medium;
+    /*border: 1px solid lightgray;*/
+}
+
+#con_top1 {
+    margin-left: 10px;
+}
+
+span {
+    font-weight: 900;
+    font-size: 40px;
+    padding-left: 45%;
+    color: rgb(117, 12, 12)
+}
+
+.con_mid_all {
+    width: 100%;
+    height: auto;
+    margin: 0px 10px 10px 0px;
+    background-color: white;
+    /*border: 1px solid lightgray;*/
+}
+
+#con_mid1 {
+    margin-left: 10px;
+}
+
+#con_mid4 {
+    width: 150%;
+}
+
+.con_bot_all {
+    width: 100%;
+    height: auto;
+    margin: 0px 10px 20px 0px;
+    background-color: white;
+    /*border: 1px solid lightgray;*/
+}
+
+#con_bot1 {
+    margin-left: 10px;
+    width: 120%;
+    padding: 10px;
+    display: flex;
+    overflow: auto;
+    -ms-overflow-style: none;
+}
+
+/*#con_bot1_table {
+    /*Datatable
+    border-collapse: collapse;
+    border-spacing: 0px;
+    border: 1px solid black;
+    width: 100%;
+}*/
+#con_bot1_table {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    
+}
+#con_bot1::-webkit-scrollbar{ 
+    display:none; 
+}
+
+#con_bot1_table thead th {
+    width: 150px;
+    padding: 10px;
+    font-weight: 900;
+    vertical-align: top;
+    color: #fff;
+    margin: 20px 10px;
+    background-color: lightgray;
+}
+
+#con_bot1_table tbody th {
+    width: 150px;
+    padding: 10px;
+}
+
+#con_bot1_table td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+}
+
+tr:hover {
+    background: #FAFAFA;
+}
+.grade_1 {
+    background: #FF4437;
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
+}
+.grade_2 {
+    background: #FFA636;
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
+}
+.grade_3 {
+    background: #FFFA48;
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
+}
+.grade_4 {
+    background: #73E600;
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
+}
+.grade_5 {
+    background: #05B81D;
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
+}
