@@ -70,16 +70,16 @@ $(function(){
             order:[[0,"desc"]], //이건 나중에 위험도 내림차순때문에 지정
             ajax:{
                 type: "get",
-                url: 'https://jsonplaceholder.typicode.com/comments',
+                url: 'https://jsonplaceholder.typicode.com/comments', //서버에서 변경
                 dataSrc: '',
                 dataType: 'json',
             },
-            columns:[
-                {data:"id",width:10},
-                {data:"postId",width:30},
-                {data:"name",width:15},
-                {data:"email",width:20},
-                {data:"body",width:20}
+            columns:[ //여기 data 명은 서버에서 변경 
+                {data:"id",width:"10%"},
+                {data:"postId",width:"30%"},
+                {data:"name",width:"15%"},
+                {data:"email",width:"20%"},
+                {data:"body",width:"20%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -117,11 +117,11 @@ $(function(){
                 dataType: 'json',
             },
             columns:[
-                {data:"id",width:10},
-                {data:"postId",width:30},
-                {data:"name",width:15},
-                {data:"email",width:20},
-                {data:"body",width:20}
+                {data:"id",width:"10%"},
+                {data:"postId",width:"30%"},
+                {data:"name",width:"15%"},
+                {data:"email",width:"20%"},
+                {data:"body",width:"20%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -159,11 +159,11 @@ $(function(){
                 dataType: 'json',
             },
             columns:[
-                {data:"id",width:10},
-                {data:"postId",width:30},
-                {data:"name",width:15},
-                {data:"email",width:20},
-                {data:"body",width:20}
+                {data:"id",width:"10%"},
+                {data:"postId",width:"30%"},
+                {data:"name",width:"15%"},
+                {data:"email",width:"20%"},
+                {data:"body",width:"20%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -201,11 +201,11 @@ $(function(){
                 dataType: 'json',
             },
             columns:[
-                {data:"id",width:10},
-                {data:"postId",width:30},
-                {data:"name",width:15},
-                {data:"email",width:20},
-                {data:"body",width:20}
+                {data:"id",width:"10%"},
+                {data:"postId",width:"30%"},
+                {data:"name",width:"15%"},
+                {data:"email",width:"20%"},
+                {data:"body",width:"20%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -243,11 +243,11 @@ $(function(){
                 dataType: 'json',
             },
             columns:[
-                {data:"id",width:10},
-                {data:"postId",width:30},
-                {data:"name",width:15},
-                {data:"email",width:20},
-                {data:"body",width:20}
+                {data:"id",width:"10%"},
+                {data:"postId",width:"30%"},
+                {data:"name",width:"15%"},
+                {data:"email",width:"20%"},
+                {data:"body",width:"20%"}
             ],
             //scrollX:false,
             //scrollY:350

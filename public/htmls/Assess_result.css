@@ -151,20 +151,22 @@ a { text-decoration:none;}
     top:5%;
     width:90%;
     height:90%;
-    /*border: 2px solid #CFCFCF;*/
     border-spacing:0;
 }
 
 #table_right th{
     position: sticky;
     top:0px;
-    background-color:#F0F0F0;
-    border:none;
+    background-color:white;
+    /*border:none;*/
+    text-align:center;
 }
+
 
 #methodTable{
     table-layout:fixed; /*표 크기 고정 */
     border-spacing:0;
+    text-align:center;
 }
 
 #right{
