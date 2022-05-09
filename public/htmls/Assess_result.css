@@ -35,6 +35,9 @@ a { text-decoration:none;}
     background-color:#ED7D31;
 }
 
+#again{
+    cursor:pointer;
+}
 
 .bigbox{
     display:flex;
@@ -68,6 +71,7 @@ a { text-decoration:none;}
     flex-direction:column;
     justify-content:center; 
     align-items : center;
+    cursor:pointer;
 }
 
 #box2{
@@ -85,6 +89,7 @@ a { text-decoration:none;}
     flex-direction:column;
     justify-content:center; 
     align-items : center;
+    cursor:pointer;
 }
 
 #box3{
@@ -101,7 +106,8 @@ a { text-decoration:none;}
     display:flex;
     flex-direction:column;
     justify-content:center; 
-    align-items : center;
+    align-items : center;    
+    cursor:pointer;
 }
 
 #box4{
@@ -119,6 +125,7 @@ a { text-decoration:none;}
     flex-direction:column;
     justify-content:center; 
     align-items : center;
+    cursor:pointer;
 }
 
 .bigbox p{
@@ -135,3 +142,43 @@ a { text-decoration:none;}
     color:gray;
 }
 
+
+
+#table_right{
+    overflow:auto;
+    position:absolute;
+    left:5%;
+    top:5%;
+    width:90%;
+    height:90%;
+    /*border: 2px solid #CFCFCF;*/
+    border-spacing:0;
+}
+
+#table_right th{
+    position: sticky;
+    top:0px;
+    background-color:#F0F0F0;
+    border:none;
+}
+
+#methodTable{
+    table-layout:fixed; /*표 크기 고정 */
+    border-spacing:0;
+}
+
+#right{
+    position:absolute;
+    top:5%;
+    height:85%;
+    width:55%;
+    left:40%;
+    background-color: #FBFBFB;
+    border:2px white solid;
+    border-radius:50px;
+    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    /*가운데 정렬을 위한 조건들 */
+    display:flex;
+    justify-content:center; 
+    align-items : center;
+}

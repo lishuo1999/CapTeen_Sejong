@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+
+    <!--DataTable 적용-->
+    <script type="text/javascript" src="http://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />    
+
 </head>
 
 <body>
@@ -21,8 +26,8 @@
         <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
             <p><a href="/logout" style="color:black;">로그아웃</a></p></div>
         <!--왼쪽 상단-->
-        <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:700;">
-            <p style="color:black;">위험 처리 결과</></p>
+        <div id="again" onclick="window.location.href='./Assess_result.html'"style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:700;">
+            <p>위험 처리 결과</p>
         </div>
         <div>
             <button type="button" id="next" onclick="window.location.href='./Final_result1.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
@@ -41,11 +46,23 @@
             <div id="box4">
                 <p id="text1">위험 감소</p><p id='text2'>고 위험에 대해 보안대책을 적용하여<br> 그 수치를 낮춘다.</p>      
             </div>
+
+            <!--처리 방식별 테이블-->
+            <div id='right'>
+                <div id='table_right'>
+                  <table id="methodTable">
+                    <thead>
+                      <tr>
+                        <th>위험 명</th><th>전략 선택</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
         </div>
-
-
     </div>
 
 </body>
-
 </html>
