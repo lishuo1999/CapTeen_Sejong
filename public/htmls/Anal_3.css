@@ -18,15 +18,15 @@ a { text-decoration:none;}
     width: 100%; height: 100%;
     position: relative;
     overflow:hidden; /*얘를 써줘야 영상이 안삐져나옴*/
-    background-color:thistle;
+    background-color:black;
 }
 
 
 #next{
 
     text-align:center;
-    color:white;
-    background-color:black;
+    color:black;
+    background-color:white;
     width:100px;
     height:50px;
     font-size:15px;
