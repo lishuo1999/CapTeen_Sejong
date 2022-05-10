@@ -9,14 +9,16 @@
     <div id="title">
         <span>기업의 정보보안 위험관리 평가 도구</span>
     </div>
-    <div class="login-form">
+    <div class="join-form">
         <h1>회원가입</h1>
         <form id="join" action="/join" method="post"> <!--form data가 도착할 URL! 서버쪽에서 입력할 것-->
             <div class="name-area"><label for="id">아이디<span style="color:red">*</span></label></div>
-            <div class="int-area">
+            <div class="int-area_id">
                 <input type="text" name="id" id="id" autocomplete="off" placeholder="5자리 이상 입력하세요" required>
+                <button id="id_ident" style="margin-left: 5px;">중복확인</button>
             </div>
             <br>
+            <p id="result" style="margin: 0px; margin-left: 150px;"></p>
             <div class="name-area"><label for="pw">비밀번호<span style="color:red">*</span></label></div>
             <div class="int-area">
                 <input type="password" name="pw" id="pw" autocomplete="off" placeholder="영어,숫자,특수문자 조합으로 해주세요.(글자수는 6~12)" required>

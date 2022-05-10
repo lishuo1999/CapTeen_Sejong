@@ -22,6 +22,9 @@ h3 {
     top: 10px;
     margin: 0px;
 }
+h3:hover {
+    cursor: pointer;
+}
 
 .title {
     height: 10%;
@@ -35,7 +38,10 @@ h3 {
     right: 10px;
     float: right;
 }
-
+a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 .con_top {
     height: 14%;
     width: 100%;
