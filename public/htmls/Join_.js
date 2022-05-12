@@ -1,4 +1,37 @@
 $(function () {
+   $('#id_ident').click(function () {
+      if ($('#id').val() != '') {
+         // 아이디를 서버로 전송 > DB 유효성 검사 > 결과 반환받기
+         $.ajax({
+            type: 'GET',
+            url: '/',
+            data: {
+               "id": $('#id').val()
+            },
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (result) {
+               if (result == '0') { //0이면 아이디 존재x
+                  $('#result').css("color","green").text('사용 가능한 아이디입니다.');
+                  $('#int-area_id').css("margin-bottom", "5px");
+                  //alert('사용 가능한 아이디입니다.');
+               } else { //1이면 아이디 이미 존재
+                  $('#result').css("color","red").text('이미 사용중인 아이디입니다.');
+                  $('#int-area_id').css("margin-bottom", "5px");
+                  //alert('이미 사용중인 아이디입니다.');
+               }
+            },
+            error: function (error) {
+               console.log(error);
+            }
+         });
+
+      } else {
+         alert('아이디를 입력하세요.');
+         $('#id').focus();
+      }
+   })
+
    $('#join').on("submit", function (event) {
       var $id = $(this).find("[name=id]");
       var $pw = $(this).find("[name=pw]");
@@ -54,4 +87,6 @@ $(function () {
       });
 
    });
+
+   
 });

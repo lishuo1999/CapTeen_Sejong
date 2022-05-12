@@ -1,19 +1,4 @@
 window.onload = function () {
-    $(function(){ //DataTable
-        /*$("#con_bot1_table").DataTable({
-            lengthChange: false, // 검색 기능 숨기기
-            searching: false,// 정렬 기능 숨기기
-            ordering: false,// 정보 표시 숨기기
-            info: true,// 페이징 기능 숨기기
-            paging: true,
-            pagingType : "simple",
-            "autoWidth": false,
-            "scrollY": 170,
-            "scrollCollapse": true,
-            "pageLength": 5
-        });*/
-    });
-
     var ctx1 = $("#pie-chart1");
     var pieLabels = ["1등급", "2등급", "3등급", "4등급", "5등급"];
     var pieData = [10, 4, 8, 4, 3]; //임의로 설정

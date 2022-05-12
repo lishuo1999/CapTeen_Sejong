@@ -69,7 +69,7 @@ input:focus {
 }
 button:hover {
     background-color: #ED7D31;
-    cursor: pointers;
+    cursor: pointer;
 }
 .sign_up {
     margin-top: 20px;

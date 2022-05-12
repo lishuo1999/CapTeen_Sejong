@@ -14,18 +14,22 @@ body {
     left: 10px;
     top: 10px;
 }
-.login-form {
+.join-form {
     position: relative;
     background-color: white;
     padding: 50px 90px 50px 90px;
     box-shadow: 3px 3px 3px 3px gray;
 }
-.login-form h1 {
+.join-form h1 {
     font-size: 32px;
     text-align: center;
     font-weight: 900;
 }
 .int-area {
+    float: right;
+    width: 300px;
+}
+.int-area_id {
     float: right;
     width: 300px;
 }
@@ -47,6 +51,29 @@ body {
     margin-left: 15px;
     width: 255px;
 }
+.int-area_id input {
+    opacity: 30%;
+    background-position: 15px center;
+    padding: 10px 10px 10px 20px;
+    background-color:transparent;
+    border:none;
+    border-bottom: 1px solid black;
+    font-size: 15px; color:black;
+    outline: none;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    width: 175px;
+}
+#id_ident {
+    background:black;
+    color: white;
+    border: none;
+    height: 25px;
+}
+#id_ident:hover {
+    background-color: #ED7D31;
+    cursor: pointer;
+}
 input:focus {
     border: 2px solid #ED7D31;
 }
@@ -64,7 +91,7 @@ input:focus {
     border-radius: 25px;
     font-weight: 900;
 }
-button:hover {
+.btn-area button:hover {
     background-color: #ED7D31;
     cursor: pointer;
 }

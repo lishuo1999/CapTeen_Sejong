@@ -22,7 +22,9 @@ h3 {
     top: 10px;
     margin: 0px;
 }
-
+h3:hover {
+    cursor: pointer;
+}
 
 .con_top {
     height: 14%;
@@ -72,7 +74,7 @@ span {
     font-weight: 900;
     font-size: 40px;
     padding-left: 45%;
-    color: rgb(117, 12, 12)
+    color: rgb(167, 158, 158)
 }
 
 .con_mid_all {
