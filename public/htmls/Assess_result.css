@@ -5,7 +5,7 @@ html,body,div,video {margin:0;padding:0;}
 html{overflow: hidden;}
 html, body{width: 100%; height: 100%; }
 
-body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px; background-color:white; }  
+body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px; background-color:#EDEDEF; }  
 
 body{
     font-family: 'NanumSquare',sans-serif;
@@ -64,16 +64,21 @@ a { text-decoration:none;}
     height: 50%;
     width:20%;
     left:4%;
-    background-color: #F1F0EF;
-    border:2px white solid;
+    background-color: white;
+    border:2px #EEEEEE solid;
     border-radius:50px;
-    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    box-shadow: 2px 2px 3px 3px #CBCBCB;
     /*가운데 정렬을 위한 조건들 */
     display:flex;
     flex-direction:column;
     justify-content:center; 
     align-items : center;
     cursor:pointer;
+}
+
+#box1:hover{
+    box-shadow:none; 
+    border:4px #ED7D31 solid;    
 }
 
 #box2{
@@ -82,16 +87,21 @@ a { text-decoration:none;}
     height: 50%;
     width:20%;
     left:28%;
-    background-color: #F1F0EF;
-    border:2px white solid;
+    background-color: white;
+    border:2px #EEEEEE solid;
     border-radius:50px;
-    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    box-shadow: 2px 2px 3px 3px #CBCBCB;
     /*가운데 정렬을 위한 조건들 */
     display:flex;
     flex-direction:column;
     justify-content:center; 
     align-items : center;
     cursor:pointer;
+}
+
+#box2:hover{
+    box-shadow:none; 
+    border:4px #ED7D31 solid;    
 }
 
 #box3{
@@ -100,10 +110,10 @@ a { text-decoration:none;}
     height:50%;
     width:20%;
     left:52%;
-    background-color: #F1F0EF;
-    border:2px white solid;
+    background-color: white;
+    border:2px #EEEEEE solid;
     border-radius:50px;
-    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    box-shadow: 2px 2px 3px 3px #CBCBCB;
     /*가운데 정렬을 위한 조건들 */
     display:flex;
     flex-direction:column;
@@ -112,22 +122,32 @@ a { text-decoration:none;}
     cursor:pointer;
 }
 
+#box3:hover{
+    box-shadow:none; 
+    border:4px #ED7D31 solid;    
+}
+
 #box4{
     position:absolute;
     top:25%;
     height:50%;
     width:20%;
     left:76%;
-    background-color: #F1F0EF;
-    border:2px white solid;
+    background-color: white;
+    border:2px #EEEEEE solid;
     border-radius:50px;
-    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    box-shadow: 2px 2px 3px 3px #CBCBCB;
     /*가운데 정렬을 위한 조건들 */
     display:flex;
     flex-direction:column;
     justify-content:center; 
     align-items : center;
     cursor:pointer;
+}
+
+#box4:hover{
+    box-shadow:none; 
+    border:4px #ED7D31 solid;    
 }
 
 .bigbox p{
@@ -159,9 +179,11 @@ a { text-decoration:none;}
 #table_right th{
     position: sticky;
     top:0px;
-    background-color:white;
+    /*background-color:#FED8B8;*/
     /*border:none;*/
+    background-color:#ED7D31;
     text-align:center;
+    color:white;
 }
 
 
@@ -195,13 +217,13 @@ a { text-decoration:none;}
 #fadeinText1{
     position:absolute;
     top:3%;
-    left:35%;
+    left:34%;
 }
 
 #fadeinText2{
     position:absolute;
     top:3%;
-    left:35%;
+    left:34%;
 }
 
 #fadeinText3{
@@ -213,7 +235,7 @@ a { text-decoration:none;}
 #fadeinText4{
     position:absolute;
     top:3%;
-    left:35%;
+    left:36%;
 }
 
 #Text1{
@@ -223,4 +245,46 @@ a { text-decoration:none;}
 
 #Text2{
     color:gray;
+}
+
+/*상단 바 */
+
+.header{
+    width: 100%;
+    height: 50px;
+    background-color:#DCDCDC;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    
+}
+.navigation{
+  width: 100%;
+  text-align: center;
+}
+.navigation a{
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 0 18PX;
+  text-decoration: NONE;
+  color: #808080;
+  font-weight: 500;
+  /*text-shadow: 0 0 20px #000000;*/
+  transition: 0.3s;
+}
+
+/*.navigation a:hover{ 
+  color: #ED7D31;
+}*/
+.nav{
+  position: fixed;
+}
+ 
+#now{
+    color:black;
+    font-weight:700;
+}
+
+#now:hover{
+    color:#ED7D31;
 }

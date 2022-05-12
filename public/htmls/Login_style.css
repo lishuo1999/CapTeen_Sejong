@@ -8,12 +8,14 @@ body {
     height: 700px;
     background-color:#F8F7F7;
 }
-#title > span {
+/*#title > span {
     font-weight: 900;
     position:fixed;
     left: 10px;
     top: 10px;
-}
+}*/
+
+
 .login-form {
     position: relative;
     background-color: white;
@@ -80,4 +82,39 @@ button:hover {
 }
 a:hover {
     text-decoration: underline;
+}
+
+/*상단 바 */
+
+.header{
+    width: 100%;
+    height: 50px;
+    background-color:#DCDCDC;
+    position:fixed;
+    display:flex;
+    top:0%;
+    align-items:center;
+    justify-content:center;
+    
+}
+.navigation{
+  width: 100%;
+  text-align: center;
+}
+.navigation a{
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 0 18PX;
+  text-decoration: NONE;
+  color: #808080;
+  font-weight: 500;
+  /*text-shadow: 0 0 20px #000000;*/
+  transition: 0.3s;
+}
+
+/*.navigation a:hover{ 
+  color: #ED7D31;
+}*/
+.nav{
+  position: fixed;
 }

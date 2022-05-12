@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
   
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>-->
+
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -30,14 +31,20 @@
     <script src="Assess_result.js"></script>
 
 
-    <div class="content">    
-        <!--로그아웃-->
-        <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:900;">
-            <p><a href="/logout" style="color:black;">로그아웃</a></p></div>
-        <!--왼쪽 상단-->
-        <div id="again" onclick="window.location.href='./Assess_result.html'"style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:900;">
-            <p>위험 처리 결과</p>
-        </div>
+    <div class="content">
+        <!--상단바-->
+        <div class="header">
+            <div class="navigation">
+              <a href="#none">위험 분석</a>
+              <a href="#none">위험 분석 결과</a>
+              <a href="#none">위험 평가</a>
+              <a href="#none">위험 처리</a>
+              <a href="#" id='now' onClick="top.location='javascript:location.reload()'">위험 처리 결과</a>
+              <a href="#none">위험 관리 결과</a>
+              <a href="./logout" style="color:black; position:absolute; left:94%; font-weight:700;">로그아웃</a>
+            </div>
+        </div> 
+
         <div>
             <button type="button" id="next" onclick="window.location.href='./Final_result1.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
         </div> 

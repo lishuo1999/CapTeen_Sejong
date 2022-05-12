@@ -18,7 +18,7 @@ a { text-decoration:none;}
     width: 100%; height: 100%;
     position: relative;
     overflow:hidden; /*얘를 써줘야 영상이 안삐져나옴*/
-    background-color:thistle;
+    background-color:black;
 }
 
 /* 스크룔 화살표 */
@@ -146,4 +146,51 @@ a { text-decoration:none;}
 
 #input3:focus{
     outline:4px solid #ED7D31;
+}
+
+/*상단 바 */
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 50px;
+    background-color:#DCDCDC;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+}
+.navigation{
+  width: 100%;
+  text-align: center;
+}
+
+.navigation a{
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 0 18PX;
+  text-decoration: NONE;
+  color: #808080;
+  font-weight: 500;
+  /*text-shadow: 0 0 20px #000000;*/
+  transition: 0.3s;
+}
+
+/*.navigation a:hover{ 
+  color: #ED7D31;
+}*/
+.nav{
+  position: fixed;
+}
+ 
+#now{
+    color:black;
+    font-weight:700;
+}
+
+#now:hover{
+    color:#ED7D31;
 }

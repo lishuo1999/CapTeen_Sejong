@@ -33,13 +33,20 @@
     <script src="Anal_result.js"></script>
     
     <div class="content">    
-        <!--왼쪽 상단-->
-        <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:900;">
-            <p style="color:black;">위험 분석 결과</p>
-        </div> 
-        <!--로그아웃-->
-        <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:900;">
-            <p><a href="./Login.html" style="color:black;">로그아웃</a></p></div>
+
+          <!--상단바-->
+        <div class="header">
+          <div class="navigation">
+            <a href="#none">위험 분석</a>
+            <a href="#" id='now' onClick="top.location='javascript:location.reload()'">위험 분석 결과</a>
+            <a href="#none">위험 평가</a>
+            <a href="#none">위험 처리</a>
+            <a href="#none">위험 처리 결과</a>
+            <a href="#none">위험 관리 결과</a>
+            <a href="./logout" style="color:black; position:absolute; left:94%; font-weight:700;">로그아웃</a>
+          </div>
+        </div>
+
 
         <div>
           <button type="button" id="Next" onclick="window.location.href='./Eval_1.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>

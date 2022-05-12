@@ -23,18 +23,6 @@ h3 {
     margin: 0px;
 }
 
-.title {
-    height: 10%;
-    width: 100%;
-    display: flex;
-}
-
-.title>a {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    float: right;
-}
 
 .con_top {
     height: 14%;
@@ -194,3 +182,47 @@ tr:hover {
     border-radius: 10px;
     text-align: center;
 }
+
+/*상단 바 */
+
+.header{
+    width: 100%;
+    height: 50px;
+    background-color:#DCDCDC;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    
+}
+.navigation{
+  width: 100%;
+  text-align: center;
+}
+.navigation a{
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 0 18PX;
+  text-decoration: NONE;
+  color: #808080;
+  font-weight: 500;
+  /*text-shadow: 0 0 20px #000000;*/
+  transition: 0.3s;
+}
+
+/*.navigation a:hover{ 
+  color: #ED7D31;
+}*/
+.nav{
+  position: fixed;
+}
+ 
+#now{
+    color:black;
+    font-weight:700;
+}
+
+#now:hover{
+    color:#ED7D31;
+}
+
+a { text-decoration:none;}
