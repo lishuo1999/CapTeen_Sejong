@@ -18,10 +18,11 @@ $(function(){
         $("#right").fadeIn(1000);
         $("#fadeinText1").fadeIn(1000);
         $(".bigbox").css({
-            "background-color": "#F1F0EF",
+            //"background-color": "#F1F0EF",
+            "background-color":"white",
             "border":"2px white solid",
             "border-radius":"50px",
-            "box-shadow": "2px 2px 3px 3px #EEEEEE"
+            "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
         
         $("#methodTable").DataTable({
@@ -62,10 +63,11 @@ $(function(){
         $("#right").fadeIn(1000);
         $("#fadeinText2").fadeIn(1000);
         $(".bigbox").css({
-            "background-color": "#F1F0EF",
+            //"background-color": "#F1F0EF",
+            "background-color":"white",
             "border":"2px white solid",
             "border-radius":"50px",
-            "box-shadow": "2px 2px 3px 3px #EEEEEE"
+            "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
 
         $("#methodTable").DataTable({
@@ -73,6 +75,7 @@ $(function(){
             paging:false,
             autoWidth:false,
             ordering:false,
+            searching:false,
             destroy:true, //다시 클릭하면 다시 로드 
             ajax:{ //위험 전가에 해당하는 위험들 받아오기
                 type: "get",
@@ -107,10 +110,11 @@ $(function(){
         $("#right").fadeIn(1000);
         $("#fadeinText3").fadeIn(1000);
         $(".bigbox").css({
-            "background-color": "#F1F0EF",
+            //"background-color": "#F1F0EF",
+            "background-color":"white",
             "border":"2px white solid",
             "border-radius":"50px",
-            "box-shadow": "2px 2px 3px 3px #EEEEEE"
+            "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
 
         $("#methodTable").DataTable({
@@ -118,6 +122,7 @@ $(function(){
             paging:false,
             autoWidth:false,
             ordering:false,
+            searching:false,
             destroy:true, //다시 클릭하면 다시 로드 
             ajax:{ //위험 회피에 해당하는 위험들 받아오기
                 type: "get",
@@ -152,10 +157,11 @@ $(function(){
         $("#right").fadeIn(1000);
         $("#fadeinText4").fadeIn(1000);
         $(".bigbox").css({
-            "background-color": "#F1F0EF",
+            //"background-color": "#F1F0EF",
+            "background-color":"white",
             "border":"2px white solid",
             "border-radius":"50px",
-            "box-shadow": "2px 2px 3px 3px #EEEEEE"
+            "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
 
         $("#methodTable").DataTable({
@@ -163,6 +169,7 @@ $(function(){
             paging:false,
             autoWidth:false,
             ordering:false,
+            searching:false,
             destroy:true, //다시 클릭하면 다시 로드 
             ajax:{ //위험 감소에 해당하는 위험들 받아오기
                 type: "get",

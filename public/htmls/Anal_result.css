@@ -5,7 +5,7 @@ html,body,div,video {margin:0;padding:0;}
 html{overflow: hidden;}
 html, body{width: 100%; height: 100%; }
 
-body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px; /*background-color:white;*/ }  
+body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px; background-color:#EDEDEF; }  
 
 body{
     font-family: 'NanumSquare',sans-serif;
@@ -30,7 +30,7 @@ a { text-decoration:none;}
     text-align:center;
     color:white;
     background-color:black;
-    width:100px;
+    width:90px;
     height:50px;
 
     font-size:15px;
@@ -38,6 +38,7 @@ a { text-decoration:none;}
     border-radius:30px;
     cursor:pointer;
     border:none;
+    z-index:10000;
 }
 
 
@@ -56,22 +57,24 @@ table {
 
 th,td{
     padding:15px;
+    word-break: break-all; /*자동 줄바꿈 */
 }
 
 thead{
     background:#F0F0F0;
     color:black;
-    font-size:15px;
+    font-size:13px;
     border-top:2px solid #CFCFCF;
 }
 
 tbody{
     background:white;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 #head:hover{
     cursor:pointer;
+    /*background-color:#ED7D31;*/
     background-color:#CFCFCF;
 } /*등급 표시 부분 */
 
@@ -94,7 +97,8 @@ tbody{
     background-color: #FBFBFB;
     border:2px white solid;
     border-radius:50px;
-    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    box-shadow: 2px 2px 3px 3px #CBCBCB;
+    z-index:100;
 }
 
 #title1{
@@ -137,7 +141,8 @@ tbody{
     background-color: #FBFBFB;
     border:2px white solid;
     border-radius:50px;
-    box-shadow: 2px 2px 3px 3px #EEEEEE;
+    box-shadow: 2px 2px 3px 3px #CBCBCB;
+    z-index:100;
 }
 
 #table_right{
@@ -160,7 +165,7 @@ tbody{
 
 #caption{
     position:absolute;
-    left:48%;
+    left:47%;
     top:5%;
     font-size:20px;
     font-weight:900;
@@ -176,4 +181,47 @@ tbody{
     top:7%;
     margin: auto;
     /*background-color:gray;*/
+    z-index:1;
+}
+
+
+/*상단 바 */
+
+.header{
+    width: 100%;
+    height: 50px;
+    background-color:#DCDCDC;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+.navigation{
+  width: 100%;
+  text-align: center;
+}
+.navigation a{
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 0 18PX;
+  text-decoration: NONE;
+  color: #808080;
+  font-weight: 500;
+  /*text-shadow: 0 0 20px #000000;*/
+  transition: 0.3s;
+}
+
+/*.navigation a:hover{ 
+  color: #ED7D31;
+}*/
+.nav{
+  position: fixed;
+}
+ 
+#now{
+    color:black;
+    font-weight:700;
+}
+
+#now:hover{
+    color:#ED7D31;
 }

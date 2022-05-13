@@ -28,7 +28,7 @@
             <p>위험 평가를 시작합니다.</p>
         </div>
         <!--로그아웃-->
-        <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
+        <div style="position: absolute; left: 95.5%; top: 0.5%; font-size:15px; font-weight:700;">
             <p><a href="/logout" style="color:white;">로그아웃</a></p></div>
         <!--화살표-->
         <div class="arrow">
@@ -40,14 +40,20 @@
 
     <!--2page-->
     <div class="content" style="background-color: white;">
-        <!--로그인-->
-        <div style="position: absolute; left: 95.5%; top: 1%; font-size:15px; font-weight:700;">
-            <p><a href="./Login.html" style="color:black;">로그아웃</a></p>
-        </div>
-        <!--왼쪽 상단-->
-        <div style="position: absolute; left:1.5%; top: 1%; font-size:15px; font-weight:700;">
-            <p style="color:black;">위험 평가</></p>
-        </div>
+        <!--상단바-->
+        <div class="header">
+          <div class="navigation">
+            <a href="#none">위험 분석</a>
+            <a href="#none">위험 분석 결과</a>
+            <a href="#" id='now' onClick="top.location='javascript:location.reload()'">위험 평가</a>
+            <a href="#none">위험 처리</a>
+            <a href="#none">위험 처리 결과</a>
+            <a href="#none">위험 관리 결과</a>
+            <a href="./logout" style="color:black; position:absolute; left:94%; font-weight:700;">로그아웃</a>
+          </div>
+        </div>    
+
+
         <div style="position:absolute; left:30%; top:25%; color:black; font-size:50px; font-weight:700;">
             <p data-aos="fade-right" data-aos-duration="1000">다음 중 DoA를 선택하세요.</p>
         </div>
@@ -58,7 +64,7 @@
             <input type="radio" name="DoA" class='sel sel3' value='third'>33333333333<br><br>
             <input type="radio" name="DoA" class='sel sel4' value='fourth'>44444444444
         </form>  
-        <div style="position:absolute; left:45%; top:80%;">
+        <div style="position:absolute; left:47%; top:70%;">
             <button type="button" id="next" style="display:none" onclick="window.location.href='./Eval_2.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
         </div> 
 
