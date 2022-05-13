@@ -46,10 +46,13 @@ $(function () { //자산분류 선택 시 -> 해당 자산그룹명 리스트를
             data: {
                 "index": $data_send
             },
-            success: function (data) { //data: 서버로부터 받아온 json data    (여기까지 성공)
-                for (var i = 0; i < data.length; i++) {
+            success: function (data) { //data: 서버로부터 받아온 json data 
+                /*for (var i = 0; i < data.length; i++) {
                     $('#sel_2').append("<option value=" + obj[i].groupId + ">" + obj[i].groupname + "</option>"); //groupname: 자산그룹명, groupId: 해당 그룹명의 value값
-                }
+                }*/
+                $.each(data, function(index, item) { // 데이터 =item
+                    $('#sel_2').append("<option value=" + item.groupId + ">" + item.groupname + "</option>"); //groupname: 자산그룹명, groupId: 해당 그룹명의 value값
+            });
             },
             error: function () {
                 console.log(error);
