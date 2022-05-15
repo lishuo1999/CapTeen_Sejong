@@ -52,11 +52,7 @@ $(function () { //자산분류 선택 시 -> 해당 자산그룹명 리스트를
                 }*/
                 $.each(data, function(index, item) { // 데이터 =item
                     $('#sel_2').append("<option value=" + item.groupId + ">" + item.groupname + "</option>"); //groupname: 자산그룹명, groupId: 해당 그룹명의 value값
-<<<<<<< HEAD
 				});
-=======
-            });
->>>>>>> 5533b31de590e58c276089c76432b2c0bf26122e
             },
             error: function () {
                 console.log(error);
