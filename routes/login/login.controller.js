@@ -12,16 +12,21 @@ exports.login = async(req, res, next) => {
     queryResult = await(isThereUser(usr_id, usr_pw_sha512));
     //if there's a user then grant user a session
     if(queryResult==1){
-        req.session.displayName=usr_id;
-        req.session.loginData=req.session.save(error=>{if(error) console.log(error)});
+        req.session.userName=usr_id;
+        req.session.save(error=>{if(error) console.log(error)});
+        console.log(req.session);
         res.sendFile('Anal_1.html', {root: 'public/htmls'});
     }
 
     //else if there's a user matches with id info, then show alert "id or pw is incorrect"
-    //else, show alert "please register"
+    if(queryResult==0){
+        res.send(`<script>alert('Please check your ID or PW');location.href=document.referrer;</script>`);
+    }
 
-    //로그인이 완료되면 Anal_1.html로 리디렉션
-    else;
+    //else, show alert "please register"
+    else{
+        res.send(`<script>alert('Please Register');location.href='/Join.html';</script>`);
+    }
 }
 
 //function which searches whether there's a user matches with the given parameter(id, pw)
@@ -30,7 +35,6 @@ isThereUser=(id, pw)=>{
         const searchSql='SELECT usr_id, usr_pw FROM usr_db.users WHERE usr_id=?';
         db.query(searchSql, id, function(err, rows, field){
             if(err) console.log(err);
-            console.log(rows);
             if(rows.length>0) //id exists
             {
                 if(rows[0].usr_pw == pw) //user certificated
