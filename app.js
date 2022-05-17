@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+const cors = require('cors');
 const dotenv=require('dotenv').config('/etc/');
 var app = express();
 
@@ -17,9 +18,14 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 app.use(cookieParser());
 app.use(
     session({
+        key: "loginData",
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
