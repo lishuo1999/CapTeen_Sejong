@@ -18,8 +18,11 @@
   "homepage": "https://github.com/touBVa/CapTeen#readme",
   "dependencies": {
     "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
     "debug": "^4.3.4",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "http-errors": "^2.0.0",
     "jade": "^1.11.0",
     "md5": "^2.3.0",

@@ -3,10 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var session = require('express-session');
+const dotenv=require('dotenv').config('/etc/');
 var app = express();
 
 var routes = require('./routes/index');
+
 
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -16,6 +18,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            path:'/',
+            httpOnly: true,
+            secure: false,
+            maxAge: 60*60*1000, // 1 hour-should be corrected after
+        },
+    })
+);
 
 //port configuration
 //const PORT = 3000;
