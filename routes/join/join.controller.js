@@ -5,11 +5,11 @@ const crypto=require('crypto');
 exports.getJoinInfo = (req, res, next) => {
     //to remove '' from the body info
     var id=req.body.id.replace("'", "");
-    var pw=req.body.pw.replace("'", "");
+    const pw=req.body.pw.replace("'", "");
     var pn=req.body.pn.replace("'", "");
     var em=req.body.em.replace("'", "");
     var id_md5=md5(id);
-    var pw_SHA512 = crypto.createHash('sha512').update(JSON.stringify(pw)).digest('hex');
+    const pw_SHA512 = crypto.createHash('sha512').update(pw).digest('hex');
     const usrInsert = [id, pw_SHA512, pn, em, id_md5];
     
     //inserting user into the usr_db.users table
