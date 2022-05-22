@@ -1,6 +1,7 @@
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
-html,body {
+html,
+body {
     margin: 0;
     height: 100%;
     width: 100%;
@@ -146,6 +147,7 @@ h3 {
     width: 100%;
     height: 9%;
 }
+
 .con_right_2 {
     display: flex;
     position: absolute;
@@ -187,6 +189,7 @@ h3 {
     height: 455px;
 
 }
+
 .users_asset_list_table {
     border-collapse: collapse;
     text-align: left;
@@ -196,6 +199,7 @@ h3 {
     height: 100%;
     width: 100%;
 }
+
 table.users_asset_list_table thead th {
     width: 150px;
     padding: 10px;
@@ -205,12 +209,14 @@ table.users_asset_list_table thead th {
     background: #ED7D31;
     margin: 20px 10px;
 }
+
 table.users_asset_list_table td {
     width: 350px;
     padding: 10px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
+
 .footer {
     position: fixed;
     bottom: 0px;
@@ -237,44 +243,155 @@ table.users_asset_list_table td {
 
 /*상단 바 */
 
-.header{
+.header {
     width: 100%;
     height: 50px;
-    background-color:#F8F7F7;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    
+    background-color: #F8F7F7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
-.navigation{
-  width: 100%;
-  text-align: center;
+
+.navigation {
+    width: 100%;
+    text-align: center;
 }
-.navigation a{
-  font-size: 15px;
-  text-transform: uppercase;
-  padding: 0 18PX;
-  text-decoration: NONE;
-  color: #808080;
-  font-weight: 500;
-  /*text-shadow: 0 0 20px #000000;*/
-  transition: 0.3s;
+
+.navigation a {
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 0 18PX;
+    text-decoration: NONE;
+    color: #808080;
+    font-weight: 500;
+    /*text-shadow: 0 0 20px #000000;*/
+    transition: 0.3s;
 }
 
 /*.navigation a:hover{ 
   color: #ED7D31;
 }*/
-.nav{
-  position: fixed;
-}
- 
-#now{
-    color:black;
-    font-weight:700;
+.nav {
+    position: fixed;
 }
 
-#now:hover{
+#now {
+    color: black;
+    font-weight: 700;
+}
+
+#now:hover {
+    color: #ED7D31;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*.hover{
+    background:#ffebde;
+    color:#ffffff;
+    cursor:pointer;
+}*/
+.cia {
+    color: white;
+    text-align: center;
+}
+
+.cia_div {
+    background-color: black;
+    width: 80px;
+    margin-left: 17px;
+}
+
+.cia_div:hover {
+    background-color: #ED7D31;
+    cursor: pointer;
+}
+
+.delete:hover {
+    cursor: pointer;
+}
+
+#exit_btn:hover {
+    content: url('https://img.icons8.com/ios-filled/50/000000/xbox-x.png');
+}
+
+.modal-wrapper {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 1;
+    /*display:none;*/
+}
+
+.modal-content {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    width: 600px;
+    height: 600px;
+    background: #fff;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 70px;
+}
+.cia_bar a:hover{
+    color:#ED7D31;
+    cursor: pointer;
+    font-weight: 900;
+}
+.cia_table {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    height: 70%;
+    width: 90%;
+    overflow: auto;
+    margin: auto;
+    margin-bottom: 10px;
+    /*display: none;*/
+}
+
+.cia_table thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: balck;
+    border-bottom:1px solid #808080;
+    margin: 20px 10px;
+    text-align: center;
+}
+.cia_table thead th span:hover {
+    cursor: pointer;
     color:#ED7D31;
 }
-
-a { text-decoration:none;}
+.cia_table td {
+    width: 30   0px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+#cia_save {
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    width: 60px;
+    height: 30px;
+    margin: auto;
+    display: none;
+}
+#cia_save:hover {
+    background-color:#ED7D31;
+    cursor: pointer;
+}
