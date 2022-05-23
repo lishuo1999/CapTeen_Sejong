@@ -205,7 +205,7 @@ a { text-decoration:none;}
 }
 
 
-#vulTable{
+#threatTable{
     position:absolute;
     overflow-x:hidden;
     overflow-y:auto;
@@ -217,7 +217,7 @@ a { text-decoration:none;}
     box-shadow: 2px 2px 3px 3px lightgrey;
 }
 
-#vulTable th{
+#threatTable th{
     position: sticky;
     top:0px;
     /*background-color:#FED8B8;*/
@@ -228,7 +228,7 @@ a { text-decoration:none;}
 }
 
 
-#vulList{
+#threatList{
     left:0.5%;
     position:absolute;
     top:1%;
@@ -286,6 +286,6 @@ td{
     border-radius:10px;
 }
 
-#vulNum{
+#threatNum{
     display:none;
 }
