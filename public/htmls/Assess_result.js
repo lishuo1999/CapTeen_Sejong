@@ -7,8 +7,6 @@ window.onload = function () {
     $("#fadeinText4").hide();
 }
 
-
-
 //위험 수용박스를 클릭했을 때 
 $(function(){
     $('#box1').on('click',function(){ // 위험 수용 
@@ -26,28 +24,35 @@ $(function(){
             "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
         
-        $("#methodTable").DataTable({
-            info:false,
-            paging:false,
-            autoWidth:false,
-            searching:false,
-            ordering:false,
-            destroy:true, //다시 클릭하면 다시 로드 
-            ajax:{ //위험 수용에 해당하는 위험들 받아오기
-                type: "get",
-                url: 'https://jsonplaceholder.typicode.com/comments',  //서버에서 입력할 url
-                dataSrc: '',
-                dataType: 'json',
-            },
-            columns:[
-                {data:"id",width:"70%"}, //1열만 데이터 받아와서 넣기 (위험수용에 해당하는 위험들), "id"로 적혀있는 값은 수정 필요 
-                {
-                    render: function () { //select box
-                        return '<select id="choice" onchange="change(this);"><option value="sooyong">위험 수용</option><option value="jeonga">위험 전가</option><option value="hoepee">위험 회피</option><option value="gamso">위험 감소</option></select>'
-                    }
+        $.ajax({
+            type: "post",
+            url: 'https://jsonplaceholder.typicode.com/comments',//서버 url
+            dataType: 'json',
+            data:({
+                "method":"수용"
+            }),
+            success:function(data){
+                console.log(data);
+            }
+        })
+
+        $.ajax({
+            url:"https://jsonplaceholder.typicode.com/posts",
+            type:"get",
+            dataType:"json",
+            success:function(data){
+                var html='';
+                for(key in data){
+                    html+='<tr>';
+                    html+='<td>'+data[key].title+'</td>'; //이게 위험 명 
+                    html+='<td><select id="choice" onchange="change(this);"><option value="sooyong">위험 수용</option><option value="jeonga">위험 전가</option><option value="hoepee">위험 회피</option><option value="gamso">위험 감소</option></select></td>';
+                    html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
+                    html+='</tr>';
                 }
-            ],
-        });
+                $("#dynamicTbody").empty();
+                $("#dynamicTbody").append(html);
+            }
+        })
         $("#choice").val("sooyong").prop("selected", true); //초기 선택값 지정
     })
 });
@@ -71,30 +76,35 @@ $(function(){
             "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
 
-        $("#methodTable").DataTable({
-            info:false,
-            paging:false,
-            autoWidth:false,
-            ordering:false,
-            searching:false,
-            destroy:true, //다시 클릭하면 다시 로드 
-            ajax:{ //위험 전가에 해당하는 위험들 받아오기
-                type: "get",
+            $.ajax({
+                type: "post",
                 url: 'https://jsonplaceholder.typicode.com/comments',//서버 url
-                dataSrc: '',
                 dataType: 'json',
-            },
-            columns:[
-                {data:"id",width:"70%"}, //1열만 데이터 받아와서 넣기 (위험전가에 해당하는 위험들)
-                {
-                    render: function () { //select box
-                        return '<select id="choice" onchange="change(this);"><option value="jeonga">위험 전가</option><option value="sooyong">위험 수용</option><option value="hoepee">위험 회피</option><option value="gamso">위험 감소</option></select>'
-                    }
+                data:({
+                    "method":"전가"
+                }),
+                success:function(data){
+                    console.log(data);
                 }
-            ],
-
-
-        });
+            })
+    
+            $.ajax({
+                url:"https://jsonplaceholder.typicode.com/posts",
+                type:"get",
+                dataType:"json",
+                success:function(data){
+                    var html='';
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].title+'</td>'; //이게 위험 명 
+                        html+='<td><select id="choice" onchange="change(this);"><option value="jeonga">위험 전가</option><option value="sooyong">위험 수용</option><option value="hoepee">위험 회피</option><option value="gamso">위험 감소</option></select></td>';
+                        html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }
+                    $("#dynamicTbody").empty();
+                    $("#dynamicTbody").append(html);
+                }
+            })
         $("#choice").val("jeonga").prop("selected", true); //초기 선택값 지정
     })
 });
@@ -118,30 +128,36 @@ $(function(){
             "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
 
-        $("#methodTable").DataTable({
-            info:false,
-            paging:false,
-            autoWidth:false,
-            ordering:false,
-            searching:false,
-            destroy:true, //다시 클릭하면 다시 로드 
-            ajax:{ //위험 회피에 해당하는 위험들 받아오기
-                type: "get",
-                url: 'https://jsonplaceholder.typicode.com/comments', //서버 url
-                dataSrc: '',
+            $.ajax({
+                type: "post",
+                url: 'https://jsonplaceholder.typicode.com/comments',//서버 url
                 dataType: 'json',
-            },
-            columns:[
-                {data:"id",width:"70%"}, //1열만 데이터 받아와서 넣기 (위험회피에 해당하는 위험들)
-                {
-                    render: function () { //select box
-                        return '<select id="choice" onchange="change(this);"><option value="hoepee">위험 회피</option><option value="sooyong">위험 수용</option><option value="jeonga">위험 전가</option><option value="gamso">위험 감소</option></select>'
-                    }
+                data:({
+                    "method":"회피"
+                }),
+                success:function(data){
+                    console.log(data);
                 }
-            ],
+            })
+    
+            $.ajax({
+                url:"https://jsonplaceholder.typicode.com/posts",
+                type:"get",
+                dataType:"json",
+                success:function(data){
+                    var html='';
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].title+'</td>'; //이게 위험 명 
+                        html+='<td><select id="choice" onchange="change(this);"><option value="hoepee">위험 회피</option><option value="sooyong">위험 수용</option><option value="jeonga">위험 전가</option><option value="gamso">위험 감소</option></select></td>';
+                        html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }
+                    $("#dynamicTbody").empty();
+                    $("#dynamicTbody").append(html);
+                }
+            })
 
-
-        });
         $("#choice").val("hoepee").prop("selected", true); //초기 선택값 지정
     })
 });
@@ -165,30 +181,38 @@ $(function(){
             "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
 
-        $("#methodTable").DataTable({
-            info:false,
-            paging:false,
-            autoWidth:false,
-            ordering:false,
-            searching:false,
-            destroy:true, //다시 클릭하면 다시 로드 
-            ajax:{ //위험 감소에 해당하는 위험들 받아오기
-                type: "get",
-                url: 'https://jsonplaceholder.typicode.com/comments', //서버 url
-                dataSrc: '',
+        
+            $.ajax({
+                type: "post",
+                url: 'https://jsonplaceholder.typicode.com/comments',//서버 url
                 dataType: 'json',
-            },
-            columns:[
-                {data:"id",width:"70%"}, //1열만 데이터 받아와서 넣기 (위험감소에 해당하는 위험들)
-                {
-                    render: function () { //select box
-                        return '<select id="choice" onchange="change(this);"><option value="gamso">위험 감소</option><option value="sooyong">위험 수용</option><option value="jeonga">위험 전가</option><option value="hoepee">위험 회피</option></select>'
-                    }
+                data:({
+                    "method":"감소"
+                }),
+                success:function(data){
+                    console.log(data);
                 }
-            ],
+            })
+    
+            $.ajax({
+                url:"https://jsonplaceholder.typicode.com/posts",
+                type:"get",
+                dataType:"json",
+                success:function(data){
+                    var html='';
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].title+'</td>'; //이게 위험 명 
+                        html+='<td><select id="choice" onchange="change(this);"><option value="gamso">위험 감소</option><option value="sooyong">위험 수용</option><option value="jeonga">위험 전가</option><option value="hoepee">위험 회피</option></select></td>';
+                        html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }
+                    $("#dynamicTbody").empty();
+                    $("#dynamicTbody").append(html);
+                }
+            })
 
-
-        });
+            
         $("#choice").val("gamso").prop("selected", true); //초기 선택값 지정
     });
 
@@ -196,14 +220,17 @@ $(function(){
 
 
 function change(obj){ //select box 다른 옵션 클릭했을때
-    var index=obj.closest("tr").rowIndex;
-    console.log(index); //클릭한 애의 rowindex 가져오기 
+
+    //var index=obj.closest("tr").rowIndex;
+    //console.log(index); //클릭한 애의 rowindex 가져오기 
     var val=obj.closest("td");
-   // console.log(val);
     var sel=val.firstChild.options[val.firstChild.selectedIndex].value; //클릭한 애의 선택된 값 가져오기 
     console.log(sel);
 
-    var obj={"index":index,"selected":sel}; //{변경한 열 번호, 변경한 값} 전송
+    var num=obj.closest("tr").childNodes[2].innerText; //감춰진 위험 고유번호 가져오기 
+    console.log(num);
+
+    var obj={"selected":sel,"num":num}; //{변경한 값, 위험 고유번호} 전송
 
     $.ajax({
         type: 'POST',   //post방식으로 명시

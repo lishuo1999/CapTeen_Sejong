@@ -116,6 +116,7 @@ a { text-decoration:none;}
     border-left:none;
     border-right:none;
     border-bottom:3px solid black;
+    background-color:#F8F7F7;
 }
 
 #input1:focus{
@@ -129,6 +130,7 @@ a { text-decoration:none;}
     border-left:none;
     border-right:none;
     border-bottom:3px solid black;
+    background-color:#F8F7F7;
 }
 
 #input2:focus{
@@ -142,6 +144,7 @@ a { text-decoration:none;}
     border-left:none;
     border-right:none;
     border-bottom:3px solid black;
+    background-color:#F8F7F7;
 }
 
 #input3:focus{

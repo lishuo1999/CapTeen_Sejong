@@ -2,7 +2,7 @@
 $(function(){
 	$('#next').on('click',function(){            
 
-        value=$("input[name=business]:checked").val(); //value값 가져오기
+        value=$("input[name=business]:checked").val(); // 선택한 value값 가져오기
         console.log(value);
 
         $.ajax({

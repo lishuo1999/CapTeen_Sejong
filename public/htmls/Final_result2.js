@@ -1,6 +1,6 @@
 window.onload = function () {
     //처리 전략별 위험 개수
-    $.ajax({
+    /*$.ajax({
         type: "get",
         url: "/", //서버에서 입력할 것
         datatype: "json",
@@ -17,11 +17,11 @@ window.onload = function () {
         error: function () {
             console.log(error);
         }
-    });
+    });*/
 
     var ctx1 = $("#pie-chart1"); //자산
     var pieLabels = ["1등급", "2등급", "3등급", "4등급", "5등급"];
-    var pieData = []; //임의로 설정
+    var pieData = [10, 8, 3, 8, 7]; //임의로 설정
     var pieColors = [
         "#0E77C7",
         "#3E9DE6",
@@ -30,7 +30,7 @@ window.onload = function () {
         "#E3EDFE"
     ];
 
-    $.ajax({
+    /*$.ajax({
         type: "get",
         url: "/", //서버에서 입력할 것
         datatype: "json",
@@ -48,7 +48,7 @@ window.onload = function () {
         error: function () {
             console.log(error);
         }
-    });
+    });*/
 
     var mypieChart = new Chart(ctx1, {
         type: 'doughnut',
@@ -77,7 +77,7 @@ window.onload = function () {
 
     var ctx2 = $("#pie-chart2"); //취약성
     var pieLabels = ["1등급", "2등급", "3등급", "4등급", "5등급"];
-    var pieData = []; //임의로 설정
+    var pieData = [4, 2, 3, 9, 10]; //임의로 설정
     var pieColors = [
         "#FF9C00",
         "#FFB136",
@@ -86,7 +86,7 @@ window.onload = function () {
         "#FEEACB"
     ];
 
-    $.ajax({
+    /*$.ajax({
         type: "get",
         url: "/", //서버에서 입력할 것
         datatype: "json",
@@ -104,7 +104,7 @@ window.onload = function () {
         error: function () {
             console.log(error);
         }
-    });
+    });*/
 
     var mypieChart = new Chart(ctx2, {
         type: 'doughnut',
@@ -124,7 +124,7 @@ window.onload = function () {
 
     var ctx3 = $("#pie-chart3"); //위협
     var pieLabels = ["1등급", "2등급", "3등급", "4등급", "5등급"];
-    var pieData = []; //임의로 설정
+    var pieData = [4, 9, 2, 9, 4]; //임의로 설정
     var pieColors = [
         "#00B834",
         "#30D960",
@@ -133,7 +133,7 @@ window.onload = function () {
         "#D9FCE0"
     ];
 
-    $.ajax({
+    /*$.ajax({
         type: "get",
         url: "/", //서버에서 입력할 것
         datatype: "json",
@@ -151,7 +151,7 @@ window.onload = function () {
         error: function () {
             console.log(error);
         }
-    });
+    });*/
 
     var mypieChart = new Chart(ctx3, {
         type: 'doughnut',
@@ -171,7 +171,7 @@ window.onload = function () {
 
 
     var ctx4 = $("#bar-chart1"); //자산 대분류별 자산 수
-    var barData = [];
+    var barData = [5, 9, 2, 10, 9];
 
     $.ajax({
         type: "get",
@@ -219,9 +219,9 @@ window.onload = function () {
 
 
     var ctx5 = $("#bar-chart2"); //위험도 등급별 위험 수
-    var barData = [];
+    var barData = [10, 6, 12, 7, 8];
 
-    $.ajax({
+    /*$.ajax({
         type: "get",
         url: "/", //서버에서 입력할 것
         datatype: "json",
@@ -239,7 +239,7 @@ window.onload = function () {
         error: function () {
             console.log(error);
         }
-    });
+    });*/
 
     var mybarChart = new Chart(ctx5, {
         type: 'bar',

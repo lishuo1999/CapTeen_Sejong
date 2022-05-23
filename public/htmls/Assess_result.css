@@ -152,7 +152,6 @@ a { text-decoration:none;}
 
 .bigbox p{
     text-align:center;
-    
 }
 
 #text1{
@@ -287,4 +286,8 @@ a { text-decoration:none;}
 
 #now:hover{
     color:#ED7D31;
+}
+
+#riskNum{
+    display:none;
 }
