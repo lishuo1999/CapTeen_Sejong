@@ -1,13 +1,34 @@
 //비즈니스 선택 결과를 받아서 DB의 사용자 테이블에 저장
-
+const db = require('../serverConfig');
 const session = require("express-session");
+const md5=require('md5');
+const { get } = require('express/lib/response');
 
 //body에 저장되어 들어오고, 해당 값을 텍스트로 받아오도록 해둠
 exports.business = (req, res, next) => {
     var business_value=req.body.value.replace("'", "");
-    var input_sql='UPDATE ';
-    business_value=Number(business_value);
-    consol.log(req.session);
+    var business_id=0;
+    var usr_id=req.session.userName;
+    const usr_id_md5=md5(usr_id);
+    var update_sql='UPDATE usr_db.users SET usr_business = ? WHERE usr_id_md5= \''+usr_id_md5+'\'';
+    var getBsnsID_sql='SELECT id_business FROM data_db.business WHERE name_business = ?';
+
+    //get business id which name matches req.body.value
+    db.query(getBsnsID_sql, business_value, function(err, rows, fields){
+        business_id=rows[0].id_business
+    })
+
+    //input the id of users' business
+    db.query(update_sql, business_id, function(err, rows, fields){
+        if(err){
+            console.log(err);
+
+        }
+        else{
+            console.log('business value input successed!');
+        }
+    })
+
 
 }
 

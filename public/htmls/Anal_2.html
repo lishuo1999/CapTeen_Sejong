@@ -18,18 +18,297 @@
 </head>
 
 <body>
+    <!--팝업창-->
+    <div class="modal-wrapper">
+        <div class="modal-content">
+            <div style="height: 30px; border-top:1px solid #808080;"><img id="exit_btn" src="https://img.icons8.com/ios/50/000000/xbox-x.png" style="float:right; height: 25px; width: 25px; margin-top: 5px; margin-right: 5px;"/></div>
+            <div class="cia_bar" style="height: 40px; padding-top:20px;">
+                <a id="c_label" style="text-align: center; padding-left: 25px; padding-right: 25px; font-weight:900;">기밀성 지표</a>
+                <a id="i_label" style="text-align: center; padding-left: 25px; padding-right: 25px; font-weight:900;">무결성 지표</a>
+                <a id="a_label" style="text-align: center; padding-left: 25px; padding-right: 25px; font-weight:900;">가용성 지표</a>
+            </div>
+            <!--기밀성 지표 테이블-->
+            <!--<table id="c_cal" class="cia_table">
+                <thead>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">지표</th>
+                        <th style="width: 10px; text-align: center;">1</th>
+                        <th style="width: 10px; text-align: center;">2</th>
+                        <th style="width: 10px; text-align: center;">3</th>
+                        <th style="width: 10px; text-align: center;">4</th>
+                        <th style="width: 10px; text-align: center;">5</th>
+                        <th style="width: 30px; text-align: center;">점수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 변조 및 삭제 방지 필요성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 수정 감사기록 필요성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 변조․삭제 민원발생 가능성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보 파기 및 변조 시 악용범위</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">외부 공개 정보의 신뢰도 수준</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 백업 정도</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 인증서 처리 필요성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 무결성 확인 필요성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 기관 업무수행 영향도</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 기관 제공 서비스 관련성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 비상계획정보 관련성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 기관 재정 영향도</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 국민생활 관련성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                </tbody>
+            </table>-->
+            <!--무결성 지표 테이블-->
+            <table id="i_cal" class="cia_table">
+                <thead>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">지표</th>
+                        <th style="width: 10px; text-align: center;">1</th>
+                        <th style="width: 10px; text-align: center;">2</th>
+                        <th style="width: 10px; text-align: center;">3</th>
+                        <th style="width: 10px; text-align: center;">4</th>
+                        <th style="width: 10px; text-align: center;">5</th>
+                        <th style="width: 30px; text-align: center;">점수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 변조 및 삭제 방지 필요성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 수정 감사기록 필요성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 변조․삭제 민원발생 가능성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보 파기 및 변조 시 악용범위</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">외부 공개 정보의 신뢰도 수준</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 백업 정도</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 인증서 처리 필요성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 무결성 확인 필요성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 기관 업무수행 영향도</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 기관 제공 서비스 관련성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 비상계획정보 관련성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 기관 재정 영향도</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 170px; text-align: center;">정보의 국민생활 관련성</th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='1'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='2'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='3'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='4'></th>
+                        <th style="width: 10px; text-align: center;"><input name="cs_biz_form" type='checkbox' value='5'></th>
+                        <th style="width: 30px; text-align: center;" id="score"></th>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="cia_save">저장</button>
+        </div>
+    </div>
+
     <!--상단바-->
     <div class="header">
         <div class="navigation">
-          <a href="#" id='now' onClick="top.location='javascript:location.reload()'">위험 분석</a>
-          <a href="#none">위험 분석 결과</a>
-          <a href="#none">위험 평가</a>
-          <a href="#none">위험 처리</a>
-          <a href="#none">위험 처리 결과</a>
-          <a href="#none">위험 관리 결과</a>
-          <a href="./logout" style="color:black; position:absolute; left:94%; font-weight:700;">로그아웃</a>
+            <a href="#" id='now' onClick="top.location='javascript:location.reload()'">위험 분석</a>
+            <a href="#none">위험 분석 결과</a>
+            <a href="#none">위험 평가</a>
+            <a href="#none">위험 처리</a>
+            <a href="#none">위험 처리 결과</a>
+            <a href="#none">위험 관리 결과</a>
+            <a href="./logout" style="color:black; position:absolute; left:94%; font-weight:700;">로그아웃</a>
         </div>
-    </div> 
+    </div>
 
     <div class="container_left">
         <div class="con_left_1">
@@ -50,10 +329,9 @@
                             <select id="sel_1">
                                 <option value="0" selected>-선택-</option>
                                 <option value="1">전자정보</option>
-                                <option value="2">문서</option>
-                                <option value="3">소프트웨어</option>
-                                <option value="4">하드웨어</option>
-                                <option value="5">인력</option>
+                                <option value="2">소프트웨어</option>
+                                <option value="3">하드웨어</option>
+                                <option value="4">인력</option>
                             </select>
                         </td>
                         <th style="font-size:15px">자산그룹명</th>
@@ -99,9 +377,12 @@
                 <table class="users_asset_list_table">
                     <thead>
                         <tr>
-                            <th scope="cols" style="width: 150px;">자산분류</th>
-                            <th scope="cols" style="width: 150px;">그룹명</th>
-                            <th scope="cols" style="width: 150px;">자산명</th>
+                            <th scope="cols" style="width: 60px; text-align: center;">대분류</th>
+                            <th scope="cols" style="width: 90px; text-align: center;">그룹명</th>
+                            <th scope="cols" style="width: 90px; text-align: center;">자산명</th>
+                            <th scope="cols" style="width: 90px; text-align: center;">CIA</th>
+                            <th scope="cols" style="width: 90px; text-align: center;">업무의존도</th>
+                            <th scope="cols" style="width: 70px; text-align: center;">삭제</th>
                         </tr>
                     </thead>
                     <tbody>

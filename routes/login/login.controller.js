@@ -14,7 +14,6 @@ exports.login = async(req, res, next) => {
     if(queryResult==1){
         req.session.userName=usr_id;
         req.session.save(error=>{if(error) console.log(error)});
-        console.log(req.session);
         res.sendFile('Anal_1.html', {root: 'public/htmls'});
     }
 
@@ -24,7 +23,7 @@ exports.login = async(req, res, next) => {
     }
 
     //else, show alert "please register"
-    else{
+    if(queryResult==-1){
         res.send(`<script>alert('Please Register');location.href='/Join.html';</script>`);
     }
 }
