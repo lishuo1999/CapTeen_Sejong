@@ -276,6 +276,11 @@ td{
     font-size:14px;
 }
 
+th{
+    vertical-align:center;
+    font-size:18px;
+}
+
 #save:hover{
     font-weight:700;
     background-color:#ED7D31;
