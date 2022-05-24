@@ -100,7 +100,7 @@ h3 {
 }
 
 .asset_list {
-    border: 1px solid black;
+    border: none;
     overflow: auto;
     margin-left: 10px;
     margin-right: 10px;
@@ -108,14 +108,6 @@ h3 {
     height: 380px;
 }
 
-#asset_list_table {
-    /*Datatable*/
-    table-layout: fixed;
-    border-collapse: collapse;
-    border-spacing: 0px;
-    border: 1px solid black;
-    transform: none;
-}
 
 #collect {
     /*부모태그 : asset_list*/
@@ -297,12 +289,14 @@ a {
 .cia {
     color: white;
     text-align: center;
+    font-size: 13px;
 }
 
 .cia_div {
     background-color: black;
-    width: 80px;
+    width: 75px;
     margin-left: 17px;
+    border-radius: 15px;
 }
 
 .cia_div:hover {
@@ -327,7 +321,7 @@ a {
     right: 0;
     background: rgba(0, 0, 0, 0.6);
     opacity: 1;
-    /*display:none;*/
+    display:none;
 }
 
 .modal-content {
@@ -359,7 +353,7 @@ a {
     overflow: auto;
     margin: auto;
     margin-bottom: 10px;
-    /*display: none;*/
+    display: none;
 }
 
 .cia_table thead th {
@@ -381,7 +375,7 @@ a {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
-#cia_save {
+.cia_save {
     border: none;
     background-color: black;
     color: white;
@@ -391,7 +385,31 @@ a {
     margin: auto;
     display: none;
 }
-#cia_save:hover {
+.cia_save:hover {
     background-color:#ED7D31;
     cursor: pointer;
+}
+#asset_list_table {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    height: 100%;
+    width: 100%;
+}
+#asset_list_table thead th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+    background: #ED7D31;
+    margin: 20px 10px;
+}
+#asset_list_table td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
 }
