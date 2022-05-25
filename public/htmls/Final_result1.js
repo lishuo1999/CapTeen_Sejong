@@ -15,3 +15,25 @@ $(document).ready(function(){
       }, 6000);
 
 });
+
+var result;
+var real=[];
+$(function(){
+  $('#next').on('click',function(){
+
+  $.ajax({
+    type:'get',
+    url:'https://jsonplaceholder.typicode.com/posts', //위험 등급별 퍼센트 받아오기!!!
+    dataType:'json',
+    success:function(data){
+      console.log("success");
+      console.log(data);
+      localStorage.setItem("data",JSON.stringify(data)); // "data" 라는 저장소 이름은 변경될거임 
+    },
+    error:function(){
+      console.log(error);
+    }
+  })
+
+  });
+});

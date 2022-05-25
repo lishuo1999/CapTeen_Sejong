@@ -28,6 +28,7 @@ $(function(){
         dataType:'json',
         success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
             console.log("success");
+            data={1:1,2:2,3:3,4:4,5:5};
             console.log(data);
             localStorage.setItem("data",JSON.stringify(data));
         },
