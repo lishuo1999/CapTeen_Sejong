@@ -51,7 +51,7 @@ let createGradetable=function(){
     for (var i=0;i<5;i++){
         $("tr:eq("+1+") td:eq("+(i+1)+")").html(datas[i]);
         // 1번째 행의 i+1번째 열에 datas[i] 데이터 넣음
-        
+
     }
 };
 

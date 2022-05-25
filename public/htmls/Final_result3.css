@@ -1,0 +1,407 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+html,body,div,video {margin:0;padding:0;}
+
+html{overflow: hidden;}
+html, body{width: 100%; height: 100%; }
+
+body {padding:0px, 0px, 0px, 0px; margin:0px, 0px, 0px, 0px; background-color:#F8F7F7; }  
+
+body{font-family: 'NanumSquare',sans-serif;}
+
+a { text-decoration:none;}
+
+
+.content{
+    width: 100%; height: 100%;
+    position: relative;
+    overflow:hidden; /*얘를 써줘야 영상이 안삐져나옴*/
+    background-color:black;
+}
+
+/*상단 바 */
+.header{
+    width: 100%;
+    height: 50px;
+    background-color:#F8F7F7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+.navigation{
+  width: 100%;
+  text-align: center;
+}
+
+.navigation a{
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 0 18PX;
+  text-decoration: NONE;
+  color: #808080;
+  font-weight: 500;
+  /*text-shadow: 0 0 20px #000000;*/
+  transition: 0.3s;
+}
+
+
+.nav{
+  position: fixed;
+}
+ 
+#now{
+    color:black;
+    font-weight:700;
+}
+
+#now:hover{
+    color:#ED7D31;
+}
+
+#box1{
+    position:absolute;
+    top:7%;
+    height:15%;
+    width:94%;
+    left:3%;
+    /*background-color: lime;*/
+    /*box-shadow: 1px 1px 2px 2px lightgray;
+    cursor:pointer;*/
+
+    border-radius:30px;
+
+    /*가운데 정렬을 위한 조건들 */
+   
+    display:flex;
+    /*margin:auto;*/
+    align-items : center;
+}
+
+#box1 p{
+    text-align: center;
+    color:#686560;
+}
+
+.grade{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+
+#perc1{
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:0px;
+}
+
+#box1-1{
+    position:absolute;
+    top:5%;
+    height:90%;
+    left:2.5%;
+    width:17%;
+    background-color:white;
+    border-radius:20px;
+    box-shadow:1px 1px 2px 2px lightgray;
+    cursor:pointer;
+
+    justify-content:center;
+    align-content:center;
+    display:inline-block;
+    flex-direction:column;
+}
+
+/*마우스 올렸을 때 효과 (아래 3개) */
+#box1-1:hover{
+    box-shadow:none;
+    background-color:#ED7D31;
+    /*border:4px #ED7D31 solid;*/
+}
+
+#box1-1:hover .grade{
+    color:white;
+}
+
+#box1-1:hover #perc1{
+    color:white;
+}
+
+#box1-2{
+    position:absolute;
+    top:5%;
+    height:90%;
+    left:22%;
+    width:17%;
+    background-color:white;
+    border-radius:20px;
+    box-shadow:1px 1px 2px 2px lightgray;
+    cursor:pointer;
+
+    display:inilne-block;
+    flex-direction:column;
+    justify-content:center;
+    align-content:center;
+}
+
+#box1-2:hover{
+    box-shadow:none;
+    background-color:#ED7D31;
+    /*border:4px #ED7D31 solid;*/
+}
+
+#box1-2:hover .grade{
+    color:white;
+}
+
+#box1-2:hover #perc2{
+    color:white;
+}
+
+#perc2{
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:0px;
+}
+
+
+#box1-3{
+    position:absolute;
+    top:5%;
+    height:90%;
+    left:41.5%;
+    width:17%;
+    background-color:white;
+    border-radius:20px;
+    box-shadow:1px 1px 2px 2px lightgray;
+    cursor:pointer;
+
+    display:inline-block;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#box1-3:hover{
+    box-shadow:none;
+    background-color:#ED7D31;
+    /*border:4px #ED7D31 solid;*/
+}
+
+#box1-3:hover .grade{
+    color:white;
+}
+
+#box1-3:hover #perc3{
+    color:white;
+}
+
+#perc3{
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:0px;
+}
+
+#box1-4{
+    position:absolute;
+    top:5%;
+    height:90%;
+    left:61%;
+    width:17%;
+    background-color:white;
+    border-radius:20px;
+    box-shadow:1px 1px 2px 2px lightgray;
+    cursor:pointer;
+
+    display:inline-block;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#box1-4:hover{
+    box-shadow:none;
+    background-color:#ED7D31;
+    /*border:4px #ED7D31 solid;*/
+}
+
+#box1-4:hover .grade{
+    color:white;
+}
+
+#box1-4:hover #perc4{
+    color:white;
+}
+
+#perc4{
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:0px;
+}
+
+
+#box1-5{
+    position:absolute;
+    top:5%;
+    height:90%;
+    left:80.5%;
+    width:17%;
+    background-color:white;
+    border-radius:20px;
+    box-shadow:1px 1px 2px 2px lightgray;
+    cursor:pointer;
+
+    display:inline-block;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#box1-5:hover{
+    box-shadow:none;
+    background-color:#ED7D31;
+    /*border:4px #ED7D31 solid;*/
+}
+
+#box1-5:hover .grade{
+    color:white;
+}
+
+#box1-5:hover #perc5{
+    color:white;
+}
+
+#perc5{
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:0px;
+}
+
+
+#box2{
+    position:absolute;
+    top:25%;
+    height:70%;
+    width:25%;
+    left:3%;
+    /*background-color: lime;*/
+    /*border:2px #EEEEEE solid;*/
+    border-radius:30px;
+    /*box-shadow: 1px 1px 2px 2px lightgray;*/
+    /*가운데 정렬을 위한 조건들 */
+    display:flex;
+    flex-direction:column;
+    justify-content:center; 
+    align-items : center;
+}
+
+#chart1{
+    position:absolute;
+    top:2%;
+    height:47%;
+    left:7%;
+    width:86%;
+    background-color:white;
+    border-radius:20px;
+    box-shadow:1px 1px 2px 2px lightgray;
+
+    justify-content:center;
+    align-content:center;
+    flex-direction:column;
+}
+
+#pie-chart1{
+    position:absolute;
+    bottom:5%;
+    left:20%;
+}
+
+#chart1-name{
+    position:absolute;
+    left:20%;
+    top:3%;
+    font-weight:700;
+    color:#686560;
+}
+
+#chart2{
+    position:absolute;
+    bottom:2%;
+    height:47%;
+    left:7%;
+    width:86%;
+    background-color:white;
+    border-radius:20px;
+    box-shadow:1px 1px 2px 2px lightgray;
+
+    justify-content:center;
+    align-content:center;
+    display:inline-block;
+    flex-direction:column;
+}
+
+#pie-chart2{
+    position:absolute;
+    bottom:5%;
+    left:20%;
+}
+
+#chart2-name{
+    position:absolute;
+    left:20%;
+    top:3%;
+    font-weight:700;
+    color:#686560;
+}
+
+#box3{
+    position:absolute;
+    top:25%;
+    height:70%;
+    width:70%;
+    left:28%;
+    /*background-color: lime;*/
+    /*border:2px #EEEEEE solid;*/
+    border-radius:30px;
+    /*box-shadow: 1px 1px 2px 2px lightgray;*/
+    /*가운데 정렬을 위한 조건들 */
+    display:flex;
+    flex-direction:column;
+    justify-content:center; 
+    align-items : center;
+}
+
+#table{
+    position:absolute;
+    top:2%;
+    height:96%;
+    left:2%;
+    width:96%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    border-spacing:0;
+    box-shadow: 2px 2px 3px 3px lightgrey;
+    border-radius:20px;
+
+    text-align:center;
+}
+
+#table th{
+    position:sticky;
+    top:0px;
+    background-color:#ed7c31fb;
+    color:white;
+}
+
+#chart1-name{
+    font-weight:900;
+}
+
+#chart2-name{
+    font-weight:900;
+}
+
+tr:hover{
+    background-color:#FBE5D6;
+}
