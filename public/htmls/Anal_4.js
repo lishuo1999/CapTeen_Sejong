@@ -5,21 +5,22 @@ $(document).ready(function(){
 $(function(){
     $('#box1').on('click',function(){         
         
-        $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"post",
-            dataType:"json",
-            data:({
-                "category":"하드웨어" //선택한 카테고리 정보 서버로 전송
-            }),
-            success:function(data){
-               console.log(data);
-            }
-        })
+        //$.ajax({
+        //    url:"https://jsonplaceholder.typicode.com/posts",
+        //    type:"post",
+        //    dataType:"json",
+        //    data:({
+        //        "category":"하드웨어" //선택한 카테고리 정보 서버로 전송
+        //    }),
+        //    success:function(data){
+        //       console.log(data);
+        //    }
+        //})
 
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
+            data:{"category":"하드웨어"},
             dataType:"json",
             success:function(data){
                 var html='';
@@ -45,21 +46,22 @@ $(function(){
 $(function(){
     $('#box2').on('click',function(){         
         
-        $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"post",
-            dataType:"json",
-            data:({
-                "category":"소프트웨어" //선택한 카테고리 정보 서버로 전송
-            }),
-            success:function(data){
-               console.log(data);
-            }
-        })
+        //$.ajax({
+        //    url:"https://jsonplaceholder.typicode.com/posts",
+        //    type:"post",
+        //    dataType:"json",
+        //    data:({
+        //        "category":"소프트웨어" //선택한 카테고리 정보 서버로 전송
+        //    }),
+        //    success:function(data){
+        //       console.log(data);
+        //    }
+        //})
 
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
+            data:{"category":"소프트웨어"},
             dataType:"json",
             success:function(data){
                 var html='';
@@ -86,21 +88,22 @@ $(function(){
 $(function(){
     $('#box3').on('click',function(){         
         
-        $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"post",
-            dataType:"json",
-            data:({
-                "category":"전자정보" //선택한 카테고리 정보 서버로 전송
-            }),
-            success:function(data){
-               console.log(data);
-            }
-        })
+        //$.ajax({
+        //    url:"https://jsonplaceholder.typicode.com/posts",
+        //    type:"post",
+        //    dataType:"json",
+        //    data:({
+        //        "category":"전자정보" //선택한 카테고리 정보 서버로 전송
+        //    }),
+        //    success:function(data){
+        //       console.log(data);
+        //    }
+        //})
 
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
+            data:{"category":"전자정보"},
             dataType:"json",
             success:function(data){
                 var html='';
@@ -126,21 +129,22 @@ $(function(){
 $(function(){
     $('#box4').on('click',function(){         
         
-        $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"post",
-            dataType:"json",
-            data:({
-                "category":"인적" //선택한 카테고리 정보 서버로 전송
-            }),
-            success:function(data){
-               console.log(data);
-            }
-        })
+        //$.ajax({
+        //    url:"https://jsonplaceholder.typicode.com/posts",
+        //    type:"post",
+        //    dataType:"json",
+        //    data:({
+        //        "category":"인적" //선택한 카테고리 정보 서버로 전송
+        //    }),
+        //    success:function(data){
+        //       console.log(data);
+        //    }
+        //})
 
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
+            data:{"category":"인적"},
             dataType:"json",
             success:function(data){
                 var html='';
