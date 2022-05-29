@@ -14,29 +14,24 @@ exports.business=(req, res, next)=>{
     var update_sql='UPDATE usr_db.users SET usr_business=? WHERE usr_id_md5=?';
     var getBsnsID_sql='SELECT id_business FROM data_db.business WHERE name_business = ?';
 
-    async.waterfall([
-        //get business id which name matches req.body.value
-        function(){
-            db.query(getBsnsID_sql, business_value, function(err, rows, fields){
-                business_id=rows[0].id_business
-                console.log(business_id);
-            })
-        },
+    new Promise((resolve)=>{
+        db.query(getBsnsID_sql, business_value, function(err, rows, fields){
+            business_id=rows[0].id_business;
+            console.log(business_id);
+            resolve(business_id);
+        })
+    })
+    .then((result)=>db.query(update_sql, [result, usr_id_md5], function(err, rows, fields){
+        if(err){
+            console.log(err);
 
-        //input the id of users' business
-        function(){
-            var temp=db.query(update_sql, [business_id, usr_id_md5], function(err, rows, fields){
-                if(err){
-                    console.log(err);
-
-                }
-                else{
-                    console.log('business value input successed!');
-                }
-            })
-            console.log(temp.sql);
         }
-    ])
+        else{
+            console.log('business value input successed!');
+        }
+    }));
+
+
 
 }
 
