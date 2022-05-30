@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $("#threatTable").hide(); //일단 table 숨기기 
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 $(function(){

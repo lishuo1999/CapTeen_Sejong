@@ -294,3 +294,7 @@ th{
 #threatNum{
     display:none;
 }
+
+#standard:hover{
+    cursor:pointer;
+}
