@@ -30,7 +30,8 @@ exports.getJoinInfo = (req, res, next) => {
     assets_id int DEFAULT 0, FOREIGN KEY(assets_id) REFERENCES data_db.assets(id_assets) ON UPDATE CASCADE,
     vulns_id int DEFAULT 0, FOREIGN KEY(vulns_id) REFERENCES data_db.vulns(id_vulns) ON UPDATE CASCADE,
     threats_id int DEFAULT 0, FOREIGN KEY(threats_id) REFERENCES data_db.threats(id_threats) ON UPDATE CASCADE,
-    usr_risk_rate int DEFAULT 0
+    usr_risk_rate int DEFAULT 0,
+    usr_risk_mng_id int DEFAULT 0, FOREIGN KEY(usr_risk_mng_id) REFERENCES data_db.risk_manage(id_manage) ON UPDATE CASCADE
     ) DEFAULT CHARSET UTF8 COMMENT 'newTable';`;
     db.query(create_table_sql, function(err, rows, fields){
         if(err){

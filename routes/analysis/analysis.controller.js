@@ -3,23 +3,25 @@ const db = require('../serverConfig');
 const session = require("express-session");
 const md5=require('md5');
 const { get } = require('express/lib/response');
+const async=require('async');
 
 //body에 저장되어 들어오고, 해당 값을 텍스트로 받아오도록 해둠
-exports.business = (req, res, next) => {
+exports.business=(req, res, next)=>{
     var business_value=req.body.value.replace("'", "");
     var business_id=0;
     var usr_id=req.session.userName;
     const usr_id_md5=md5(usr_id);
-    var update_sql='UPDATE usr_db.users SET usr_business = ? WHERE usr_id_md5= \''+usr_id_md5+'\'';
+    var update_sql='UPDATE usr_db.users SET usr_business=? WHERE usr_id_md5=?';
     var getBsnsID_sql='SELECT id_business FROM data_db.business WHERE name_business = ?';
 
-    //get business id which name matches req.body.value
-    db.query(getBsnsID_sql, business_value, function(err, rows, fields){
-        business_id=rows[0].id_business
+    new Promise((resolve)=>{
+        db.query(getBsnsID_sql, business_value, function(err, rows, fields){
+            business_id=rows[0].id_business;
+            console.log(business_id);
+            resolve(business_id);
+        })
     })
-
-    //input the id of users' business
-    db.query(update_sql, business_id, function(err, rows, fields){
+    .then((result)=>db.query(update_sql, [result, usr_id_md5], function(err, rows, fields){
         if(err){
             console.log(err);
 
@@ -27,7 +29,8 @@ exports.business = (req, res, next) => {
         else{
             console.log('business value input successed!');
         }
-    })
+    }));
+
 
 
 }
