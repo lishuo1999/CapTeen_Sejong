@@ -23,7 +23,7 @@ $(function(){
             //url:"/analysis/vul"
             type:"get",
             dataType:"json",
-            data:{"category":"하드웨어"},
+            data:{"category":"4"}, //하드웨어
             success:function(data){
                 var html='';
                 for(key in data){
@@ -64,7 +64,7 @@ $(function(){
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
             dataType:"json",
-            data:{"category":"소프트웨어"},
+            data:{"category":"2"}, //소프트웨어
             success:function(data){
                 var html='';
                 for(key in data){
@@ -106,7 +106,7 @@ $(function(){
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
             dataType:"json",
-            data:{"category":"전자정보"},
+            data:{"category":"1"}, //전자정보
             success:function(data){
                 var html='';
                 for(key in data){
@@ -147,7 +147,7 @@ $(function(){
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
             dataType:"json",
-            data:{"category":"인적"},
+            data:{"category":"3"}, //인적자원
             success:function(data){
                 var html='';
                 for(key in data){
