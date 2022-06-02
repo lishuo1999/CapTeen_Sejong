@@ -7,5 +7,7 @@ const controller = require('./assess.controller');
 // assess/userInput
 router.post('/userInput', controller.input);
 
+router.get('/threat',controller.threat);
+
 
 module.exports = router;
