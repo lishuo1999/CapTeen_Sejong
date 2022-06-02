@@ -76,10 +76,7 @@ $(function(){
             },
             columns:[ //여기 data 명은 서버에서 변경 
                 {data:"id",width:"10%"},
-                {data:"postId",width:"30%"},
-                {data:"name",width:"15%"},
-                {data:"email",width:"20%"},
-                {data:"body",width:"20%"}
+                {data:"name",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -118,10 +115,7 @@ $(function(){
             },
             columns:[
                 {data:"id",width:"10%"},
-                {data:"postId",width:"30%"},
-                {data:"name",width:"15%"},
-                {data:"email",width:"20%"},
-                {data:"body",width:"20%"}
+                {data:"name",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -160,10 +154,7 @@ $(function(){
             },
             columns:[
                 {data:"id",width:"10%"},
-                {data:"postId",width:"30%"},
-                {data:"name",width:"15%"},
-                {data:"email",width:"20%"},
-                {data:"body",width:"20%"}
+                {data:"name",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -202,10 +193,7 @@ $(function(){
             },
             columns:[
                 {data:"id",width:"10%"},
-                {data:"postId",width:"30%"},
-                {data:"name",width:"15%"},
-                {data:"email",width:"20%"},
-                {data:"body",width:"20%"}
+                {data:"postId",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -224,7 +212,7 @@ $(function(){
         });
 
     });
-    $('#head .tooltip5').on('click',function(){ //1등급
+    $('#head .tooltip5').on('click',function(){ //5등급
         $("#caption").text("5등급");
         $("#caption").fadeIn(1000);
         $("#table_right").fadeIn(1000);        
@@ -244,10 +232,7 @@ $(function(){
             },
             columns:[
                 {data:"id",width:"10%"},
-                {data:"postId",width:"30%"},
-                {data:"name",width:"15%"},
-                {data:"email",width:"20%"},
-                {data:"body",width:"20%"}
+                {data:"name",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350

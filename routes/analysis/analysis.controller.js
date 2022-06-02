@@ -5,6 +5,7 @@ const md5=require('md5');
 const { get } = require('express/lib/response');
 const async=require('async');
 
+
 //body에 저장되어 들어오고, 해당 값을 텍스트로 받아오도록 해둠
 exports.business=(req, res, next)=>{
     var business_value=req.body.value.replace("'", "");
@@ -24,12 +25,117 @@ exports.business=(req, res, next)=>{
     .then((result)=>db.query(update_sql, [result, usr_id_md5], function(err, rows, fields){
         if(err){
             console.log(err);
+
         }
         else{
             console.log('business value input successed!');
         }
     }));
+
 }
+
+
+
+//Anal_3 : show vulnerabilities 
+exports.vuln=(req,res,next)=>{ //get method
+    var category=req.query.category;
+    console.log(category);
+    var usr_id=req.session.userName;
+    //console.log(usr_id);
+    const md5_id=md5(usr_id);
+    //console.log(md5_id);
+
+    var select_vulns_sql='SELECT vulns_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
+    //console.log(select_vulns_sql);
+
+
+    var json="["
+    let index=0
+    let len=-1
+    lsy();
+
+    function lsy(){
+
+        if(index==len){ // finish
+            console.log("hihi");
+            json=json.slice(0,-1)
+            json+=']'
+            console.log("PARSHING ARRAY:",json)
+            const obj=JSON.parse(json)
+            console.log("obj:",obj)
+            res.send(obj)
+            return console.log("done");
+        }else{
+            db.query(select_vulns_sql,category,function(err,rows,fields){
+                len=rows.length
+                var id_vulns=rows[index].vulns_id;
+                lsy2(id_vulns).then(lsy);
+                index++;
+        })
+
+    }
+    }
+
+    function lsy2(item){// item means vul_id
+        return new Promise(function(resolve,reject){
+            var select_vuln_name_sql="SELECT name_vulns,id_vulns FROM data_db.vulns WHERE id_vulns=?"
+            db.query(select_vuln_name_sql,item,function(err,rows,fields){
+                //let id_vulns=array[i]
+                let id_vulns=rows[0].id_vulns
+                //console.log(id_vulns)
+                let name_vulns=rows[0].name_vulns
+                //console.log(name_vulns)
+                json+='{"id_vulns":'+id_vulns+',"name_vulns":"'+name_vulns+'"},'
+                console.log(json)
+                resolve();
+            })
+        })
+    }
+}
+
+ 
+
+//Anal_3 : saving data and making grade
+exports.save_vuln=(req,res,next)=>{
+    var id_vulns=req.body.num;
+    var serious_vulns=req.body.money;
+    var exposed_vulns=req.body.frequency;
+    console.log(id_vulns,serious_vulns,exposed_vulns);
+
+    //grading .. [exp,ser,grade]
+    var saved1=[[1,1,1],[1,2,2],[1,3,3]]
+    var saved2=[[2,1,2],[2,2,3],[2,3,4]]
+    var saved3=[[3,1,3],[3,2,4],[3,3,5]]
+
+    if(exposed_vulns==1){
+        var grade=saved1[serious_vulns-1][2]
+    }
+    else if(exposed_vulns==2){
+        var grade=saved2[serious_vulns-1][2]
+    }
+    else{
+        var grade=saved3[serious_vulns-1][2]
+    }
+    console.log("grade:",grade);
+
+
+    var usr_id=req.session.userName;
+    //console.log(usr_id);
+    const md5_id=md5(usr_id);
+    //console.log(md5_id);
+
+    var update_vulns_sql='UPDATE usr_db.table_'+md5_id+' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate
+    console.log(update_vulns_sql);
+
+    db.query(update_vulns_sql,[grade,id_vulns],function(err,rows,fields){
+        if(err) console.log(err)
+        else{
+            console.log("Vulnerability Rate updated!")
+        }
+    })
+}
+
+
 
 //위험도 계산해서 위험도 분류, DB와의 인터렉션 필요
 //async sync check. if error occurs, then use Promise
@@ -546,57 +652,3 @@ riskAssess=(asset, vuln, threat)=>{
         }
     })
 }
-
-//대분류에 따른 중분류 리스트 보내기 (id_mid_assets, name_m_cat_ass)
-exports.asset_big = (req, res, next) => {
-    var index = req.query.id_big_assets; //대분류 id를 받음
-    var Mid_assets_id = 'SELECT id_mid_assets FROM data_db.assets WHERE id_big_assets = ?'; //디비에서 해당 중분류 id들 조회
-    var Mid_assets_name = 'SELECT id_m_cat_ass, name_m_cat_ass FROM data_db.mid_category_assets WHERE id_m_cat_ass = ?'; //중분류 id로 중분류 명 조회, ? 에 Mid_assets_id의 원소들 들어가야 함
-    var data = '[';
-    var Mid_list = [];
-
-    db.query(Mid_assets_id, index, function (err, rows, fields) {
-        for (var i = 0; i < rows.length; i++) {
-            Mid_list.push(rows[i].id_mid_assets);
-        }
-        const set = new Set(Mid_list);
-        const Mid_list_new = Array.from(set);
-        let index = 0;
-        test1();
-        function test1() {
-            if(Mid_list_new.length == index) {
-                data = data.slice(0,-1);
-                data += ']';
-                console.log(data);
-                const json = JSON.parse(data);
-                res.send(json);
-            }else{
-                test2(Mid_list_new[index]).then(test1);
-                index++;
-            }
-        }
-        function test2(item) {
-            return new Promise(function (resolve, reject) {
-                db.query(Mid_assets_name, item, function (err, rows, fields) {
-                    //비어있는 객체 생성
-                    var obj;
-                    //person1객체의 프로퍼티를 할당
-                    obj = '{"id_mid_assets":' + rows[0].id_m_cat_ass + ',"name_m_cat_ass":"' + rows[0].name_m_cat_ass + '"}';
-                    //data.push(obj);
-                    data += obj;
-                    data += ',';
-                    console.log();
-                    resolve();
-                })
-            });
-        }
-    })
-}
-//대분류, 중분류, 자산 고유번호, 자산명, C, I, A, 업무의존도, 가치등급 리스트 보내기 (name_b_cat_ass, name_m_cat_ass, id_assets, name_assets, c_assets, i_assets, a_assets, dpdcy_assets, value_assets)
-// /*exports.asset_big_mid = (req, res, next) => 
-//     var big_index = req.jquery.id_big_assets; //대분류 id 받아옴
-//     var mid_index = req.jquery.id_mid_assets; //중분류 id 받아옴
-//     var DB_big = 'SELECT name_b_cat_ass FROM data_db.assets WHERE id big_index = ?';//대분류 리스트 조회
-//     var DB_mid = 'SELECT name_m_cat_ass FROM data_db.assets WHERE id_mid_index = ?';//중분류 리스트 조회
-//     var DB_assets_id = 'SELECT id_assets FROM data_db.assets WHERE id_mid_index = ?';//자산 고유번호 리스트 조회
-//     var DB_assets_name = 'SELECT name_assets FROM data_db.assets WHERE id_mid_index = ?';//자산 리스트 조회
