@@ -544,7 +544,7 @@ riskAssess=(asset, vuln, threat)=>{
                 console.log("valueError: threatValueError");
                 break;
         }
-    })s
+    })
 }
 
 //대분류에 따른 중분류 리스트 보내기 (id_mid_assets, name_m_cat_ass)
