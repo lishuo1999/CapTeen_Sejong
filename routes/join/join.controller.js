@@ -27,11 +27,15 @@ exports.getJoinInfo = (req, res, next) => {
     //Create a table with the name md5(user_id)
     var create_table_sql=`CREATE TABLE table_`+id_md5+`(
     usr_risk_id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
+    big_assets_id int DEFAULT 0, FOREIGN KEY(big_assets_id) REFERENCES data_db.big_category_assets(id_b_cat_ass) ON UPDATE CASCADE,
     assets_id int DEFAULT 0, FOREIGN KEY(assets_id) REFERENCES data_db.assets(id_assets) ON UPDATE CASCADE,
+    usr_assets_rate int DEFAULT 0,
     vulns_id int DEFAULT 0, FOREIGN KEY(vulns_id) REFERENCES data_db.vulns(id_vulns) ON UPDATE CASCADE,
+    usr_vulns_rate int DEFAULT 0,
     threats_id int DEFAULT 0, FOREIGN KEY(threats_id) REFERENCES data_db.threats(id_threats) ON UPDATE CASCADE,
+    usr_threats_rate int DEFAULT 0,
     usr_risk_rate int DEFAULT 0,
-    usr_risk_mng_id int DEFAULT 0, FOREIGN KEY(usr_risk_mng_id) REFERENCES data_db.risk_manage(id_manage) ON UPDATE CASCADE
+    usr_risk_mng_id int DEFAULT 0
     ) DEFAULT CHARSET UTF8 COMMENT 'newTable';`;
     db.query(create_table_sql, function(err, rows, fields){
         if(err){
