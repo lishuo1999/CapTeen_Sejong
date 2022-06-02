@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $("#threatTable").hide(); //일단 table 숨기기 
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 $(function(){
@@ -20,7 +21,7 @@ $(function(){
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
-            data:{"category":"하드웨어"},
+            data:{"category":"4"}, //하드웨어
             dataType:"json",
             success:function(data){
                 var html='';
@@ -61,7 +62,7 @@ $(function(){
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
-            data:{"category":"소프트웨어"},
+            data:{"category":"2"}, //소프트웨어
             dataType:"json",
             success:function(data){
                 var html='';
@@ -103,7 +104,7 @@ $(function(){
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
-            data:{"category":"전자정보"},
+            data:{"category":"1"}, //전자정보
             dataType:"json",
             success:function(data){
                 var html='';
@@ -144,7 +145,7 @@ $(function(){
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
-            data:{"category":"인적"},
+            data:{"category":"3"}, //인적자원
             dataType:"json",
             success:function(data){
                 var html='';

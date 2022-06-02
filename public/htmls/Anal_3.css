@@ -287,3 +287,7 @@ td{
 #vulNum{
     display:none;
 }
+
+#standard:hover{
+    cursor:pointer;
+}
