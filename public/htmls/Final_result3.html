@@ -19,6 +19,7 @@
     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
+
     <link href="Final_result3.css" type="text/css" rel="stylesheet">    
 </head>
 
@@ -53,23 +54,23 @@
 
         <div id='box1'>
             <div id='box1-1'>
-                <p class='grade'>위험 1등급</p>
+                <p class='grade1'>위험 1등급</p>
                 <p id='perc1'>24%</p>
             </div>
             <div id='box1-2'>
-                <p class='grade'>위험 2등급</p>
+                <p class='grade2'>위험 2등급</p>
                 <p id='perc2'></p>
             </div>
             <div id='box1-3'>
-                <p class='grade'>위험 3등급</p>
+                <p class='grade3'>위험 3등급</p>
                 <p id='perc3'></p>            
             </div>
             <div id='box1-4'>
-                <p class='grade'>위험 4등급</p>
+                <p class='grade4'>위험 4등급</p>
                 <p id='perc4'></p>
             </div>
             <div id='box1-5'>
-                <p class='grade'>위험 5등급</p>
+                <p class='grade5'>위험 5등급</p>
                 <p id='perc5'></p>
             </div>
         </div>
@@ -87,12 +88,12 @@
 
         <div id='box3'>
             <div id='table'>
-                <table id='finalTable' class="table table-bordered"> 
+                <table id='finalTable' class="table tablesorter table-bordered"> 
                     <thead>
-                        <tr>
-                          <th style="width:10%">위험도</th>
-                          <th style="width:75%">위험</th>
-                          <th style="width:25%">처리 전략</th>
+                        <tr class='head_title'>
+                            <th style="width:7%">위험도</th>
+                            <th style="width:83%">위험</th>
+                            <th style="width:10%">처리 전략</th>
                         </tr>
                       </thead>
                       <tbody id='dynamicTbody'>

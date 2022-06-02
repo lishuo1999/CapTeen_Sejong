@@ -1,4 +1,4 @@
-var real=JSON.parse(localStorage.getItem("data")); // 데이터 가져오기 추후 이름 바꿈
+var real=JSON.parse(localStorage.getItem("data1")); // 데이터 가져오기 추후 이름 바꿈
 var result=Object.keys(real); //전송받은 데이터 result 변수에 저장~ 
 var datas=[]
 for(var i=0;i<5;i++){ 
@@ -37,8 +37,6 @@ $(function(){
         $('#chart1').append('<canvas id="pie-chart1" width="200" height="200"></canvas>');
         $('#chart2').append('<canvas id="pie-chart2" width="200" height="200"></canvas>');
 
-
-
 ////첫 번째 차트 그리기 
         var ctx1=$("#pie-chart1");
         var pieLabels=['1등급', '2등급', '3등급', '4등급', '5등급'];
@@ -54,7 +52,7 @@ $(function(){
                var pieData=data;
             }
         });
-        var pieColors=["#FF9C00","#FFB136","#FFC566","#FFD696","#FEEACB"]; 
+        var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136","#FF9C00"]; 
 
         pieData=[1,2,3,4,5];
 
@@ -76,7 +74,7 @@ $(function(){
     
 ////// 두 번째 차트 그리기     
         var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인적'];
+        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
         //data 등급별 받아오기 
        $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
@@ -88,7 +86,7 @@ $(function(){
                var pieData=data;
             }
         });
-        var pieColors=["#FFB136","#FFC566","#FFD696","#FEEACB"]; 
+        var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136"]; 
         
         pieData=[5,4,3,2];
 
@@ -110,31 +108,7 @@ $(function(){
     
 /////////// 표 그리기
 
-        //몇등급인지 전송, 해당 등급별 "위험" 받아오기 
-        //$("#finalTable").DataTable({
-//
-        //    info:false,
-        //    paging:false,
-        //    autoWidth:false,
-        //    searching:false,
-        //    destroy:true, //다시 클릭하면 다시 로드 
-        //    order:[[0,"desc"]], //나중에 위험도 내림차순때문에 지정
-        //    ajax:{
-        //        type: "get",
-        //        url: 'https://jsonplaceholder.typicode.com/posts',
-        //        data:{"level":"1등급"}, //선택한 카테고리 정보 서버로 전송 
-        //        dataSrc: '',
-        //        dataType: 'json',
-        //    },
-        //    columns:[
-        //        {data:"id"},
-        //        {data:"title"},
-        //        {data:"userId"},
-        //    ],
-        //    //scrollX:false,
-        //    //scrollY:350
-//
-        //});
+
 
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
@@ -151,40 +125,12 @@ $(function(){
                     html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                     html+='</tr>';
                 }
+
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
+                sort();
             }
         });
-
-        $('#finalTable th').each(function (column) {
-            $(this).click(function() {
-              if($(this).is('.asc')) {
-                $(this).removeClass('asc');
-                $(this).addClass('desc');
-                sortdir=-1;
-        
-              } else {
-                $(this).addClass('asc');
-                $(this).removeClass('desc'); sortdir=1;
-              }
-        
-              $(this).siblings().removeClass('asc');
-              $(this).siblings().removeClass('desc');
-        
-              var rec = $('#finalTable').find('tbody>tr').get();
-        
-              rec.sort(function (a, b) {
-                var val1 = $(a).children('td').eq(column).text().toUpperCase();
-                var val2 = $(b).children('td').eq(column).text().toUpperCase();
-                return (val1 < val2)?-sortdir:(val1>val2)?sortdir:0;
-              });
-        
-              $.each(rec, function(index, row) {
-                  $('#finalTable tbody').append(row);
-              });
-            });
-         });
-
         $("#box2").fadeIn(1000);
         $("#box3").fadeIn(1000);
     })
@@ -241,7 +187,7 @@ $(function(){
     
 ////// 두 번째 차트 그리기     
         var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인적'];
+        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
         //data 등급별 받아오기 
        $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
@@ -284,13 +230,14 @@ $(function(){
                 for(key in data){
                     html+='<tr>';
                     html+='<td>'+data[key].id+'</td>'; //위험도
-                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>';//위험명
-                    html+='<td>'+data[key].userId+'</td>';//위험처리전략
+                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //위험
+                    html+='<td>'+data[key].userId+'</td>';//위험 처리전략
                     html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                     html+='</tr>';
                 }
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
+                sort();
             }
         });
 
@@ -351,7 +298,7 @@ $(function(){
     
 ////// 두 번째 차트 그리기     
         var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인적'];
+        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
         //data 등급별 받아오기 
        $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
@@ -394,14 +341,15 @@ $(function(){
                 var html='';
                 for(key in data){
                     html+='<tr>';
-                    html+='<td>'+data[key].id+'</td>'; //위험도 
-                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>';//위험명
-                    html+='<td>'+data[key].userId+'</td>';//처리전략
+                    html+='<td>'+data[key].id+'</td>'; //위험도
+                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //위험명
+                    html+='<td>'+data[key].userId+'</td>';//위험 처리전략
                     html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                     html+='</tr>';
                 }
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
+                sort();
             }
         })
 
@@ -466,7 +414,7 @@ $(function(){
     
 ////// 두 번째 차트 그리기     
         var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인적'];
+        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
         //data 등급별 받아오기 
        $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
@@ -509,14 +457,15 @@ $(function(){
                 var html='';
                 for(key in data){
                     html+='<tr>';
-                    html+='<td>'+data[key].id+'</td>'; //이게 위험도 
-                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //이게 위험 명
-                    html+='<td>'+data[key].userId+'</td>'; //처리 전략 
+                    html+='<td>'+data[key].id+'</td>'; //위험도
+                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //위험명
+                    html+='<td>'+data[key].userId+'</td>';//위험 처리전략
                     html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                     html+='</tr>';
                 }
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
+                sort();
             }
         })
 
@@ -581,7 +530,7 @@ $(function(){
 
 ////// 두 번째 차트 그리기     
         var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인적'];
+        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
         //data 등급별 받아오기 
        $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
@@ -624,14 +573,16 @@ $(function(){
                 var html='';
                 for(key in data){
                     html+='<tr>';
-                    html+='<td>'+data[key].id+'</td>'; //위험도  
-                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>';//위험명
-                    html+='<td>'+data[key].userId+'</td>';//처리전략 
+                    html+='<td>'+data[key].id+'</td>'; //위험도
+                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //위험명
+                    html+='<td>'+data[key].userId+'</td>';//위험 처리전략
                     html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                     html+='</tr>';
                 }
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
+                sort();
+             
             }
         })
 
@@ -667,7 +618,7 @@ function change(obj){ //위험명 클릭시 !!
 
             console.log(data);
             $("#text1").text("취약성 내용이 들어갈 부분");
-            $("#text2").text("위험 처리 방법이 들어갈 부분");
+            $("#text2").text("취약성 조치 방법이 들어갈 부분");
 
         },
         error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
@@ -676,12 +627,50 @@ function change(obj){ //위험명 클릭시 !!
     })
 
 
-
     $(".modal").fadeIn(1000);
 }
+  
+function sort(){ // 비용을 기준으로 내림차순 정렬
 
-$(function(){
-    $(".modal_content").click(function(){
-        $(".modal").fadeOut();
-    })
-})
+    var trs=document.getElementById("dynamicTbody").getElementsByTagName("tr");
+    var rows = trs.length;
+    console.log("행 수 : ",rows);
+
+    //var c=trs[20].childNodes[0].innerText;
+    //console.log(parseInt(c));
+
+    for(var i=0;i<rows;i++){
+
+        for(var j=0;j<i;j++){
+            var c11=trs[i].childNodes[0].innerText;
+            var c12=trs[i].childNodes[1].innerText;
+            var c13=trs[i].childNodes[2].innerText;
+            var c14=trs[i].childNodes[3].innerText;
+
+            var c21=trs[j].childNodes[0].innerText;
+            var c22=trs[j].childNodes[1].innerText;
+            var c23=trs[j].childNodes[2].innerText;
+            var c24=trs[j].childNodes[3].innerText;
+
+            if(parseInt(c11)>parseInt(c21)){
+            
+                var tmp1=c11
+                var tmp2=c12
+                var tmp3=c13
+                var tmp4=c14
+            
+                trs[i].childNodes[0].innerText=c21;
+                trs[i].childNodes[1].innerText=c22; 
+                trs[i].childNodes[2].innerText=c23; 
+                trs[i].childNodes[3].innerText=c24;
+            
+                trs[j].childNodes[0].innerText=tmp1;
+                trs[j].childNodes[1].innerText=tmp2;
+                trs[j].childNodes[2].innerText=tmp3;
+                trs[j].childNodes[3].innerText=tmp4;
+            }
+
+        }
+    }
+
+}
