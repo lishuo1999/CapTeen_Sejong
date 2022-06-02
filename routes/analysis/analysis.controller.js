@@ -24,7 +24,6 @@ exports.business=(req, res, next)=>{
     .then((result)=>db.query(update_sql, [result, usr_id_md5], function(err, rows, fields){
         if(err){
             console.log(err);
-
         }
         else{
             console.log('business value input successed!');
@@ -545,5 +544,60 @@ riskAssess=(asset, vuln, threat)=>{
                 console.log("valueError: threatValueError");
                 break;
         }
+    })s
+}
+
+//대분류에 따른 중분류 리스트 보내기 (id_mid_assets, name_m_cat_ass)
+exports.asset_big = (req, res, next) => {
+    var index = req.query.id_big_assets; //대분류 id를 받음
+    var Mid_assets_id = 'SELECT id_mid_assets FROM data_db.assets WHERE id_big_assets = ?'; //디비에서 해당 중분류 id들 조회
+    var Mid_assets_name = 'SELECT id_m_cat_ass, name_m_cat_ass FROM data_db.mid_category_assets WHERE id_m_cat_ass = ?'; //중분류 id로 중분류 명 조회, ? 에 Mid_assets_id의 원소들 들어가야 함
+    var data = '[';
+    var Mid_list = [];
+
+    db.query(Mid_assets_id, index, function (err, rows, fields) {
+        for (var i = 0; i < rows.length; i++) {
+            Mid_list.push(rows[i].id_mid_assets);
+        }
+        const set = new Set(Mid_list);
+        const Mid_list_new = Array.from(set);
+        let index = 0;
+        test1();
+        function test1() {
+            if(Mid_list_new.length == index) {
+                data = data.slice(0,-1);
+                data += ']';
+                console.log(data);
+                const json = JSON.parse(data);
+                res.send(json);
+            }else{
+                test2(Mid_list_new[index]).then(test1);
+                index++;
+            }
+        }
+        function test2(item) {
+            return new Promise(function (resolve, reject) {
+                db.query(Mid_assets_name, item, function (err, rows, fields) {
+                    //비어있는 객체 생성
+                    var obj;
+                    //person1객체의 프로퍼티를 할당
+                    obj = '{"id_mid_assets":' + rows[0].id_m_cat_ass + ',"name_m_cat_ass":"' + rows[0].name_m_cat_ass + '"}';
+                    //data.push(obj);
+                    data += obj;
+                    data += ',';
+                    console.log();
+                    resolve();
+                })
+            });
+        }
     })
 }
+//대분류, 중분류, 자산 고유번호, 자산명, C, I, A, 업무의존도, 가치등급 리스트 보내기 (name_b_cat_ass, name_m_cat_ass, id_assets, name_assets, c_assets, i_assets, a_assets, dpdcy_assets, value_assets)
+/*exports.asset_big_mid = (req, res, next) => {
+    var big_index = req.jquery.id_big_assets; //대분류 id 받아옴
+    var mid_index = req.jquery.id_mid_assets; //중분류 id 받아옴
+    var DB_big = 'SELECT name_b_cat_ass FROM data_db.assets WHERE id big_index = ?';//대분류 리스트 조회
+    var DB_mid = 'SELECT name_m_cat_ass FROM data_db.assets WHERE id_mid_index = ?';//중분류 리스트 조회
+    var DB_assets_id = 'SELECT id_assets FROM data_db.assets WHERE id_mid_index = ?';//자산 고유번호 리스트 조회
+    var DB_assets_name = 'SELECT name_assets FROM data_db.assets WHERE id_mid_index = ?';//자산 리스트 조회
+}*/

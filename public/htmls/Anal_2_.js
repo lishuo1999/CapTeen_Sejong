@@ -3,23 +3,19 @@ window.onload = function () {
 }
 $(function () { //자산분류 선택 시 -> 해당 자산그룹명 리스트를 select 태그에 데이터 가져오기
     $('#sel_1').change(function (event) {
-        var $data_send = $(this).val();
-        //alert($data_send);
+        var data_send = $(this).val();
         $.ajax({
             type: "get",
-            url: "/", //서버에서 입력할 것
+            url: "/analysis/asset_big", //서버에서 입력할 것
             datatype: "json",
             contentType: "application/json",
             data: {
-                "index": $data_send //대분류
+                "id_big_assets": data_send //대분류
             },
             success: function (data) { //data: 서버로부터 받아온 json data 
-                /*for (var i = 0; i < data.length; i++) {
-                    $('#sel_2').append("<option value=" + obj[i].groupId + ">" + obj[i].groupname + "</option>"); //groupname: 자산그룹명, groupId: 해당 그룹명의 value값
-                }*/
-                $.each(data, function (index, item) { // 데이터 =item
-                    $('#sel_2').append("<option value=" + item.groupId + ">" + item.groupname + "</option>"); //groupname: 자산그룹명, groupId: 해당 그룹명의 value값
-                });
+                for (var i = 0; i < data.length; i++) {
+                    $('#sel_2').append("<option value=" + data[i].id_m_cat_ass + ">" + data[i].name_m_cat_ass + "</option>"); //groupname: 자산그룹명, groupId: 해당 그룹명의 value값
+                }
             },
             error: function () {
                 console.log(error);
