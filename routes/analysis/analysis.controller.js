@@ -41,12 +41,13 @@ exports.result = async(req, res, next) => {
     let maxIdx=0;
     let arr_rate=[];
     let risk_rate=[];
+    let risk_rate_for_web=[];
     let riskRate=0;
     let usr_id_md5=md5(req.session.userName);
     let getRateSql='SELECT assets_id, usr_assets_rate, usr_vulns_rate, usr_threats_rate FROM usr_db.table_'+usr_id_md5;
 
     //get the rates of assets, threats, vulnerabilities in order and put them in the array: arr_rate
-    new Promise((resolve)=>{
+    new Promise(function(resolve, reject){
             db.query(getRateSql, function(err, rows, field){
                 if(err){
                     console.log(err);
@@ -57,64 +58,63 @@ exports.result = async(req, res, next) => {
                         cursor = rows[idx];
                         arr_rate.push([cursor.assets_id, cursor.usr_assets_rate, cursor.usr_vulns_rate, cursor.usr_threats_rate]);
                     }
-                    console.log("arr_rate= "+arr_rate);
+                    resolve(arr_rate);
                 }
             })
-            resolve();
     })
 
     //give the array as a parameter of riskAssess()
     //store the risk rate into the array: risk_rate
-    .then(()=>{
-        new Promise(async(resolve)=>{
+    .then(async function(result){
+            console.log(result);
             for(var idx=0;idx<maxIdx;idx++){
-                console.log(maxIdx);
-                assetId=arr_rate[idx][0];
-                asset=arr_rate[idx][1];
-                vuln=arr_rate[idx][2];
-                threat=arr_rate[idx][3];
+                assetId=result[idx][0];
+                asset=result[idx][1];
+                vuln=result[idx][2];
+                threat=result[idx][3];
                 riskRate= await riskAssess(asset, vuln, threat);
                 risk_rate.push([assetId, riskRate]);
             }
-            console.log(risk_rate);
-            resolve();
-        })
-        .then(()=>{
-            const updateSql='UPDATE usr_db.table_'+usr_id_md5+' SET usr_risk_rate=? WHERE assets_id=?';
-            //send the risk rate to the database
-            new Promise((resolve)=>{
-                console.log("Before for");
-                for(var idx=0;idx<maxIdx;idx++){
-                    db.query(updateSql, [risk_rate[idx][1], risk_rate[idx][0]], function(err, rows, field){
-                        if(err){
-                            console.log(err);
-                        }
-                        else{
-                            console.log('risk rate update trial['+idx+'] success');
-                        }
-                    })
-                }
-                resolve();
-            })
-            .then(()=>{
-                //count the number of risks per each rate
-                let risk_1=risk_rate.filter(element=> 1 === element).length;
-                let risk_2=risk_rate.filter(element=> 2 === element).length;
-                let risk_3=risk_rate.filter(element=> 3 === element).length;
-                let risk_4=risk_rate.filter(element=> 4 === element).length;
-                let risk_5=risk_rate.filter(element=> 5 === element).length;
-                console.log(risk_1);
-            
-                //차례대로 1등급, 2등급, 3등급, 4등급, 5등급 개수를 보내주면 됨
-                const json = '{"1":'+risk_1+', "2":'+risk_2+', "3":'+risk_3+', "4":'+risk_4+', "5":'+risk_5+'}';
-                const obj = JSON.parse(json);
-                //GET /analysis/result?1=3&2=4&3=5&4=6&5=0 이런 식으로 response됨.
-                console.log(obj);
-                res.send(obj);
-            });
-        });
+            return(risk_rate);
+    })
+    .then(function(result){
+        //all data is in order, so don't need to check whether the risk rate is the right risk rate for (asset, threat, vuln)
+        const updateSql='UPDATE usr_db.table_'+usr_id_md5+' SET usr_risk_rate=? WHERE usr_risk_id=?';
+        //send the risk rate to the database
+            for(var idx=0;idx<maxIdx;idx++){
+                //this will be executed at the very last moment, but never mind; the data dependency is over at here
+                db.query(updateSql, [result[idx][1], idx+1], function(err, rows, field){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        console.log('risk rate update trial['+idx+'] success');
+                    }
+                })
+            }
+            for(var idx=0;idx<maxIdx;idx++){
+                risk_rate_for_web.push(result[idx][1]);
+            }
+            return(risk_rate_for_web);
+    })
+    .then(async function (result){
+        //count the number of risks per each rate
+        let risk_1=await result.filter(element=> 1 === element).length;
+        let risk_2=await result.filter(element=> 2 === element).length;
+        let risk_3=await result.filter(element=> 3 === element).length;
+        let risk_4=await result.filter(element=> 4 === element).length;
+        let risk_5=await result.filter(element=> 5 === element).length;
+        console.log("the very last one: "+result);
+
+        //차례대로 1등급, 2등급, 3등급, 4등급, 5등급 개수를 보내주면 됨
+        const json = '{"1":'+risk_1+', "2":'+risk_2+', "3":'+risk_3+', "4":'+risk_4+', "5":'+risk_5+'}';
+        const obj = JSON.parse(json);
+        //GET /analysis/result?1=3&2=4&3=5&4=6&5=0 이런 식으로 response됨.
+        console.log(obj);
+        return(res.send(obj));
     });
 }
+
 
 //sends the list of user's risks whose level is 1
 exports.risk1_list = (req, res, next) => {
@@ -593,11 +593,10 @@ exports.asset_big = (req, res, next) => {
     })
 }
 //대분류, 중분류, 자산 고유번호, 자산명, C, I, A, 업무의존도, 가치등급 리스트 보내기 (name_b_cat_ass, name_m_cat_ass, id_assets, name_assets, c_assets, i_assets, a_assets, dpdcy_assets, value_assets)
-/*exports.asset_big_mid = (req, res, next) => {
-    var big_index = req.jquery.id_big_assets; //대분류 id 받아옴
-    var mid_index = req.jquery.id_mid_assets; //중분류 id 받아옴
-    var DB_big = 'SELECT name_b_cat_ass FROM data_db.assets WHERE id big_index = ?';//대분류 리스트 조회
-    var DB_mid = 'SELECT name_m_cat_ass FROM data_db.assets WHERE id_mid_index = ?';//중분류 리스트 조회
-    var DB_assets_id = 'SELECT id_assets FROM data_db.assets WHERE id_mid_index = ?';//자산 고유번호 리스트 조회
-    var DB_assets_name = 'SELECT name_assets FROM data_db.assets WHERE id_mid_index = ?';//자산 리스트 조회
-}*/
+// /*exports.asset_big_mid = (req, res, next) => 
+//     var big_index = req.jquery.id_big_assets; //대분류 id 받아옴
+//     var mid_index = req.jquery.id_mid_assets; //중분류 id 받아옴
+//     var DB_big = 'SELECT name_b_cat_ass FROM data_db.assets WHERE id big_index = ?';//대분류 리스트 조회
+//     var DB_mid = 'SELECT name_m_cat_ass FROM data_db.assets WHERE id_mid_index = ?';//중분류 리스트 조회
+//     var DB_assets_id = 'SELECT id_assets FROM data_db.assets WHERE id_mid_index = ?';//자산 고유번호 리스트 조회
+//     var DB_assets_name = 'SELECT name_assets FROM data_db.assets WHERE id_mid_index = ?';//자산 리스트 조회
