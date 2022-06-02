@@ -45,8 +45,8 @@ exports.vuln=(req,res,next)=>{ //get method
     const md5_id=md5(usr_id);
     //console.log(md5_id);
 
-    var select_vulns_sql='SELECT vulns_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
-    //console.log(select_vulns_sql);
+    var select_threats_sql='SELECT threats_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
+    //console.log(select_threats_sql);
 
 
     var json="["
@@ -66,10 +66,10 @@ exports.vuln=(req,res,next)=>{ //get method
             res.send(obj)
             return console.log("done");
         }else{
-            db.query(select_vulns_sql,category,function(err,rows,fields){
+            db.query(select_threats_sql,category,function(err,rows,fields){
                 len=rows.length
-                var id_vulns=rows[index].vulns_id;
-                lsy2(id_vulns).then(lsy);
+                var id_threats=rows[index].threats_id;
+                lsy2(id_threats).then(lsy);
                 index++;
         })
 
@@ -78,14 +78,14 @@ exports.vuln=(req,res,next)=>{ //get method
 
     function lsy2(item){// item means vul_id
         return new Promise(function(resolve,reject){
-            var select_vuln_name_sql="SELECT name_vulns,id_vulns FROM data_db.vulns WHERE id_vulns=?"
+            var select_vuln_name_sql="SELECT name_threats,id_threats FROM data_db.threats WHERE id_threats=?"
             db.query(select_vuln_name_sql,item,function(err,rows,fields){
-                //let id_vulns=array[i]
-                let id_vulns=rows[0].id_vulns
-                //console.log(id_vulns)
-                let name_vulns=rows[0].name_vulns
-                //console.log(name_vulns)
-                json+='{"id_vulns":'+id_vulns+',"name_vulns":"'+name_vulns+'"},'
+                //let id_threats=array[i]
+                let id_threats=rows[0].id_threats
+                //console.log(id_threats)
+                let name_threats=rows[0].name_threats
+                //console.log(name_threats)
+                json+='{"id_threats":'+id_threats+',"name_threats":"'+name_threats+'"},'
                 console.log(json)
                 resolve();
             })
@@ -97,24 +97,24 @@ exports.vuln=(req,res,next)=>{ //get method
 
 //Anal_3 : saving data and making grade
 exports.save_vuln=(req,res,next)=>{
-    var id_vulns=req.body.num;
-    var serious_vulns=req.body.money;
-    var exposed_vulns=req.body.frequency;
-    console.log(id_vulns,serious_vulns,exposed_vulns);
+    var id_threats=req.body.num;
+    var serious_threats=req.body.money;
+    var exposed_threats=req.body.frequency;
+    console.log(id_threats,serious_threats,exposed_threats);
 
     //grading .. [exp,ser,grade]
     var saved1=[[1,1,1],[1,2,2],[1,3,3]]
     var saved2=[[2,1,2],[2,2,3],[2,3,4]]
     var saved3=[[3,1,3],[3,2,4],[3,3,5]]
 
-    if(exposed_vulns==1){
-        var grade=saved1[serious_vulns-1][2]
+    if(exposed_threats==1){
+        var grade=saved1[serious_threats-1][2]
     }
-    else if(exposed_vulns==2){
-        var grade=saved2[serious_vulns-1][2]
+    else if(exposed_threats==2){
+        var grade=saved2[serious_threats-1][2]
     }
     else{
-        var grade=saved3[serious_vulns-1][2]
+        var grade=saved3[serious_threats-1][2]
     }
     console.log("grade:",grade);
 
@@ -124,10 +124,10 @@ exports.save_vuln=(req,res,next)=>{
     const md5_id=md5(usr_id);
     //console.log(md5_id);
 
-    var update_vulns_sql='UPDATE usr_db.table_'+md5_id+' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate
-    console.log(update_vulns_sql);
+    var update_threats_sql='UPDATE usr_db.table_'+md5_id+' SET usr_threats_rate=? WHERE threats_id=?' // update vulnerability rate
+    console.log(update_threats_sql);
 
-    db.query(update_vulns_sql,[grade,id_vulns],function(err,rows,fields){
+    db.query(update_threats_sql,[grade,id_threats],function(err,rows,fields){
         if(err) console.log(err)
         else{
             console.log("Vulnerability Rate updated!")
@@ -135,7 +135,102 @@ exports.save_vuln=(req,res,next)=>{
     })
 }
 
+//Anal_4.html => show threats 
+exports.threat=(req,res,next)=>{ //get method
+    var category=req.query.category;
+    console.log(category);
+    var usr_id=req.session.userName;
+    //console.log(usr_id);
+    const md5_id=md5(usr_id);
+    //console.log(md5_id);
 
+    var select_threats_sql='SELECT threats_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
+    //console.log(select_threats_sql);
+
+
+    var json="["
+    let index=0
+    let len=-1
+    lsy();
+
+    function lsy(){
+
+        if(index==len){ // finish
+            console.log("hihi");
+            json=json.slice(0,-1)
+            json+=']'
+            console.log("PARSHING ARRAY:",json)
+            const obj=JSON.parse(json)
+            console.log("obj:",obj)
+            res.send(obj)
+            return console.log("done");
+        }else{
+            db.query(select_threats_sql,category,function(err,rows,fields){
+                len=rows.length
+                var id_threats=rows[index].threats_id;
+                lsy2(id_threats).then(lsy);
+                index++;
+        })
+
+    }
+    }
+
+    function lsy2(item){// item means vul_id
+        return new Promise(function(resolve,reject){
+            var select_threats_name_sql="SELECT name_threats,id_threats FROM data_db.threats WHERE id_threats=?"
+            db.query(select_threats_name_sql,item,function(err,rows,fields){
+                //let id_threats=array[i]
+                let id_threats=rows[0].id_threats
+                //console.log(id_threats)
+                let name_threats=rows[0].name_threats
+                //console.log(name_threats)
+                json+='{"id_threats":'+id_threats+',"name_threats":"'+name_threats+'"},'
+                console.log(json)
+                resolve();
+            })
+        })
+    }
+}
+
+//Anal_4 : saving data and making grade
+exports.save_threat=(req,res,next)=>{
+    var id_threats=req.body.num;
+    var serious_threats=req.body.money;
+    var exposed_threats=req.body.frequency;
+    console.log(id_threats,serious_threats,exposed_threats);
+
+    //grading .. [exp,ser,grade]
+    var saved1=[[1,1,1],[1,2,2],[1,3,3]]
+    var saved2=[[2,1,2],[2,2,3],[2,3,4]]
+    var saved3=[[3,1,3],[3,2,4],[3,3,5]]
+
+    if(exposed_threats==1){
+        var grade=saved1[serious_threats-1][2]
+    }
+    else if(exposed_threats==2){
+        var grade=saved2[serious_threats-1][2]
+    }
+    else{
+        var grade=saved3[serious_threats-1][2]
+    }
+    console.log("grade:",grade);
+
+
+    var usr_id=req.session.userName;
+    //console.log(usr_id);
+    const md5_id=md5(usr_id);
+    //console.log(md5_id);
+
+    var update_threats_sql='UPDATE usr_db.table_'+md5_id+' SET usr_threats_rate=? WHERE threats_id=?' // update vulnerability rate
+    console.log(update_threats_sql);
+
+    db.query(update_threats_sql,[grade,id_threats],function(err,rows,fields){
+        if(err) console.log(err)
+        else{
+            console.log("Threat Rate updated!")
+        }
+    })
+}
 
 //위험도 계산해서 위험도 분류, DB와의 인터렉션 필요
 //async sync check. if error occurs, then use Promise
@@ -150,7 +245,7 @@ exports.result = async(req, res, next) => {
     let risk_rate_for_web=[];
     let riskRate=0;
     let usr_id_md5=md5(req.session.userName);
-    let getRateSql='SELECT assets_id, usr_assets_rate, usr_vulns_rate, usr_threats_rate FROM usr_db.table_'+usr_id_md5;
+    let getRateSql='SELECT assets_id, usr_assets_rate, usr_threats_rate, usr_threats_rate FROM usr_db.table_'+usr_id_md5;
 
     //get the rates of assets, threats, vulnerabilities in order and put them in the array: arr_rate
     new Promise(function(resolve, reject){
@@ -162,7 +257,7 @@ exports.result = async(req, res, next) => {
                     maxIdx=rows.length;
                     for(var idx=0;idx<maxIdx;idx++){
                         cursor = rows[idx];
-                        arr_rate.push([cursor.assets_id, cursor.usr_assets_rate, cursor.usr_vulns_rate, cursor.usr_threats_rate]);
+                        arr_rate.push([cursor.assets_id, cursor.usr_assets_rate, cursor.usr_threats_rate, cursor.usr_threats_rate]);
                     }
                     resolve(arr_rate);
                 }
@@ -235,8 +330,8 @@ exports.risk1_list = (req, res, next) => {
     let vulname=0;
     let thrtname=0;
     let name_arr=[];
-    const selectIdSql='SELECT assets_id, vulns_id, threats_id FROM usr_db.table_'+usr_id_md5+' WHERE usr_risk_rate=1';
-    const selectNameSql='SELECT assets.name_assets, threats.name_threats, vulns.name_vulns FROM threats RIGHT JOIN assets ON assets.id_assets=threats.id_assets RIGHT JOIN vulns ON vulns.id_assets=assets.id_assets WHERE assets.id_assets=?';
+    const selectIdSql='SELECT assets_id, threats_id, threats_id FROM usr_db.table_'+usr_id_md5+' WHERE usr_risk_rate=1';
+    const selectNameSql='SELECT assets.name_assets, threats.name_threats, threats.name_threats FROM threats RIGHT JOIN assets ON assets.id_assets=threats.id_assets RIGHT JOIN threats ON threats.id_assets=assets.id_assets WHERE assets.id_assets=?';
     
     new Promise((resolve)=>{
         //getting asset id, vulnerability id and threat id from user's table.
@@ -249,7 +344,7 @@ exports.risk1_list = (req, res, next) => {
                 maxIdx=rows.length;
                 for(var idx=0;idx<maxIdx;idx++){
                     astId=rows[idx].assets_id;
-                    vulId=rows[idx].vulns_id;
+                    vulId=rows[idx].threats_id;
                     thrtId=rows[idx].threats_id
                     id_arr.push([astId, vulId, thrtId]);
                 }
@@ -267,7 +362,7 @@ exports.risk1_list = (req, res, next) => {
                 else{
                     //I guess a problem will be occur here
                     astname=rows[0].name_assets;
-                    vulname=rows[0].name_vulns;
+                    vulname=rows[0].name_threats;
                     thrtname=rows[0].name_threats;
                     name_arr.push({riskRate: 1, risk: ''+astname+' can be exploited by '+thrtname+' using '+vulname});
                 }
