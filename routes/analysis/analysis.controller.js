@@ -66,14 +66,14 @@ exports.result = async(req, res, next) => {
     //give the array as a parameter of riskAssess()
     //store the risk rate into the array: risk_rate
     .then(()=>{
-        new Promise((resolve)=>{
+        new Promise(async(resolve)=>{
             for(var idx=0;idx<maxIdx;idx++){
                 console.log(maxIdx);
                 assetId=arr_rate[idx][0];
                 asset=arr_rate[idx][1];
                 vuln=arr_rate[idx][2];
                 threat=arr_rate[idx][3];
-                riskRate= riskAssess(asset, vuln, threat);
+                riskRate= await riskAssess(asset, vuln, threat);
                 risk_rate.push([assetId, riskRate]);
             }
             console.log(risk_rate);
@@ -90,7 +90,7 @@ exports.result = async(req, res, next) => {
                             console.log(err);
                         }
                         else{
-                            console.log('risk rate update trial['+idx+'] successed');
+                            console.log('risk rate update trial['+idx+'] success');
                         }
                     })
                 }
