@@ -75,8 +75,8 @@ $(function(){
                 dataType: 'json',
             },
             columns:[ //여기 data 명은 서버에서 변경 
-                {data:"id",width:"10%"},
-                {data:"name",width:"90%"}
+                {data:"riskRate",width:"10%"},
+                {data:"risk",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -109,13 +109,13 @@ $(function(){
             order:[[0,"desc"]], //이건 나중에 위험도 내림차순때문에 지정
             ajax:{
                 type: "get",
-                url: 'https://jsonplaceholder.typicode.com/comments',
+                url: '/analysis/risk2',
                 dataSrc: '',
                 dataType: 'json',
             },
             columns:[
-                {data:"id",width:"10%"},
-                {data:"name",width:"90%"}
+                {data:"riskRate",width:"10%"},
+                {data:"risk",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -148,13 +148,13 @@ $(function(){
             order:[[0,"desc"]], //이건 나중에 위험도 내림차순때문에 지정
             ajax:{
                 type: "get",
-                url: 'https://jsonplaceholder.typicode.com/comments',
+                url: '/analysis/risk3',
                 dataSrc: '',
                 dataType: 'json',
             },
             columns:[
-                {data:"id",width:"10%"},
-                {data:"name",width:"90%"}
+                {data:"riskRate",width:"10%"},
+                {data:"risk",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -173,7 +173,7 @@ $(function(){
         });
 
     });
-    $('#head .tooltip4').on('click',function(){ //1등급
+    $('#head .tooltip4').on('click',function(){ //4등급
         $("#caption").text("4등급");
         $("#caption").fadeIn(1000);
         $("#table_right").fadeIn(1000);        
@@ -187,13 +187,13 @@ $(function(){
             order:[[0,"desc"]], //이건 나중에 위험도 내림차순때문에 지정
             ajax:{
                 type: "get",
-                url: 'https://jsonplaceholder.typicode.com/comments',
+                url: '/analysis/risk4',
                 dataSrc: '',
                 dataType: 'json',
             },
             columns:[
-                {data:"id",width:"10%"},
-                {data:"postId",width:"90%"}
+                {data:"riskRate",width:"10%"},
+                {data:"risk",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350
@@ -226,13 +226,13 @@ $(function(){
             order:[[0,"desc"]], //이건 나중에 위험도 내림차순때문에 지정
             ajax:{
                 type: "get",
-                url: 'https://jsonplaceholder.typicode.com/comments',
+                url: '/analysis/risk5',
                 dataSrc: '',
                 dataType: 'json',
             },
             columns:[
-                {data:"id",width:"10%"},
-                {data:"name",width:"90%"}
+                {data:"riskRate",width:"10%"},
+                {data:"risk",width:"90%"}
             ],
             //scrollX:false,
             //scrollY:350
