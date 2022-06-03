@@ -25,10 +25,10 @@ router.get('/result', controller.result);
 
 //anal_result.html operation
 router.get('/risk1', controller.risk1_list);
-//router.get('/risk2', controller.risk2_list);
-//router.get('/risk3', controller.risk3_list);
-//router.get('/risk4', controller.risk4_list);
-//router.get('/risk5', controller.risk5_list);
+router.get('/risk2', controller.risk2_list);
+router.get('/risk3', controller.risk3_list);
+router.get('/risk4', controller.risk4_list);
+router.get('/risk5', controller.risk5_list);
 
 router.get('/test', controller.test);
 

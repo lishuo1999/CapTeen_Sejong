@@ -410,7 +410,7 @@ exports.risk1_list = (req, res, next) => {
                 let astname= k.name_assets;
                 let vulname= k.name_vulns;
                 let thrtname= k.name_threats;
-                name_arr.push({riskRate: 1, risk: ''+astname+' can be exploited by '+thrtname+' using '+vulname});
+                name_arr.push({riskRate: 1, risk: ''+astname+'의 '+thrtname+'으로 인해 '+vulname+' 발생 가능'});
                 console.log(name_arr);
                 });
             }
@@ -427,6 +427,336 @@ exports.risk1_list = (req, res, next) => {
     });
 
 
+}
+
+exports.risk2_list = (req, res, next) => {
+    let usr_id=req.session.userName;
+    let usr_id_md5=md5(usr_id);
+    let id_arr=[];
+    let astId=0;
+    let vulId=0;
+    let thrtId=0;
+    let maxIdx=0;
+    let name_arr=[];
+    const selectIdSql='SELECT assets_id, vulns_id, threats_id FROM usr_db.table_'+usr_id_md5+' WHERE usr_risk_rate=2';
+    const selectNameSql=`SELECT 
+    data_db.assets.name_assets, data_db.assets.id_assets, 
+    data_db.threats.name_threats, data_db.threats.id_threats, 
+    data_db.vulns.name_vulns, data_db.vulns.id_vulns 
+    FROM 
+    data_db.threats 
+    RIGHT JOIN data_db.assets 
+    ON data_db.assets.id_assets=data_db.threats.id_assets 
+    RIGHT JOIN data_db.vulns 
+    ON data_db.vulns.id_assets=data_db.assets.id_assets 
+    WHERE 
+    data_db.assets.id_assets=? AND data_db.vulns.id_vulns=? AND data_db.threats.id_threats=?`;
+    
+    new Promise(function(resolve, reject){
+        //getting asset id, vulnerability id and threat id from user's table.
+        //the data will be stored in id_arr array.
+        db.query(selectIdSql, function(err, rows, fields){
+            if(err){
+                console.log(err);
+            }
+            else{
+                maxIdx=rows.length;
+                for(var idx=0;idx<maxIdx;idx++){
+                    astId=rows[idx].assets_id;
+                    vulId=rows[idx].vulns_id;
+                    thrtId=rows[idx].threats_id
+                    id_arr.push([astId, vulId, thrtId]);
+                }
+                console.log(id_arr);
+                resolve([id_arr, maxIdx])
+            }
+        })
+    })
+    //getting asset name, vulnerability name and threat name by asset id
+    //store the dataset in the name_arr as a object type: {key}:{value}
+    .then(async function(result){
+        id_arr=result[0];
+        maxIdx=result[1];
+        const mysql=require('mysql2/promise');
+        try{
+            const connection=await mysql.createConnection({
+                host : "14.40.31.222",
+                user : 'dev', //for now it is the root user, but gotta make a new user with limited privileged role 
+                password:'1918password',
+                port:3306,
+                database:'data_db'
+            });
+            for(var idx =0 ; idx<maxIdx;idx++){
+                let [rows, fields] = await connection.execute(selectNameSql, [id_arr[idx][0]/*assets_id*/, id_arr[idx][1]/*vulns_id*/, id_arr[idx][2]/*threats_id*/]); //function(err, rows, fields){
+
+                rows.forEach(function(k, value){
+                let astname= k.name_assets;
+                let vulname= k.name_vulns;
+                let thrtname= k.name_threats;
+                name_arr.push({riskRate: 2, risk: ''+astname+'의 '+thrtname+'으로 인해 '+vulname+' 발생 가능'});
+                console.log(name_arr);
+                });
+            }
+            return(name_arr);
+        }
+        catch(err) {
+            console.log(err);
+        }
+    })
+    .then(function(result){
+        //const obj = JSON.parse(result);
+        //console.log(obj);
+        res.send(result);
+    });
+
+
+}
+
+exports.risk3_list = (req, res, next) => {
+    let usr_id=req.session.userName;
+    let usr_id_md5=md5(usr_id);
+    let id_arr=[];
+    let astId=0;
+    let vulId=0;
+    let thrtId=0;
+    let maxIdx=0;
+    let name_arr=[];
+    const selectIdSql='SELECT assets_id, vulns_id, threats_id FROM usr_db.table_'+usr_id_md5+' WHERE usr_risk_rate=3';
+    const selectNameSql=`SELECT 
+    data_db.assets.name_assets, data_db.assets.id_assets, 
+    data_db.threats.name_threats, data_db.threats.id_threats, 
+    data_db.vulns.name_vulns, data_db.vulns.id_vulns 
+    FROM 
+    data_db.threats 
+    RIGHT JOIN data_db.assets 
+    ON data_db.assets.id_assets=data_db.threats.id_assets 
+    RIGHT JOIN data_db.vulns 
+    ON data_db.vulns.id_assets=data_db.assets.id_assets 
+    WHERE 
+    data_db.assets.id_assets=? AND data_db.vulns.id_vulns=? AND data_db.threats.id_threats=?`;
+    
+    new Promise(function(resolve, reject){
+        //getting asset id, vulnerability id and threat id from user's table.
+        //the data will be stored in id_arr array.
+        db.query(selectIdSql, function(err, rows, fields){
+            if(err){
+                console.log(err);
+            }
+            else{
+                maxIdx=rows.length;
+                for(var idx=0;idx<maxIdx;idx++){
+                    astId=rows[idx].assets_id;
+                    vulId=rows[idx].vulns_id;
+                    thrtId=rows[idx].threats_id
+                    id_arr.push([astId, vulId, thrtId]);
+                }
+                console.log(id_arr);
+                resolve([id_arr, maxIdx])
+            }
+        })
+    })
+    //getting asset name, vulnerability name and threat name by asset id
+    //store the dataset in the name_arr as a object type: {key}:{value}
+    .then(async function(result){
+        id_arr=result[0];
+        maxIdx=result[1];
+        const mysql=require('mysql2/promise');
+        try{
+            const connection=await mysql.createConnection({
+                host : "14.40.31.222",
+                user : 'dev', //for now it is the root user, but gotta make a new user with limited privileged role 
+                password:'1918password',
+                port:3306,
+                database:'data_db'
+            });
+            for(var idx =0 ; idx<maxIdx;idx++){
+                let [rows, fields] = await connection.execute(selectNameSql, [id_arr[idx][0]/*assets_id*/, id_arr[idx][1]/*vulns_id*/, id_arr[idx][2]/*threats_id*/]); //function(err, rows, fields){
+
+                rows.forEach(function(k, value){
+                let astname= k.name_assets;
+                let vulname= k.name_vulns;
+                let thrtname= k.name_threats;
+                name_arr.push({riskRate: 3, risk: ''+astname+'의 '+thrtname+'으로 인해 '+vulname+' 발생 가능'});
+                console.log(name_arr);
+                });
+            }
+            return(name_arr);
+        }
+        catch(err) {
+            console.log(err);
+        }
+    })
+    .then(function(result){
+        //const obj = JSON.parse(result);
+        //console.log(obj);
+        res.send(result);
+    });
+
+
+}
+
+exports.risk4_list = (req, res, next) => {
+    let usr_id=req.session.userName;
+    let usr_id_md5=md5(usr_id);
+    let id_arr=[];
+    let astId=0;
+    let vulId=0;
+    let thrtId=0;
+    let maxIdx=0;
+    let name_arr=[];
+    const selectIdSql='SELECT assets_id, vulns_id, threats_id FROM usr_db.table_'+usr_id_md5+' WHERE usr_risk_rate=4';
+    const selectNameSql=`SELECT 
+    data_db.assets.name_assets, data_db.assets.id_assets, 
+    data_db.threats.name_threats, data_db.threats.id_threats, 
+    data_db.vulns.name_vulns, data_db.vulns.id_vulns 
+    FROM 
+    data_db.threats 
+    RIGHT JOIN data_db.assets 
+    ON data_db.assets.id_assets=data_db.threats.id_assets 
+    RIGHT JOIN data_db.vulns 
+    ON data_db.vulns.id_assets=data_db.assets.id_assets 
+    WHERE 
+    data_db.assets.id_assets=? AND data_db.vulns.id_vulns=? AND data_db.threats.id_threats=?`;
+    
+    new Promise(function(resolve, reject){
+        //getting asset id, vulnerability id and threat id from user's table.
+        //the data will be stored in id_arr array.
+        db.query(selectIdSql, function(err, rows, fields){
+            if(err){
+                console.log(err);
+            }
+            else{
+                maxIdx=rows.length;
+                for(var idx=0;idx<maxIdx;idx++){
+                    astId=rows[idx].assets_id;
+                    vulId=rows[idx].vulns_id;
+                    thrtId=rows[idx].threats_id
+                    id_arr.push([astId, vulId, thrtId]);
+                }
+                console.log(id_arr);
+                resolve([id_arr, maxIdx])
+            }
+        })
+    })
+    //getting asset name, vulnerability name and threat name by asset id
+    //store the dataset in the name_arr as a object type: {key}:{value}
+    .then(async function(result){
+        id_arr=result[0];
+        maxIdx=result[1];
+        const mysql=require('mysql2/promise');
+        try{
+            const connection=await mysql.createConnection({
+                host : "14.40.31.222",
+                user : 'dev', //for now it is the root user, but gotta make a new user with limited privileged role 
+                password:'1918password',
+                port:3306,
+                database:'data_db'
+            });
+            for(var idx =0 ; idx<maxIdx;idx++){
+                let [rows, fields] = await connection.execute(selectNameSql, [id_arr[idx][0]/*assets_id*/, id_arr[idx][1]/*vulns_id*/, id_arr[idx][2]/*threats_id*/]); //function(err, rows, fields){
+
+                rows.forEach(function(k, value){
+                let astname= k.name_assets;
+                let vulname= k.name_vulns;
+                let thrtname= k.name_threats;
+                name_arr.push({riskRate: 4, risk: ''+astname+'의 '+thrtname+'으로 인해 '+vulname+' 발생 가능'});
+                console.log(name_arr);
+                });
+            }
+            return(name_arr);
+        }
+        catch(err) {
+            console.log(err);
+        }
+    })
+    .then(function(result){
+        //const obj = JSON.parse(result);
+        //console.log(obj);
+        res.send(result);
+    });
+
+
+}
+
+exports.risk5_list = (req, res, next) => {
+    let usr_id=req.session.userName;
+    let usr_id_md5=md5(usr_id);
+    let id_arr=[];
+    let astId=0;
+    let vulId=0;
+    let thrtId=0;
+    let maxIdx=0;
+    let name_arr=[];
+    const selectIdSql='SELECT assets_id, vulns_id, threats_id FROM usr_db.table_'+usr_id_md5+' WHERE usr_risk_rate=5';
+    const selectNameSql=`SELECT 
+    data_db.assets.name_assets, data_db.assets.id_assets, 
+    data_db.threats.name_threats, data_db.threats.id_threats, 
+    data_db.vulns.name_vulns, data_db.vulns.id_vulns 
+    FROM 
+    data_db.threats 
+    RIGHT JOIN data_db.assets 
+    ON data_db.assets.id_assets=data_db.threats.id_assets 
+    RIGHT JOIN data_db.vulns 
+    ON data_db.vulns.id_assets=data_db.assets.id_assets 
+    WHERE 
+    data_db.assets.id_assets=? AND data_db.vulns.id_vulns=? AND data_db.threats.id_threats=?`;
+    
+    new Promise(function(resolve, reject){
+        //getting asset id, vulnerability id and threat id from user's table.
+        //the data will be stored in id_arr array.
+        db.query(selectIdSql, function(err, rows, fields){
+            if(err){
+                console.log(err);
+            }
+            else{
+                maxIdx=rows.length;
+                for(var idx=0;idx<maxIdx;idx++){
+                    astId=rows[idx].assets_id;
+                    vulId=rows[idx].vulns_id;
+                    thrtId=rows[idx].threats_id
+                    id_arr.push([astId, vulId, thrtId]);
+                }
+                console.log(id_arr);
+                resolve([id_arr, maxIdx])
+            }
+        })
+    })
+    //getting asset name, vulnerability name and threat name by asset id
+    //store the dataset in the name_arr as a object type: {key}:{value}
+    .then(async function(result){
+        id_arr=result[0];
+        maxIdx=result[1];
+        const mysql=require('mysql2/promise');
+        try{
+            const connection=await mysql.createConnection({
+                host : "14.40.31.222",
+                user : 'dev', //for now it is the root user, but gotta make a new user with limited privileged role 
+                password:'1918password',
+                port:3306,
+                database:'data_db'
+            });
+            for(var idx =0 ; idx<maxIdx;idx++){
+                let [rows, fields] = await connection.execute(selectNameSql, [id_arr[idx][0]/*assets_id*/, id_arr[idx][1]/*vulns_id*/, id_arr[idx][2]/*threats_id*/]); //function(err, rows, fields){
+
+                rows.forEach(function(k, value){
+                let astname= k.name_assets;
+                let vulname= k.name_vulns;
+                let thrtname= k.name_threats;
+                name_arr.push({riskRate: 5, risk: ''+astname+'의 '+thrtname+'으로 인해 '+vulname+' 발생 가능'});
+                console.log(name_arr);
+                });
+            }
+            return(name_arr);
+        }
+        catch(err) {
+            console.log(err);
+        }
+    })
+    .then(function(result){
+        //const obj = JSON.parse(result);
+        //console.log(obj);
+        res.send(result);
+    });
 }
 
 //function that assesses risks
