@@ -15,7 +15,7 @@ $(function(){
             success:function(data){
                 var html='';
                 console.log(data)
-                var check=data[0].name_vulns
+                var check=data.name_vulns
                 if(check=="NO DATA"){
                     html+='<tr>';
                     html+='<td>-</td>'; //이게 취약성 명 
@@ -60,7 +60,7 @@ $(function(){
             success:function(data){
                 var html='';
                 console.log(data)
-                var check=data[0].name_vulns
+                var check=data.name_vulns
                 if(check=="NO DATA"){
                     html+='<tr>';
                     html+='<td>-</td>'; //이게 취약성 명 
@@ -105,7 +105,7 @@ $(function(){
             success:function(data){
                 var html='';
                 console.log(data)
-                var check=data[0].name_vulns
+                var check=data.name_vulns
                 if(check=="NO DATA"){
                     html+='<tr>';
                     html+='<td>-</td>'; //이게 취약성 명 
@@ -148,7 +148,7 @@ $(function(){
             success:function(data){
                 var html='';
                 console.log(data)
-                var check=data[0].name_vulns
+                var check=data.name_vulns
                 if(check=="NO DATA"){
                     html+='<tr>';
                     html+='<td>-</td>'; //이게 취약성 명 

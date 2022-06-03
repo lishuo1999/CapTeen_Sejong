@@ -69,9 +69,22 @@ exports.vuln=(req,res,next)=>{ //get method
         }else{
             db.query(select_vulns_sql,category,function(err,rows,fields){
                 len=rows.length
-                var id_vulns=rows[index].id_vulns;
-                lsy2(id_vulns).then(lsy);
-                index++;
+                if(len==0){
+                    console.log("there's no vulneravility")
+                    var not='{"id_vulns":0,"name_vulns":"NO DATA"}'
+                    console.log(not)
+                    not=JSON.parse(not)
+                    console.log("not:",not)
+                    res.send(not)
+                    return;
+                }
+                else{
+                    var vulns_id=rows[index].vulns_id;
+                    console.log("id_vulns:",vulns_id);
+                    lsy2(vulns_id).then(lsy);
+                    index++;
+                }
+
         })
 
     }
@@ -154,6 +167,7 @@ exports.threat=(req,res,next)=>{ //get method
     let len=-1
     lsy();
 
+
     function lsy(){
 
         if(index==len){ // finish
@@ -168,9 +182,21 @@ exports.threat=(req,res,next)=>{ //get method
         }else{
             db.query(select_threats_sql,category,function(err,rows,fields){
                 len=rows.length
-                var id_threats=rows[index].id_threats;
-                lsy2(id_threats).then(lsy);
-                index++;
+                if(len==0){
+                    console.log("there's no threats")
+                    var not='{"id_threats":0,"name_threats":"NO DATA"}'
+                    console.log(not)
+                    not=JSON.parse(not)
+                    console.log("not:",not)
+                    res.send(not)
+                    return;
+                }
+                else{
+                    var threats_id=rows[index].threats_id;
+                    console.log("id_threats",threats_id);
+                    lsy2(threats_id).then(lsy);
+                    index++;
+                }
         })
 
     }
