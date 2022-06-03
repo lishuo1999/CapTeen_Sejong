@@ -54,19 +54,24 @@
         </div>    
 
 
-        <div style="position:absolute; left:30%; top:25%; color:black; font-size:50px; font-weight:700;">
-            <p data-aos="fade-right" data-aos-duration="1000">다음 중 DoA를 선택하세요.</p>
+        <div>
+            <p style="position:absolute; left:30%; top:25%; color:black; font-size:50px; font-weight:700;"data-aos="fade-right" data-aos-duration="1000">
+                다음 중 DoA를 선택하세요.</p>
+            <p style="position:absolute; left:30%; top:40%; color:gray; font-size:15px;" data-aos="fade-right" data-aos-duration="1000">
+                * DoA : Degree Of Assurance의 약자로, 식별된 위험에 대하여 수용 가능한 위험 수준을 의미
+            </p>
         </div>
 
-        <form class='select' data-aos="fade-right" data-aos-duration="1000">
+        <form class='select' data-aos="fade-right" data-aos-duration="1000" style="top:48%; left:48%">
             <input type="radio" name="DoA" class='sel sel1' value='1'>1<br><br> 
             <input type="radio" name="DoA" class='sel sel2' value='2'>2<br><br>
             <input type="radio" name="DoA" class='sel sel3' value='3'>3<br><br>
             <input type="radio" name="DoA" class='sel sel4' value='4'>4<br><br>
             <input type="radio" name="DoA" class='sel sel5' value='5'>5
         </form>  
-        <div style="position:absolute; left:45%; top:75%;">
-            <button type="button" id="next" style="display:none" onclick="window.location.href='./Eval_2.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
+        <div >
+
+            <button type="button" id="next" style="display:none; position:absolute; left:46%; top:78%;" onclick="window.location.href='./Eval_2.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
         </div> 
 
         <div class="moveTopBtn" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'})"><p>TOP</p>
