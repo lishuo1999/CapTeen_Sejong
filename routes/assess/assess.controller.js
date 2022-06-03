@@ -6,7 +6,7 @@ const async = require('async');
 //DoA를 받아서 DB의 사용자 테이블에 저장
 //body에 저장되어 들어오고, 해당 값을 텍스트로 받아오도록 해둠
 exports.input = (req, res, next) => {
-    let id_md5=md5(req)
+    let id_md5=md5(req.session.userName);
     //연수익
     let anRev = req.body.income;
     //보안예산비율
@@ -21,6 +21,7 @@ exports.input = (req, res, next) => {
             console.log(err);
         }
         else{
+            console.log(rows);
             console.log('Annual Revenue, Security Budget Percentage, Transfer Budget update of a user is completed');
         }
     })
