@@ -69,15 +69,7 @@ exports.vuln=(req,res,next)=>{ //get method
         }else{
             db.query(select_vulns_sql,category,function(err,rows,fields){
                 len=rows.length
-                if(len==0){//if there's no asset in this category 
-                    //const obj=JSON.parse('{"id_vulns":"NO DATA","name_vulns":"NO DATA"}')
-                    var obj='[{"id_vulns":100000,"name_vulns":"NO DATA"}]'
-                    obj=JSON.parse(obj)
-                    console.log(obj)
-                    res.send(obj)
-                    return console.log("Done");
-                }
-                var id_vulns=rows[index].vulns_id;
+                var id_vulns=rows[index].id_vulns;
                 lsy2(id_vulns).then(lsy);
                 index++;
         })
@@ -176,7 +168,7 @@ exports.threat=(req,res,next)=>{ //get method
         }else{
             db.query(select_threats_sql,category,function(err,rows,fields){
                 len=rows.length
-                var id_threats=rows[index].threats_id;
+                var id_threats=rows[index].id_threats;
                 lsy2(id_threats).then(lsy);
                 index++;
         })
@@ -1140,4 +1132,3 @@ riskAssess=(asset, vuln, threat)=>{
         }
     })
 }
-
