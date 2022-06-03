@@ -40,21 +40,26 @@ $(function(){
 ////첫 번째 차트 그리기 
         var ctx1=$("#pie-chart1");
         var pieLabels=['1등급', '2등급', '3등급', '4등급', '5등급'];
+        var pieData1=[];
+
         //data 등급별 받아오기 
         //몇등급인지 전송, 해당 등급별 "자산 등급 분포" 받아오기 , 숫자 배열로 주세욧
         $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
+            url:"/finalresult/chart1",
             type:"get",
-            data:{"grade_per_grade":"1등급의 자산 등급 분포"},
+            data:{"grade_per_grade":"1"},
             dataType:"json",
             success:function(data){
                console.log(data);
-               var pieData=data;
+               for(var key in data){
+                   pieData1.push(data[key])
+               }
+               console.log("pieData1:",pieData1);
             }
         });
         var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136","#FF9C00"]; 
 
-        pieData=[1,2,3,4,5];
+        //pieData=[1,2,3,4,5];
 
         var mypieChart=new Chart(ctx1,{
             type:'doughnut',
@@ -62,7 +67,7 @@ $(function(){
                 labels:pieLabels,
                 datasets:[
                     {
-                        data:pieData,
+                        data:pieData1,
                         backgroundColor:pieColors
                     }
                 ]
@@ -74,21 +79,25 @@ $(function(){
     
 ////// 두 번째 차트 그리기     
         var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
+        var pieLabels=['정보자산','소프트웨어','인력','하드웨어'];
+        var pieData2=[];
         //data 등급별 받아오기 
        $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"post",
-            data:{"group_per_grade":"1등급의 자산 분류 분포"},
+            url:"/finalresult/chart2",
+            type:"get",
+            data:{"group_per_grade":"1"},
             dataType:"json",
             success:function(data){
-               console.log(data);
-               var pieData=data;
+                console.log(data);
+                for(var key in data){
+                    pieData2.push(data[key])
+                }
+                console.log("pieData2:",pieData2);
             }
         });
         var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136"]; 
         
-        pieData=[5,4,3,2];
+        //pieData=[5,4,3,2];
 
         var mypieChart=new Chart(ctx2,{
             type:'doughnut',
@@ -96,7 +105,7 @@ $(function(){
                 labels:pieLabels,
                 datasets:[
                     {
-                        data:pieData,
+                        data:pieData2,
                         backgroundColor:pieColors
                     }
                 ]
@@ -113,7 +122,7 @@ $(function(){
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
-            data:{"level":"1등급"},
+            data:{"level":"1"},
             dataType:"json",
             success:function(data){
                 var html='';
@@ -150,24 +159,29 @@ $(function(){
         $('#chart1').append('<canvas id="pie-chart1" width="200" height="200"></canvas>');
         $('#chart2').append('<canvas id="pie-chart2" width="200" height="200"></canvas>');
 
-////첫 번째 차트 그리기 
+        //첫 번째 차트 그리기 
         var ctx1=$("#pie-chart1");
         var pieLabels=['1등급', '2등급', '3등급', '4등급', '5등급'];
+        var pieData1=[];
+
         //data 등급별 받아오기 
         //몇등급인지 전송, 해당 등급별 "자산 등급 분포" 받아오기 , 숫자 배열로 주세욧
         $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
+            url:"/finalresult/chart1",
             type:"get",
-            data:{"grade_per_grade":"2등급의 자산 등급 분포"},
+            data:{"grade_per_grade":"2"},
             dataType:"json",
             success:function(data){
                console.log(data);
-               var pieData=data;
+               for(var key in data){
+                   pieData1.push(data[key])
+               }
+               console.log("pieData1:",pieData1);
             }
         });
-        var pieColors=["#FF9C00","#FFB136","#FFC566","#FFD696","#FEEACB"]; 
+        var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136","#FF9C00"]; 
 
-        pieData=[1,2,3,4,5]; 
+        //pieData=[1,2,3,4,5];
 
         var mypieChart=new Chart(ctx1,{
             type:'doughnut',
@@ -175,7 +189,7 @@ $(function(){
                 labels:pieLabels,
                 datasets:[
                     {
-                        data:pieData,
+                        data:pieData1,
                         backgroundColor:pieColors
                     }
                 ]
@@ -184,40 +198,44 @@ $(function(){
                 responsive:false
             }
         });
-    
-////// 두 번째 차트 그리기     
-        var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
-        //data 등급별 받아오기 
-       $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"post",
-            data:{"group_per_grade":"2등급의 자산 분류 분포"},
-            dataType:"json",
-            success:function(data){
-               console.log(data);
-               var pieData=data;
-            }
-        });
-        var pieColors=["#FFB136","#FFC566","#FFD696","#FEEACB"]; 
-        
-        pieData=[5,4,3,2];
 
-        var mypieChart=new Chart(ctx2,{
-            type:'doughnut',
-            data:{
-                labels:pieLabels,
-                datasets:[
-                    {
-                        data:pieData,
-                        backgroundColor:pieColors
-                    }
-                ]
-            },
-            options:{
-                responsive:false
+    ////// 두 번째 차트 그리기     
+    var ctx2=$("#pie-chart2");
+    var pieLabels=['정보자산','소프트웨어','인력','하드웨어'];
+    var pieData2=[];
+    //data 등급별 받아오기 
+   $.ajax({
+        url:"/finalresult/chart2",
+        type:"get",
+        data:{"group_per_grade":"2"},
+        dataType:"json",
+        success:function(data){
+            console.log(data);
+            for(var key in data){
+                pieData2.push(data[key])
             }
-        });
+            console.log("pieData2:",pieData2);
+        }
+    });
+    var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136"]; 
+    
+    //pieData=[5,4,3,2];
+
+    var mypieChart=new Chart(ctx2,{
+        type:'doughnut',
+        data:{
+            labels:pieLabels,
+            datasets:[
+                {
+                    data:pieData2,
+                    backgroundColor:pieColors
+                }
+            ]
+        },
+        options:{
+            responsive:false
+        }
+    });
 
 
         $.ajax({
@@ -261,74 +279,84 @@ $(function(){
         $('#chart1').append('<canvas id="pie-chart1" width="200" height="200"></canvas>');
         $('#chart2').append('<canvas id="pie-chart2" width="200" height="200"></canvas>');
 
-////첫 번째 차트 그리기 
-        var ctx1=$("#pie-chart1");
-        var pieLabels=['1등급', '2등급', '3등급', '4등급', '5등급'];
-        //data 등급별 받아오기 
-        //몇등급인지 전송, 해당 등급별 "자산 등급 분포" 받아오기 , 숫자 배열로 주세욧
-        $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"get",
-            data:{"grade_per_grade":"3등급의 자산 등급 분포"},
-            dataType:"json",
-            success:function(data){
+           //첫 번째 차트 그리기 
+           var ctx1=$("#pie-chart1");
+           var pieLabels=['1등급', '2등급', '3등급', '4등급', '5등급'];
+           var pieData1=[];
+   
+           //data 등급별 받아오기 
+           //몇등급인지 전송, 해당 등급별 "자산 등급 분포" 받아오기 , 숫자 배열로 주세욧
+           $.ajax({
+               url:"/finalresult/chart1",
+               type:"get",
+               data:{"grade_per_grade":"3"},
+               dataType:"json",
+               success:function(data){
+                  console.log(data);
+                  for(var key in data){
+                      pieData1.push(data[key])
+                  }
+                  console.log("pieData1:",pieData1);
+               }
+           });
+           var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136","#FF9C00"]; 
+   
+           //pieData=[1,2,3,4,5];
+   
+           var mypieChart=new Chart(ctx1,{
+               type:'doughnut',
+               data:{
+                   labels:pieLabels,
+                   datasets:[
+                       {
+                           data:pieData1,
+                           backgroundColor:pieColors
+                       }
+                   ]
+               },
+               options:{
+                   responsive:false
+               }
+           });
+   
+       ////// 두 번째 차트 그리기     
+       var ctx2=$("#pie-chart2");
+       var pieLabels=['정보자산','소프트웨어','인력','하드웨어'];
+       var pieData2=[];
+       //data 등급별 받아오기 
+      $.ajax({
+           url:"/finalresult/chart2",
+           type:"get",
+           data:{"group_per_grade":"3"},
+           dataType:"json",
+           success:function(data){
                console.log(data);
-               var pieData=data;
-            }
-        });
-        var pieColors=["#FF9C00","#FFB136","#FFC566","#FFD696","#FEEACB"]; 
-
-        pieData=[1,2,3,4,5];
-
-        var mypieChart=new Chart(ctx1,{
-            type:'doughnut',
-            data:{
-                labels:pieLabels,
-                datasets:[
-                    {
-                        data:pieData,
-                        backgroundColor:pieColors
-                    }
-                ]
-            },
-            options:{
-                responsive:false
-            }
-        });
-    
-////// 두 번째 차트 그리기     
-        var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
-        //data 등급별 받아오기 
-       $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"post",
-            data:{"group_per_grade":"3등급의 자산 분류 분포"},
-            dataType:"json",
-            success:function(data){
-               console.log(data);
-               var pieData=data;
-            }
-        });
-        var pieColors=["#FFB136","#FFC566","#FFD696","#FEEACB"]; 
-        
-        pieData=[5,4,3,2];
-
-        var mypieChart=new Chart(ctx2,{
-            type:'doughnut',
-            data:{
-                labels:pieLabels,
-                datasets:[
-                    {
-                        data:pieData,
-                        backgroundColor:pieColors
-                    }
-                ]
-            },
-            options:{
-                responsive:false
-            }
-        });
+               for(var key in data){
+                   pieData2.push(data[key])
+               }
+               console.log("pieData2:",pieData2);
+           }
+       });
+       var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136"]; 
+       
+       //pieData=[5,4,3,2];
+   
+       var mypieChart=new Chart(ctx2,{
+           type:'doughnut',
+           data:{
+               labels:pieLabels,
+               datasets:[
+                   {
+                       data:pieData2,
+                       backgroundColor:pieColors
+                   }
+               ]
+           },
+           options:{
+               responsive:false
+           }
+       });
+   
 
         //몇등급인지 전송, 해당 등급별 위험 받아오기 
      
@@ -377,74 +405,84 @@ $(function(){
         $('#chart1').append('<canvas id="pie-chart1" width="200" height="200"></canvas>');
         $('#chart2').append('<canvas id="pie-chart2" width="200" height="200"></canvas>');
 
-////첫 번째 차트 그리기 
-        var ctx1=$("#pie-chart1");
-        var pieLabels=['1등급', '2등급', '3등급', '4등급', '5등급'];
-        //data 등급별 받아오기 
-        //몇등급인지 전송, 해당 등급별 "자산 등급 분포" 받아오기 , 숫자 배열로 주세욧
-        $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"get",
-            data:{"grade_per_grade":"4등급의 자산 등급 분포"},
-            dataType:"json",
-            success:function(data){
-               console.log(data);
-               var pieData=data;
-            }
-        });
-        var pieColors=["#FF9C00","#FFB136","#FFC566","#FFD696","#FEEACB"]; 
+       //첫 번째 차트 그리기 
+       var ctx1=$("#pie-chart1");
+       var pieLabels=['1등급', '2등급', '3등급', '4등급', '5등급'];
+       var pieData1=[];
 
-        pieData=[1,2,3,4,5];
-
-        var mypieChart=new Chart(ctx1,{
-            type:'doughnut',
-            data:{
-                labels:pieLabels,
-                datasets:[
-                    {
-                        data:pieData,
-                        backgroundColor:pieColors
-                    }
-                ]
-            },
-            options:{
-                responsive:false
-            }
-        });
-    
-////// 두 번째 차트 그리기     
-        var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
-        //data 등급별 받아오기 
+       //data 등급별 받아오기 
+       //몇등급인지 전송, 해당 등급별 "자산 등급 분포" 받아오기 , 숫자 배열로 주세욧
        $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"post",
-            data:{"group_per_grade":"4등급의 자산 분류 분포"},
-            dataType:"json",
-            success:function(data){
-               console.log(data);
-               var pieData=data;
-            }
-        });
-        var pieColors=["#FFB136","#FFC566","#FFD696","#FEEACB"]; 
-        
-        pieData=[5,4,3,2];
+           url:"/finalresult/chart1",
+           type:"get",
+           data:{"grade_per_grade":"4"},
+           dataType:"json",
+           success:function(data){
+              console.log(data);
+              for(var key in data){
+                  pieData1.push(data[key])
+              }
+              console.log("pieData1:",pieData1);
+           }
+       });
+       var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136","#FF9C00"]; 
 
-        var mypieChart=new Chart(ctx2,{
-            type:'doughnut',
-            data:{
-                labels:pieLabels,
-                datasets:[
-                    {
-                        data:pieData,
-                        backgroundColor:pieColors
-                    }
-                ]
-            },
-            options:{
-                responsive:false
-            }
-        });
+       //pieData=[1,2,3,4,5];
+
+       var mypieChart=new Chart(ctx1,{
+           type:'doughnut',
+           data:{
+               labels:pieLabels,
+               datasets:[
+                   {
+                       data:pieData1,
+                       backgroundColor:pieColors
+                   }
+               ]
+           },
+           options:{
+               responsive:false
+           }
+       });
+
+   ////// 두 번째 차트 그리기     
+    var ctx2=$("#pie-chart2");
+    var pieLabels=['정보자산','소프트웨어','인력','하드웨어'];
+    var pieData2=[];
+   //data 등급별 받아오기 
+    $.ajax({
+       url:"/finalresult/chart2",
+       type:"get",
+       data:{"group_per_grade":"4"},
+       dataType:"json",
+       success:function(data){
+           console.log(data);
+           for(var key in data){
+               pieData2.push(data[key])
+           }
+           console.log("pieData2:",pieData2);
+       }
+   });
+   var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136"]; 
+   
+   //pieData=[5,4,3,2];
+
+   var mypieChart=new Chart(ctx2,{
+       type:'doughnut',
+       data:{
+           labels:pieLabels,
+           datasets:[
+               {
+                   data:pieData2,
+                   backgroundColor:pieColors
+               }
+           ]
+       },
+       options:{
+           responsive:false
+       }
+   });
+
 
         //몇등급인지 전송, 해당 등급별 위험 받아오기 
 
@@ -490,78 +528,85 @@ $(function(){
         $("#pie-chart2").remove();
         $('#chart1').append('<canvas id="pie-chart1" width="200" height="200"></canvas>');
         $('#chart2').append('<canvas id="pie-chart2" width="200" height="200"></canvas>');
-        ////첫 번째 차트 그리기 
-        var ctx1=$("#pie-chart1");
-        var pieLabels=['1등급', '2등급', '3등급', '4등급', '5등급'];
-
-        //data 등급별 받아오기 
-        //몇등급인지 전송, 해당 등급별 "자산 등급 분포" 받아오기 , 숫자 배열로 주세욧
-        $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"get",
-            data:{"grade_per_grade":"5등급의 자산 등급 분포"},
-            dataType:"json",
-            success:function(data){
-               console.log(data);
-               var pieData=data;
-            }
-        });
-        var pieColors=["#FF9C00","#FFB136","#FFC566","#FFD696","#FEEACB"]; 
-
-        pieData=[1,1,1,1,1];
-
-        var mypieChart1=new Chart(ctx1,{
-            type:'doughnut',
-            data:{
-                labels:pieLabels,
-                datasets:[
-                    {
-                        data:pieData,
-                        backgroundColor:pieColors
-                    }
-                ]
-            },
-            options:{
-                responsive:false,
-            },
-            
-        }
-        );
-
-////// 두 번째 차트 그리기     
-        var ctx2=$("#pie-chart2");
-        var pieLabels=['하드웨어', '소프트웨어', '정보자산', '인력'];
-        //data 등급별 받아오기 
-       $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
-            type:"post",
-            data:{"group_per_grade":"5등급의 자산 분류 분포"},
-            dataType:"json",
-            success:function(data){
-               console.log(data);
-               var pieData=data;
-            }
-        });
-        var pieColors=["#FFB136","#FFC566","#FFD696","#FEEACB"]; 
         
-        pieData=[1,1,1,1];
-
-        var mypieChart2=new Chart(ctx2,{
-            type:'doughnut',
-            data:{
-                labels:pieLabels,
-                datasets:[
-                    {
-                        data:pieData,
-                        backgroundColor:pieColors
-                    }
-                ]
-            },
-            options:{
-                responsive:false,
-            },
-
-        });
+               //첫 번째 차트 그리기 
+               var ctx1=$("#pie-chart1");
+               var pieLabels=['1등급', '2등급', '3등급', '4등급', '5등급'];
+               var pieData1=[];
+       
+               //data 등급별 받아오기 
+               //몇등급인지 전송, 해당 등급별 "자산 등급 분포" 받아오기 , 숫자 배열로 주세욧
+               $.ajax({
+                   url:"/finalresult/chart1",
+                   type:"get",
+                   data:{"grade_per_grade":"5"},
+                   dataType:"json",
+                   success:function(data){
+                      console.log(data);
+                      for(var key in data){
+                          pieData1.push(data[key])
+                      }
+                      console.log("pieData1:",pieData1);
+                   }
+               });
+               var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136","#FF9C00"]; 
+       
+               //pieData=[1,2,3,4,5];
+       
+               var mypieChart=new Chart(ctx1,{
+                   type:'doughnut',
+                   data:{
+                       labels:pieLabels,
+                       datasets:[
+                           {
+                               data:pieData1,
+                               backgroundColor:pieColors
+                           }
+                       ]
+                   },
+                   options:{
+                       responsive:false
+                   }
+               });
+       
+           ////// 두 번째 차트 그리기     
+           var ctx2=$("#pie-chart2");
+           var pieLabels=['정보자산','소프트웨어','인력','하드웨어'];
+           var pieData2=[];
+           //data 등급별 받아오기 
+          $.ajax({
+               url:"/finalresult/chart2",
+               type:"get",
+               data:{"group_per_grade":"5"},
+               dataType:"json",
+               success:function(data){
+                   console.log(data);
+                   for(var key in data){
+                       pieData2.push(data[key])
+                   }
+                   console.log("pieData2:",pieData2);
+               }
+           });
+           var pieColors=["#FEEACB","#FFD696","#FFC566","#FFB136"]; 
+           
+           //pieData=[5,4,3,2];
+       
+           var mypieChart=new Chart(ctx2,{
+               type:'doughnut',
+               data:{
+                   labels:pieLabels,
+                   datasets:[
+                       {
+                           data:pieData2,
+                           backgroundColor:pieColors
+                       }
+                   ]
+               },
+               options:{
+                   responsive:false
+               }
+           });
+       
 
 
         $.ajax({

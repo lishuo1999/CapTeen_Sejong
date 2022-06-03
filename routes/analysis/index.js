@@ -32,4 +32,5 @@ router.get('/risk5', controller.risk5_list);
 
 router.get('/test', controller.test);
 
+
 module.exports = router;
