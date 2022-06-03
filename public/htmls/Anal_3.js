@@ -14,18 +14,33 @@ $(function(){
             
             success:function(data){
                 var html='';
-                for(key in data){
+                console.log(data)
+                var check=data[0].name_vulns
+                if(check=="NO DATA"){
                     html+='<tr>';
-                    html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
-                    html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
-                    html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                    html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
-                    html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                    html+='<td>-</td>'; //이게 취약성 명 
+                    html+='<td>-</td>';
+                    html+='<td>-</td>';
+                    html+='<td>-</td>';
+                    html+='<td id="vulNum">""</td>'; //이게 취약성 고유 번호, 숨겨짐 
                     html+='</tr>';
+                }
+
+                else{
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
+                        html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
+                        html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
+                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }
                 }
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
             }
+            
         })
 
         $("#vulTable").fadeIn(1000);
@@ -44,15 +59,30 @@ $(function(){
             data:{"category":"2"}, //소프트웨어
             success:function(data){
                 var html='';
-                for(key in data){
+                console.log(data)
+                var check=data[0].name_vulns
+                if(check=="NO DATA"){
                     html+='<tr>';
-                    html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
-                    html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
-                    html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                    html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
-                    html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                    html+='<td>-</td>'; //이게 취약성 명 
+                    html+='<td>-</td>';
+                    html+='<td>-</td>';
+                    html+='<td>-</td>';
+                    html+='<td id="vulNum">""</td>'; //이게 취약성 고유 번호, 숨겨짐 
                     html+='</tr>';
                 }
+
+                else{
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
+                        html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
+                        html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
+                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }
+                }
+
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
             }
@@ -74,14 +104,28 @@ $(function(){
             data:{"category":"1"}, //전자정보
             success:function(data){
                 var html='';
-                for(key in data){
+                console.log(data)
+                var check=data[0].name_vulns
+                if(check=="NO DATA"){
                     html+='<tr>';
-                    html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
-                    html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
-                    html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                    html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
-                    html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                    html+='<td>-</td>'; //이게 취약성 명 
+                    html+='<td>-</td>';
+                    html+='<td>-</td>';
+                    html+='<td>-</td>';
+                    html+='<td id="vulNum">""</td>'; //이게 취약성 고유 번호, 숨겨짐 
                     html+='</tr>';
+                }
+
+                else{
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
+                        html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
+                        html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
+                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }
                 }
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
@@ -103,14 +147,28 @@ $(function(){
             data:{"category":"3"}, //인적자원
             success:function(data){
                 var html='';
-                for(key in data){
+                console.log(data)
+                var check=data[0].name_vulns
+                if(check=="NO DATA"){
                     html+='<tr>';
-                    html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
-                    html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
-                    html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                    html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
-                    html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                    html+='<td>-</td>'; //이게 취약성 명 
+                    html+='<td>-</td>';
+                    html+='<td>-</td>';
+                    html+='<td>-</td>';
+                    html+='<td id="vulNum">""</td>'; //이게 취약성 고유 번호, 숨겨짐 
                     html+='</tr>';
+                }
+
+                else{
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
+                        html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
+                        html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
+                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }
                 }
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
