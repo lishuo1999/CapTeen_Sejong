@@ -70,7 +70,7 @@ $(function(){
             order:[[0,"desc"]], //이건 나중에 위험도 내림차순때문에 지정
             ajax:{
                 type: "get",
-                url: 'https://jsonplaceholder.typicode.com/comments', //서버에서 변경
+                url: '/analysis/risk1', //서버에서 변경
                 dataSrc: '',
                 dataType: 'json',
             },

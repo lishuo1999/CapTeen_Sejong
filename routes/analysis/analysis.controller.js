@@ -330,10 +330,10 @@ exports.risk1_list = (req, res, next) => {
     let vulname=0;
     let thrtname=0;
     let name_arr=[];
-    const selectIdSql='SELECT assets_id, threats_id, threats_id FROM usr_db.table_'+usr_id_md5+' WHERE usr_risk_rate=1';
-    const selectNameSql='SELECT assets.name_assets, threats.name_threats, threats.name_threats FROM threats RIGHT JOIN assets ON assets.id_assets=threats.id_assets RIGHT JOIN threats ON threats.id_assets=assets.id_assets WHERE assets.id_assets=?';
+    const selectIdSql='SELECT assets_id, vulns_id, threats_id FROM usr_db.table_'+usr_id_md5+' WHERE usr_risk_rate=1';
+    const selectNameSql='SELECT assets.name_assets, threats.name_threats, vulns.name_vulns FROM threats RIGHT JOIN assets ON assets.id_assets=threats.id_assets RIGHT JOIN vulns ON vulns.id_assets=assets.id_assets WHERE assets.id_assets=?';
     
-    new Promise((resolve)=>{
+    new Promise(function(resolve, reject){
         //getting asset id, vulnerability id and threat id from user's table.
         //the data will be stored in id_arr array.
         db.query(selectIdSql, function(err, rows, fields){
@@ -348,30 +348,38 @@ exports.risk1_list = (req, res, next) => {
                     thrtId=rows[idx].threats_id
                     id_arr.push([astId, vulId, thrtId]);
                 }
+                console.log(id_arr);
+                resolve(id_arr)
             }
         })
     })
     //getting asset name, vulnerability name and threat name by asset id
     //store the dataset in the name_arr as a object type: {key}:{value}
-    .then(()=>{
+    .then(function(result){
         for(var idx =0 ; idx<maxIdx;idx++){
-            db.query(selectNameSql, id_arr[idx][0], function(err, rows, fields){
+            db.query(selectNameSql, result[idx][0], function(err, rows, fields){
                 if(err){
                     console.log(err);
                 }
                 else{
                     //I guess a problem will be occur here
                     astname=rows[0].name_assets;
-                    vulname=rows[0].name_threats;
+                    vulname=rows[0].name_vulns;
                     thrtname=rows[0].name_threats;
                     name_arr.push({riskRate: 1, risk: ''+astname+' can be exploited by '+thrtname+' using '+vulname});
                 }
             })
         }
+        console.log(name_arr);
+        return(name_arr);
+    })
+    .then(function(result){
+        const obj = JSON.parse(result);
+        console.log(obj);
+        res.send(obj);
     });
 
-    const obj = JSON.parse(name_arr);
-    res.send(obj);
+
 }
 
 //function that assesses risks
