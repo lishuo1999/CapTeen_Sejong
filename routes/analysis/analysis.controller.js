@@ -318,33 +318,6 @@ exports.result = async(req, res, next) => {
 }
 
 
-exports.test = function (req, res, next) {
-    const selectNameSql = `SELECT 
-      data_db.assets.name_assets, data_db.assets.id_assets, 
-      data_db.threats.name_threats, data_db.threats.id_threats, 
-      data_db.vulns.name_vulns, data_db.vulns.id_vulns 
-      FROM 
-      data_db.threats 
-      RIGHT JOIN data_db.assets 
-      ON data_db.assets.id_assets=data_db.threats.id_assets 
-      RIGHT JOIN data_db.vulns 
-      ON data_db.vulns.id_assets=data_db.assets.id_assets 
-      WHERE 
-      data_db.assets.id_assets=? AND data_db.vulns.id_vulns=? AND data_db.threats.id_threats=?`;
-  
-    db.query(
-      selectNameSql,
-      [2, 3, 4],
-      function (err, rows, fields) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(rows);
-        }
-      }
-    );
-  };
-
 //sends the list of user's risks whose level is 1
 exports.risk1_list = (req, res, next) => {
     let usr_id=req.session.userName;

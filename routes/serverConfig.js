@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-const async=require('async');
 
 //should change below after the real world implementation
 
