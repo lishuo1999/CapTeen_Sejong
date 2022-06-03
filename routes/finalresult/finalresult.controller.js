@@ -14,23 +14,31 @@ exports.count= (req, res, next) => {
 
     //사용자 테이블에서 위험도 가져와서 카운트 후 , 뿌려주기 
     var select_sql="SELECT * from usr_db.table_"+md5_id+";"
+    console.log(select_sql)
+
+    let len=-1;
+    let index=0;
+
+    let rate1=0;
+    let rate2=0;
+    let rate3=0;
+    let rate4=0;
+    let rate5=0;
     lsy();
-
-    var len=-1;
-    var index=0;
-
-    var rate1=0;
-    var rate2=0;
-    var rate3=0;
-    var rate4=0;
-    var rate5=0;
 
     function lsy(){
 
         if(index==len){ // finish -> 등급별로 !!! 
             console.log("hihi");
-            var json='["1":'+rate1+',"2":'+rate2+',"3":'+rate3+',"4":'+rate4+',"5":'+rate5+']'
-            console.log("PARSHING DATA:",json)
+            var sum=rate1+rate2+rate3+rate4+rate5
+            rate1=parseInt(rate1*100/sum)
+            rate2=parseInt(rate2*100/sum)
+            rate3=parseInt(rate3*100/sum)
+            rate4=parseInt(rate4*100/sum)
+            rate5=parseInt(rate5*100/sum)
+
+            var json= ({"1":rate1,"2":rate2,"3":rate3,"4":rate4,"5":rate5});
+            console.log("DATA:",json)
             //const obj=JSON.parse(json)
             //console.log("obj:",obj)
             res.send(json)
@@ -39,6 +47,7 @@ exports.count= (req, res, next) => {
             db.query(select_sql,function(err,rows,fields){
                 len=rows.length
                 var risk_rate=rows[index].usr_risk_rate;
+                console.log('risk rate is : ',risk_rate)
                 lsy2(risk_rate).then(lsy);
                 index++;
         })
