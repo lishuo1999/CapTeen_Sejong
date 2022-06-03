@@ -24,22 +24,13 @@ $(function(){
             "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
         
-        $.ajax({
-            type: "post",
-            url: 'https://jsonplaceholder.typicode.com/comments',//서버 url
-            dataType: 'json',
-            data:({
-                "method":"수용"
-            }),
-            success:function(data){
-                console.log(data);
-            }
-        })
+
 
         $.ajax({
             url:"https://jsonplaceholder.typicode.com/posts",
             type:"get",
             dataType:"json",
+            data:{ "method":"수용"},
             success:function(data){
                 var html='';
                 for(key in data){
@@ -76,22 +67,12 @@ $(function(){
             "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
 
-            $.ajax({
-                type: "post",
-                url: 'https://jsonplaceholder.typicode.com/comments',//서버 url
-                dataType: 'json',
-                data:({
-                    "method":"전가"
-                }),
-                success:function(data){
-                    console.log(data);
-                }
-            })
     
             $.ajax({
                 url:"https://jsonplaceholder.typicode.com/posts",
                 type:"get",
                 dataType:"json",
+                data:{"method":"전가"},
                 success:function(data){
                     var html='';
                     for(key in data){
@@ -128,22 +109,12 @@ $(function(){
             "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
 
-            $.ajax({
-                type: "post",
-                url: 'https://jsonplaceholder.typicode.com/comments',//서버 url
-                dataType: 'json',
-                data:({
-                    "method":"회피"
-                }),
-                success:function(data){
-                    console.log(data);
-                }
-            })
     
             $.ajax({
                 url:"https://jsonplaceholder.typicode.com/posts",
                 type:"get",
                 dataType:"json",
+                data:{"method":"회피"},
                 success:function(data){
                     var html='';
                     for(key in data){
@@ -186,9 +157,7 @@ $(function(){
                 type: "post",
                 url: 'https://jsonplaceholder.typicode.com/comments',//서버 url
                 dataType: 'json',
-                data:({
-                    "method":"감소"
-                }),
+
                 success:function(data){
                     console.log(data);
                 }
@@ -198,6 +167,7 @@ $(function(){
                 url:"https://jsonplaceholder.typicode.com/posts",
                 type:"get",
                 dataType:"json",
+                data:{"method":"감소"},
                 success:function(data){
                     var html='';
                     for(key in data){
