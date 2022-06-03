@@ -245,7 +245,7 @@ exports.result = async(req, res, next) => {
     let risk_rate_for_web=[];
     let riskRate=0;
     let usr_id_md5=md5(req.session.userName);
-    let getRateSql='SELECT assets_id, usr_assets_rate, usr_threats_rate, usr_threats_rate FROM usr_db.table_'+usr_id_md5;
+    let getRateSql='SELECT assets_id, usr_assets_rate, usr_vulns_rate, usr_threats_rate FROM usr_db.table_'+usr_id_md5;
 
     //get the rates of assets, threats, vulnerabilities in order and put them in the array: arr_rate
     new Promise(function(resolve, reject){
@@ -257,7 +257,7 @@ exports.result = async(req, res, next) => {
                     maxIdx=rows.length;
                     for(var idx=0;idx<maxIdx;idx++){
                         cursor = rows[idx];
-                        arr_rate.push([cursor.assets_id, cursor.usr_assets_rate, cursor.usr_threats_rate, cursor.usr_threats_rate]);
+                        arr_rate.push([cursor.assets_id, cursor.usr_assets_rate, cursor.usr_vulns_rate, cursor.usr_threats_rate]);
                     }
                     resolve(arr_rate);
                 }
@@ -344,7 +344,7 @@ exports.risk1_list = (req, res, next) => {
                 maxIdx=rows.length;
                 for(var idx=0;idx<maxIdx;idx++){
                     astId=rows[idx].assets_id;
-                    vulId=rows[idx].threats_id;
+                    vulId=rows[idx].vulns_id;
                     thrtId=rows[idx].threats_id
                     id_arr.push([astId, vulId, thrtId]);
                 }
