@@ -45,8 +45,8 @@ exports.vuln=(req,res,next)=>{ //get method
     const md5_id=md5(usr_id);
     //console.log(md5_id);
 
-    var select_threats_sql='SELECT threats_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
-    //console.log(select_threats_sql);
+    var select_vulns_sql='SELECT vulns_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
+    //console.log(select_vulns_sql);
 
 
     var json="["
@@ -66,10 +66,10 @@ exports.vuln=(req,res,next)=>{ //get method
             res.send(obj)
             return console.log("done");
         }else{
-            db.query(select_threats_sql,category,function(err,rows,fields){
+            db.query(select_vulns_sql,category,function(err,rows,fields){
                 len=rows.length
-                var id_threats=rows[index].threats_id;
-                lsy2(id_threats).then(lsy);
+                var id_vulns=rows[index].vulns_id;
+                lsy2(id_vulns).then(lsy);
                 index++;
         })
 
@@ -78,14 +78,14 @@ exports.vuln=(req,res,next)=>{ //get method
 
     function lsy2(item){// item means vul_id
         return new Promise(function(resolve,reject){
-            var select_vuln_name_sql="SELECT name_threats,id_threats FROM data_db.threats WHERE id_threats=?"
+            var select_vuln_name_sql="SELECT name_vulns,id_vulns FROM data_db.vulns WHERE id_vulns=?"
             db.query(select_vuln_name_sql,item,function(err,rows,fields){
-                //let id_threats=array[i]
-                let id_threats=rows[0].id_threats
-                //console.log(id_threats)
-                let name_threats=rows[0].name_threats
-                //console.log(name_threats)
-                json+='{"id_threats":'+id_threats+',"name_threats":"'+name_threats+'"},'
+                //let id_vulns=array[i]
+                let id_vulns=rows[0].id_vulns
+                //console.log(id_vulns)
+                let name_vulns=rows[0].name_vulns
+                //console.log(name_vulns)
+                json+='{"id_vulns":'+id_vulns+',"name_vulns":"'+name_vulns+'"},'
                 console.log(json)
                 resolve();
             })
@@ -97,24 +97,24 @@ exports.vuln=(req,res,next)=>{ //get method
 
 //Anal_3 : saving data and making grade
 exports.save_vuln=(req,res,next)=>{
-    var id_threats=req.body.num;
-    var serious_threats=req.body.money;
-    var exposed_threats=req.body.frequency;
-    console.log(id_threats,serious_threats,exposed_threats);
+    var id_vulns=req.body.num;
+    var serious_vulns=req.body.money;
+    var exposed_vulns=req.body.frequency;
+    console.log(id_vulns,serious_vulns,exposed_vulns);
 
     //grading .. [exp,ser,grade]
     var saved1=[[1,1,1],[1,2,2],[1,3,3]]
     var saved2=[[2,1,2],[2,2,3],[2,3,4]]
     var saved3=[[3,1,3],[3,2,4],[3,3,5]]
 
-    if(exposed_threats==1){
-        var grade=saved1[serious_threats-1][2]
+    if(exposed_vulns==1){
+        var grade=saved1[serious_vulns-1][2]
     }
-    else if(exposed_threats==2){
-        var grade=saved2[serious_threats-1][2]
+    else if(exposed_vulns==2){
+        var grade=saved2[serious_vulns-1][2]
     }
     else{
-        var grade=saved3[serious_threats-1][2]
+        var grade=saved3[serious_vulns-1][2]
     }
     console.log("grade:",grade);
 
@@ -124,10 +124,10 @@ exports.save_vuln=(req,res,next)=>{
     const md5_id=md5(usr_id);
     //console.log(md5_id);
 
-    var update_threats_sql='UPDATE usr_db.table_'+md5_id+' SET usr_threats_rate=? WHERE threats_id=?' // update vulnerability rate
-    console.log(update_threats_sql);
+    var update_vulns_sql='UPDATE usr_db.table_'+md5_id+' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate
+    console.log(update_vulns_sql);
 
-    db.query(update_threats_sql,[grade,id_threats],function(err,rows,fields){
+    db.query(update_vulns_sql,[grade,id_vulns],function(err,rows,fields){
         if(err) console.log(err)
         else{
             console.log("Vulnerability Rate updated!")
