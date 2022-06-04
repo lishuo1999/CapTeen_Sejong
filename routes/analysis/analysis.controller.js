@@ -39,6 +39,7 @@ exports.business=(req, res, next)=>{
 
 //Anal_3 : show vulnerabilities 
 exports.vuln=(req,res,next)=>{ //get method
+
     var category=req.query.category;
     console.log(category);
     var usr_id=req.session.userName;
@@ -46,14 +47,15 @@ exports.vuln=(req,res,next)=>{ //get method
     const md5_id=md5(usr_id);
     //console.log(md5_id);
 
-    var select_vulns_sql='SELECT vulns_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
-    //console.log(select_vulns_sql);
+    var select_assets_sql='SELECT assets_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring assets id 
+    //console.log(select_assets_sql);
 
 
     var json="["
     let index=0
     let len=-1
     lsy();
+
 
     function lsy(){
 
@@ -67,11 +69,11 @@ exports.vuln=(req,res,next)=>{ //get method
             res.send(obj)
             return console.log("done");
         }else{
-            db.query(select_vulns_sql,category,function(err,rows,fields){
+            db.query(select_assets_sql,category,function(err,rows,fields){
                 len=rows.length
                 if(len==0){
-                    console.log("there's no vulneravility")
-                    var not='{"id_vulns":0,"name_vulns":"NO DATA"}'
+                    console.log("there's no vulnerabilities")
+                    var not='{"id_threats":0,"name_vulns":"NO DATA"}'
                     console.log(not)
                     not=JSON.parse(not)
                     console.log("not:",not)
@@ -79,32 +81,40 @@ exports.vuln=(req,res,next)=>{ //get method
                     return;
                 }
                 else{
-                    var vulns_id=rows[index].vulns_id;
-                    console.log("id_vulns:",vulns_id);
-                    lsy2(vulns_id).then(lsy);
-                    index++;
+                    var assets_id=rows[index].assets_id;
+                    console.log("id_assets",assets_id);
+                    var select_assets_name_sql="SELECT name_assets FROM data_db.assets WHERE id_assets=?"
+                    db.query(select_assets_name_sql,assets_id,function(err,rows,fields){
+                        var assets_name=rows[0].name_assets
+                        console.log("assets_name:",assets_name)
+                        lsy2(assets_id,assets_name).then(lsy)
+                        index++;
+                    })
                 }
-
         })
 
     }
     }
 
-    function lsy2(item){// item means vul_id
+    function lsy2(item,item2){// item means assets_id
         return new Promise(function(resolve,reject){
-            var select_vuln_name_sql="SELECT name_vulns,id_vulns FROM data_db.vulns WHERE id_vulns=?"
-            db.query(select_vuln_name_sql,item,function(err,rows,fields){
-                //let id_vulns=array[i]
-                let id_vulns=rows[0].id_vulns
-                //console.log(id_vulns)
-                let name_vulns=rows[0].name_vulns
-                //console.log(name_vulns)
-                json+='{"id_vulns":'+id_vulns+',"name_vulns":"'+name_vulns+'"},'
+            var select_vulns_name_sql="SELECT name_vulns,id_vulns FROM data_db.vulns WHERE id_assets=?"
+            db.query(select_vulns_name_sql,item,function(err,rows,fields){
+                for(var i=0;i<rows.length;i++){
+                //let id_threats=array[i]
+                let id_vulns=rows[i].id_vulns
+                //console.log(id_threats)
+                let name_vulns=rows[i].name_vulns
+                //console.log(name_threats)
+                json+='{"id_vulns":'+id_vulns+',"name_vulns":"'+name_vulns+'","name_assets":"'+item2+'"},'
+                }
+
                 console.log(json)
                 resolve();
             })
         })
     }
+
 }
 
  
@@ -158,7 +168,7 @@ exports.threat=(req,res,next)=>{ //get method
     const md5_id=md5(usr_id);
     //console.log(md5_id);
 
-    var select_threats_sql='SELECT threats_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
+    var select_assets_sql='SELECT assets_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
     //console.log(select_threats_sql);
 
 
@@ -180,7 +190,7 @@ exports.threat=(req,res,next)=>{ //get method
             res.send(obj)
             return console.log("done");
         }else{
-            db.query(select_threats_sql,category,function(err,rows,fields){
+            db.query(select_assets_sql,category,function(err,rows,fields){
                 len=rows.length
                 if(len==0){
                     console.log("there's no threats")
@@ -192,9 +202,9 @@ exports.threat=(req,res,next)=>{ //get method
                     return;
                 }
                 else{
-                    var threats_id=rows[index].threats_id;
-                    console.log("id_threats",threats_id);
-                    lsy2(threats_id).then(lsy);
+                    var assets_id=rows[index].assets_id;
+                    console.log("id_assets",assets_id);
+                    lsy2(assets_id).then(lsy);
                     index++;
                 }
         })
@@ -202,20 +212,22 @@ exports.threat=(req,res,next)=>{ //get method
     }
     }
 
-    function lsy2(item){// item means vul_id
+    function lsy2(item){// item means assets_id
         return new Promise(function(resolve,reject){
-            var select_threats_name_sql="SELECT name_threats,id_threats FROM data_db.threats WHERE id_threats=?"
+            var select_threats_name_sql="SELECT name_threats,id_threats FROM data_db.threats WHERE id_assets=?"
             db.query(select_threats_name_sql,item,function(err,rows,fields){
-                //let id_threats=array[i]
-                let id_threats=rows[0].id_threats
-                //console.log(id_threats)
-                let name_threats=rows[0].name_threats
-                //console.log(name_threats)
-                json+='{"id_threats":'+id_threats+',"name_threats":"'+name_threats+'"},'
-                console.log(json)
-                resolve();
+                    for(var i=0;i<rows.length;i++){
+                        //let id_threats=array[i]
+                        let id_threats=rows[i].id_threats
+                        //console.log(id_threats)
+                        let name_threats=rows[i].name_threats
+                        //console.log(name_threats)
+                        json+='{"id_threats":'+id_threats+',"name_threats":"'+name_threats+'"},'
+                    }
+                    console.log(json)
+                    resolve();
+                })
             })
-        })
     }
 }
 
