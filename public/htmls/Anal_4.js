@@ -18,6 +18,7 @@ $(function(){
                 var check=data.name_threats
                 if(check=="NO DATA"){
                     html+='<tr>';
+                    html+='<td>-</td>';//자산명
                     html+='<td>-</td>'; //이게 명 
                     html+='<td>-</td>';
                     html+='<td>-</td>';
@@ -28,6 +29,7 @@ $(function(){
                 else{
                     for(key in data){
                         html+='<tr>';
+                        html+='<td>'+data[key].name_assets+'</td>'; //자산명
                         html+='<td>'+data[key].name_threats+'</td>'; //이게 위협 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
@@ -61,6 +63,7 @@ $(function(){
                 var check=data.name_threats
                 if(check=="NO DATA"){
                     html+='<tr>';
+                    html+='<td>-</td>';//자산명
                     html+='<td>-</td>'; //이게 취약성 명 
                     html+='<td>-</td>';
                     html+='<td>-</td>';
@@ -71,6 +74,7 @@ $(function(){
                 else{
                     for(key in data){
                         html+='<tr>';
+                        html+='<td>'+data[key].name_assets+'</td>'; //자산명
                         html+='<td>'+data[key].name_threats+'</td>'; //이게 취약성 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
@@ -106,6 +110,7 @@ $(function(){
                 var check=data.name_threats
                 if(check=="NO DATA"){
                     html+='<tr>';
+                    html+='<td>-</td>';//자산명
                     html+='<td>-</td>'; //이게 취약성 명 
                     html+='<td>-</td>';
                     html+='<td>-</td>';
@@ -115,6 +120,7 @@ $(function(){
                 }else{
                     for(key in data){
                         html+='<tr>';
+                        html+='<td>'+data[key].name_assets+'</td>'; //자산명
                         html+='<td>'+data[key].name_threats+'</td>'; //이게 취약성 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
@@ -148,21 +154,23 @@ $(function(){
                 var check=data.name_threats
                 if(check=="NO DATA"){
                     html+='<tr>';
-                    html+='<td>-</td>'; //이게 취약성 명 
+                    html+='<td>-</td>';//자산명
+                    html+='<td>-</td>'; //이게 위협 명 
                     html+='<td>-</td>';
                     html+='<td>-</td>';
                     html+='<td>-</td>';
-                    html+='<td id="threatNum">""</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                    html+='<td id="threatNum">""</td>'; //이게 위협 고유 번호, 숨겨짐 
                     html+='</tr>';
                 }
                 else{
                     for(key in data){
                         html+='<tr>';
-                        html+='<td>'+data[key].name_threats+'</td>'; //이게 취약성 명 
+                        html+='<td>'+data[key].name_assets+'</td>'; //자산명
+                        html+='<td>'+data[key].name_threats+'</td>'; //이게 위협명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
                         html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
-                        html+='<td id="threatNum">'+data[key].id_threats+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
+                        html+='<td id="threatNum">'+data[key].id_threats+'</td>'; //이게 위협 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
                 }
@@ -182,11 +190,11 @@ function change(obj){ //select box 다른 옵션 클릭했을때
     //var index=obj.closest("tr").rowIndex;
     //console.log(index); //클릭한 애의 rowindex 가져오기
 
-    var frequency=obj.closest("tr").childNodes[1].firstChild;
+    var frequency=obj.closest("tr").childNodes[2].firstChild;
     frequency=frequency.value;
-    var money=obj.closest("tr").childNodes[2].firstChild;
+    var money=obj.closest("tr").childNodes[3].firstChild;
     money=money.value;
-    var num=obj.closest("tr").childNodes[4].innerText;
+    var num=obj.closest("tr").childNodes[5].innerText;
     
     console.log(frequency);//발생가능성
     console.log(money);//영향정도

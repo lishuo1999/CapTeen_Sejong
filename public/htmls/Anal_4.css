@@ -278,7 +278,7 @@ td{
 
 th{
     vertical-align:center;
-    font-size:18px;
+    /*font-size:18px;*/
 }
 
 #save:hover{
