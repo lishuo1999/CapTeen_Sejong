@@ -204,15 +204,20 @@ exports.threat=(req,res,next)=>{ //get method
                 else{
                     var assets_id=rows[index].assets_id;
                     console.log("id_assets",assets_id);
-                    lsy2(assets_id).then(lsy);
-                    index++;
+                    var select_assets_name_sql="SELECT name_assets FROM data_db.assets WHERE id_assets=?"
+                    db.query(select_assets_name_sql,assets_id,function(err,rows,fields){
+                        var assets_name=rows[0].name_assets
+                        console.log("assets_name:",assets_name)
+                        lsy2(assets_id,assets_name).then(lsy)
+                        index++;
+                    })
                 }
         })
 
     }
     }
 
-    function lsy2(item){// item means assets_id
+    function lsy2(item,item2){// item means assets_id
         return new Promise(function(resolve,reject){
             var select_threats_name_sql="SELECT name_threats,id_threats FROM data_db.threats WHERE id_assets=?"
             db.query(select_threats_name_sql,item,function(err,rows,fields){
@@ -222,7 +227,7 @@ exports.threat=(req,res,next)=>{ //get method
                         //console.log(id_threats)
                         let name_threats=rows[i].name_threats
                         //console.log(name_threats)
-                        json+='{"id_threats":'+id_threats+',"name_threats":"'+name_threats+'"},'
+                        json+='{"id_threats":'+id_threats+',"name_threats":"'+name_threats+'","name_assets":"'+item2+'"},'
                     }
                     console.log(json)
                     resolve();
