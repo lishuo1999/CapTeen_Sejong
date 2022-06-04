@@ -31,7 +31,7 @@ $(function(){
             url : '/assess/userInput',  //이동할 jsp 파일 주소
             dataType:'json',   //문자형식으로 받기
         
-            data:{'income':value1,'security':value2,'others':value3},
+            data:{'security':value1,'transferValue':value2,'transferRate':value3},
             success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
                 //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
                 console.log(data);

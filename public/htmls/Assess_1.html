@@ -56,13 +56,13 @@
         </div>
 
 
-        <!--입력1. 연수익-->
+        <!--입력1. 보안예산-->
         <div>
-            <p style= "position:absolute; left:33%; top:30%; color:black; font-size:50px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">1. 연수익을 입력하세요.</p>
+            <p style= "position:absolute; left:30%; top:30%; color:black; font-size:50px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">1. 회사의 보안 예산을 입력하세요.</p>
 
             <form>
-                <input id="input1" type="text" style= "position:absolute; left:37%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000"/>
-                <p style= "position:absolute; left:58%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">단위:억원</p>
+                <input id="input1" type="text" style= "position:absolute; left:37%; top:50%; color:black; font-size:20px; font-weight:700; text-align:center;" data-aos="fade-right" data-aos-duration="1000"/>
+                <p style= "position:absolute; left:58%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">단위:만원</p>
             </form>
         </div>
         <div class="moveTopBtn" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'})"><p>TOP</p>
@@ -85,14 +85,17 @@
         </div>
 
 
-        <!--입력2. 보안투자비율-->
+        <!--입력2. 외주비율-->
         <div>
-            <p style= "position:absolute; left:16%; top:30%; color:black; font-size:50px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">2. 연수익 대비 보안 예산 투자 비율을 입력하세요.
+            <p style= "position:absolute; left:30%; top:30%; color:black; font-size:50px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">2. 외주 비용을 입력하세요.
             </p>
-
+            
+            <p style="position:absolute; left:30%; top:45%; color:gray; font-size:15px;" data-aos="fade-right" data-aos-duration="1000">
+                * 외주비용 : 위험 처리를 위한 보험을 들거나, 보안 인프라를 다른 회사와 공유할 수 있다면 투자할 비용
+            </p>
             <form>
-                <input id="input2" type="text" style= "position:absolute; left:37%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000"/>
-                <p style= "position:absolute; left:58%; top:50%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">단위:%</p>
+                <input id="input2" type="text" style= "position:absolute; left:37%; top:55%; color:black; font-size:20px; font-weight:700; text-align:center;" data-aos="fade-right" data-aos-duration="1000"/>
+                <p style= "position:absolute; left:58%; top:55%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">단위:만원</p>
             </form>
         </div>
         <div class="moveTopBtn" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'})"><p>TOP</p>
@@ -120,20 +123,16 @@
                 <!--3. 위험 처리를 위한 보험을 들거나,<br>보안 인프라를 다른 회사와 공유할 수 있다면<br>어느 정도 비용을 투자할 것인지 입력하세요.-->
                 3. 위협 발생 시의 자산 침해에 대한 피해액을<br> 등급화한 기준을 동일하게 적용하여 <br> 외주비용을 등급화한 값을 입력하세요.
             </p>
-            
-            <p style="position:absolute; left:30%; top:53%; color:gray; font-size:15px;" data-aos="fade-right" data-aos-duration="1000">
-                * 외주비용 : 위험 처리를 위한 보험을 들거나, 보안 인프라를 다른 회사와 공유할 수 있다면 투자할 비용
-            </p>
 
             <form>
-                <input id="input3" type="text" style= "position:absolute; left:37%; top:60%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000"/>
-                <p style= "position:absolute; left:58%; top:60%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">1-3등급</p>
+                <input id="input3" type="text" style= "position:absolute; left:37%; top:55%; color:black; font-size:20px; font-weight:700; text-align:center;" data-aos="fade-right" data-aos-duration="1000"/>
+                <p style= "position:absolute; left:58%; top:55%; color:black; font-size:20px; font-weight:700;" data-aos="fade-right" data-aos-duration="1000">1-3등급</p>
             </form>
 
         </div>
         <div class="moveTopBtn" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'})"><p>TOP</p>
         </div>
-        <div style="position:absolute; left:45%; top:75%;">
+        <div style="position:absolute; left:45%; top:70%;">
             <button type="button" id="next" style="display:none" onclick="window.location.href='./Assess_2.html'" data-aos="fade-right" data-aos-duration="1000">다음</button>
         </div> 
 
