@@ -95,7 +95,7 @@ $(function(){
         });
 
     });
-    $('#head .tooltip2').on('click',function(){ //1등급
+    $('#head .tooltip2').on('click',function(){ //2등급
         $("#caption").text("2등급");
         $("#caption").fadeIn(1000);
         $("#table_right").fadeIn(1000);

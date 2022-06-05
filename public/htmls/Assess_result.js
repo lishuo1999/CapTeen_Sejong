@@ -35,16 +35,16 @@ $(function(){
                 var html='';
                 for(key in data){
                     html+='<tr>';
-                    html+='<td>'+data[key].title+'</td>'; //이게 위험 명 
-                    html+='<td><select id="choice" onchange="change(this);"><option value="sooyong">위험 수용</option><option value="jeonga">위험 전가</option><option value="hoepee">위험 회피</option><option value="gamso">위험 감소</option></select></td>';
-                    html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
+                    html+='<td>'+data[key].risk+'</td>'; //이게 위험 명 
+                    html+='<td><select id="choice" onchange="change(this);"><option value=1>위험 수용</option><option value=2>위험 전가</option><option value=3>위험 회피</option><option value=4>위험 감소</option></select></td>';
+                    html+='<td id="riskNum">'+data[key].riskId+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                     html+='</tr>';
                 }
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
             }
         })
-        $("#choice").val("sooyong").prop("selected", true); //초기 선택값 지정
+        $("#choice").val(1).prop("selected", true); //초기 선택값 지정
     })
 });
 
@@ -77,16 +77,16 @@ $(function(){
                     var html='';
                     for(key in data){
                         html+='<tr>';
-                        html+='<td>'+data[key].title+'</td>'; //이게 위험 명 
-                        html+='<td><select id="choice" onchange="change(this);"><option value="jeonga">위험 전가</option><option value="sooyong">위험 수용</option><option value="hoepee">위험 회피</option><option value="gamso">위험 감소</option></select></td>';
-                        html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
+                        html+='<td>'+data[key].risk+'</td>'; //이게 위험 명 
+                        html+='<td><select id="choice" onchange="change(this);"><option value=2>위험 전가</option><option value=1>위험 수용</option><option value=3>위험 회피</option><option value=4>위험 감소</option></select></td>';
+                        html+='<td id="riskNum">'+data[key].riskId+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
                     $("#dynamicTbody").empty();
                     $("#dynamicTbody").append(html);
                 }
             })
-        $("#choice").val("jeonga").prop("selected", true); //초기 선택값 지정
+        $("#choice").val(2).prop("selected", true); //초기 선택값 지정
     })
 });
 
@@ -119,9 +119,9 @@ $(function(){
                     var html='';
                     for(key in data){
                         html+='<tr>';
-                        html+='<td>'+data[key].title+'</td>'; //이게 위험 명 
-                        html+='<td><select id="choice" onchange="change(this);"><option value="hoepee">위험 회피</option><option value="sooyong">위험 수용</option><option value="jeonga">위험 전가</option><option value="gamso">위험 감소</option></select></td>';
-                        html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
+                        html+='<td>'+data[key].risk+'</td>'; //이게 위험 명 
+                        html+='<td><select id="choice" onchange="change(this);"><option value=3>위험 회피</option><option value=1>위험 수용</option><option value=2>위험 전가</option><option value=4>위험 감소</option></select></td>';
+                        html+='<td id="riskNum">'+data[key].riskId+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
                     $("#dynamicTbody").empty();
@@ -129,7 +129,7 @@ $(function(){
                 }
             })
 
-        $("#choice").val("hoepee").prop("selected", true); //초기 선택값 지정
+        $("#choice").val(3).prop("selected", true); //초기 선택값 지정
     })
 });
 
@@ -152,17 +152,6 @@ $(function(){
             "box-shadow": "2px 2px 3px 3px #CBCBCB"
             })
 
-        
-            $.ajax({
-                type: "post",
-                url: 'https://jsonplaceholder.typicode.com/comments',//서버 url
-                dataType: 'json',
-
-                success:function(data){
-                    console.log(data);
-                }
-            })
-    
             $.ajax({
                 url:"/assess/manage",
                 type:"get",
@@ -172,9 +161,9 @@ $(function(){
                     var html='';
                     for(key in data){
                         html+='<tr>';
-                        html+='<td>'+data[key].title+'</td>'; //이게 위험 명 
-                        html+='<td><select id="choice" onchange="change(this);"><option value="gamso">위험 감소</option><option value="sooyong">위험 수용</option><option value="jeonga">위험 전가</option><option value="hoepee">위험 회피</option></select></td>';
-                        html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
+                        html+='<td>'+data[key].risk+'</td>'; //이게 위험 명 
+                        html+='<td><select id="choice" onchange="change(this);"><option value=4>위험 감소</option><option value=1>위험 수용</option><option value=2>위험 전가</option><option value=3>위험 회피</option></select></td>';
+                        html+='<td id="riskNum">'+data[key].riskId+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
                     $("#dynamicTbody").empty();
@@ -183,7 +172,7 @@ $(function(){
             })
 
             
-        $("#choice").val("gamso").prop("selected", true); //초기 선택값 지정
+        $("#choice").val(4).prop("selected", true); //초기 선택값 지정
     });
 
 });
