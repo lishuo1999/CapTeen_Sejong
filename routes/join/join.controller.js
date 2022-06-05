@@ -34,6 +34,7 @@ exports.getJoinInfo = (req, res, next) => {
     vulns_id int DEFAULT 0, FOREIGN KEY(vulns_id) REFERENCES data_db.vulns(id_vulns) ON UPDATE CASCADE,
     usr_vulns_rate int DEFAULT 0,
     threats_id int DEFAULT 0, FOREIGN KEY(threats_id) REFERENCES data_db.threats(id_threats) ON UPDATE CASCADE,
+    usr_threats_spend int DEFAULT 0,
     usr_threats_rate int DEFAULT 0,
     usr_risk_rate int DEFAULT 0,
     usr_risk_mng_id int DEFAULT 0
