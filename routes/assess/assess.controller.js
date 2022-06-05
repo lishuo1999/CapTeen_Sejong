@@ -21,7 +21,6 @@ exports.input=async function(req, res, next){
                 console.log(err);
             }
             else{
-                console.log(rows);
                 console.log('Security Budget, Transfer Budget and Transfer Budget Rate update of a user is completed');
                 let a = await selectStrategy(id_md5);
                 console.log(a);
@@ -44,30 +43,29 @@ selectStrategy=(id_md5)=>{
         let transferBudgetV=0;
         let secBudget=0;
         let transferBudgetR=0;
-        let return_arr=[];
         console.log('here!');
 
         new Promise(function(resolve, reject){
             //get the user doa from usr_db.users
+            let return_arr;
             db.query(doaGetSql, function(err, rows, fields){
                 if(err){
                     console.log(err);
                 }
                 else{
                     doa=rows[0].usr_doa;
-                    transferBudgetV=rows[0].usr_transf_bud;
+                    transferBudgetV=rows[0].usr_trnsf_bud;
                     secBudget=rows[0].usr_sec_bud;
-                    transferBudgetR=rows[0].usr_transf_budR;
-                    resolve(doa, transferBudgetV, secBudget, transferBudgetR);
+                    transferBudgetR=rows[0].usr_trnsf_budR;
+                    resolve([doa, transferBudgetV, secBudget, transferBudgetR]);
                 }
             })
         })
         .then(function(result){
-            
-            doa = result[0];
-            transferBudgetV=result[1];
-            secBudget=result[2];
-            transferBudgetR=result[3];
+            let doa = result[0];
+            let transferBudgetV=result[1];
+            let secBudget=result[2];
+            let transferBudgetR=result[3];
 
              //get the user risk rate lists from usr_db.table_{id_md5}
             db.query(impRateGetSql, function(err, rows, fields){
@@ -80,16 +78,15 @@ selectStrategy=(id_md5)=>{
                     {
                         doaImp_arr.push([rows[idx].usr_assets_rate, rows[idx].usr_risk_rate, rows[idx].usr_assets_imp, rows[idx].usr_threats_spend]);
                     }
-                    return(doa, transferBudgetV, secBudget, transferBudgetR, doaImp_arr, maxIdx); 
+                    resolve([doa, transferBudgetV, secBudget, transferBudgetR, doaImp_arr, rows.length]); 
                     //result=[doa, transferBudgetV, sedBudget, transferBudgetR, doaImp_arr, maxIdx]
                 }
             })
-        })
+        });
     })
     .then(async function(result){
-        console.log(result);
         let doa = result[0];
-        let doaImp_arr=result[4]; // 1) usr_assets_rate 2) usr_risk_rate 3) usr_assets_imp 4) usr_threats_spend
+        let doaImp_arr =result[4]; // 1) usr_assets_rate 2) usr_risk_rate 3) usr_assets_imp 4) usr_threats_spend
         let maxIdx=result[5];
         let transferBudgetV=result[1]; //How much will you spend for the risk transfer
         let secBudget=result[2]; //How much will you allocate for the security
@@ -103,6 +100,7 @@ selectStrategy=(id_md5)=>{
         while(whetherDoaChanged){
         // in the for clause, do the strategy selection process
             for(var i=0;i<maxIdx;i++){
+                console.log("Phase"+i+': \n');
                 if(doaImp_arr[i][1]>doa)
                 {
                     if(doaImp_arr[i][2]==0/*the asset is important*/){
@@ -114,7 +112,7 @@ selectStrategy=(id_md5)=>{
                                 riskStrategy.push(2);
                                 if(i==maxIdx-1){
                                     whetherDoaChanged=false;
-                                    break;
+                                    return ([riskStrategy, doa]);
                                 }
                                 else{}
                             }
@@ -129,7 +127,7 @@ selectStrategy=(id_md5)=>{
                                 riskStrategy.push(4);
                                 if(i==maxIdx-1){
                                     whetherDoaChanged=false;
-                                    break;
+                                    return ([riskStrategy, doa]);
                                 }
                             }
                             else{
@@ -143,7 +141,7 @@ selectStrategy=(id_md5)=>{
                         riskStrategy.push(3)
                         if(i==maxIdx-1){
                             whetherDoaChanged=false;
-                            break;
+                            return ([riskStrategy, doa]);
                         }
                     }
                 }
@@ -152,16 +150,21 @@ selectStrategy=(id_md5)=>{
                     riskStrategy.push(1)
                     if(i==maxIdx-1){
                         whetherDoaChanged=false;
-                        break;
+                        return ([riskStrategy, doa]);
                     }
                 }
             }
         }
-        return (riskStrategy);
+        return ([riskStrategy, doa]);
     })
     .then(async function (result){
         let strategyUpdateSql='UPDATE usr_db.table_'+id_md5+' SET usr_risk_mng_id = ? WHERE usr_risk_id =?';
+        let doaUpdateSql='UPDATE usr_db.users SET usr_doa=? WHERE usr_id_md5=\''+id_md5+'\'';
         const mysql=require('mysql2/promise');
+        let riskStrategy=result[0];
+        let doa=result[1];
+        console.log(riskStrategy);
+        console.log(doa);
         try{
             const connection=await mysql.createConnection({
                 host : "14.40.31.222",
@@ -171,9 +174,11 @@ selectStrategy=(id_md5)=>{
                 database:'data_db'
             });
             for(var idx =0 ; idx<maxIdx;idx++){
-                let [rows, fields] = await connection.execute(strategyUpdateSql, [result[idx], idx+1]); //function(err, rows, fields){
+                let [rows, fields] = await connection.execute(strategyUpdateSql, [riskStrategy[idx], idx+1]); //function(err, rows, fields){
                 console.log('Strategy Update: '+rows);
             }
+            connection.execute(doaUpdateSql, [doa]);
+
         }
         catch(err) {
             console.log(err);
@@ -197,12 +202,10 @@ async function howMuchSecBudget (id_md5, secBudget) {
                 database:'data_db'
             });
             let [rows, fields] = await connection.execute(getAssetRate);
-            for(var idx =0 ; idx<rows.length;idx++){
-                rows.forEach(function(k, value){
-                    riskRate_arr.push(k.usr_risk_rate);
-                });
-            }
-            resolve(riskRate);
+            rows.forEach(function(k, value){
+                riskRate_arr.push(k.usr_risk_rate);
+            });
+            resolve(riskRate_arr);
         }
         catch(err) {
             console.log(err);
