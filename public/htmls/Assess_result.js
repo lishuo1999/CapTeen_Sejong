@@ -27,10 +27,10 @@ $(function(){
 
 
         $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
+            url:"/assess/manage",
             type:"get",
             dataType:"json",
-            data:{ "method":"수용"},
+            data:{ "method":1}, //accept
             success:function(data){
                 var html='';
                 for(key in data){
@@ -72,7 +72,7 @@ $(function(){
                 url:"https://jsonplaceholder.typicode.com/posts",
                 type:"get",
                 dataType:"json",
-                data:{"method":"전가"},
+                data:{"method":2},//transfer
                 success:function(data){
                     var html='';
                     for(key in data){
@@ -111,10 +111,10 @@ $(function(){
 
     
             $.ajax({
-                url:"https://jsonplaceholder.typicode.com/posts",
+                url:"/assess/manage",
                 type:"get",
                 dataType:"json",
-                data:{"method":"회피"},
+                data:{"method":3},
                 success:function(data){
                     var html='';
                     for(key in data){
@@ -164,10 +164,10 @@ $(function(){
             })
     
             $.ajax({
-                url:"https://jsonplaceholder.typicode.com/posts",
+                url:"/assess/manage",
                 type:"get",
                 dataType:"json",
-                data:{"method":"감소"},
+                data:{"method":4},
                 success:function(data){
                     var html='';
                     for(key in data){
