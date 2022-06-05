@@ -69,7 +69,7 @@ exports.count= (req, res, next) => {
 
 }
 
-// draw chat1 : risk rate - asset rate 
+// draw chart1 : risk rate - asset rate 
 exports.chart1=(req,res,next)=>{
 
     var usr_id=req.session.userName;
@@ -86,8 +86,6 @@ exports.chart1=(req,res,next)=>{
     let rate1=0;
     let rate2=0;
     let rate3=0;
-    let rate4=0;
-    let rate5=0;
 
     lsy();
 
@@ -95,8 +93,8 @@ exports.chart1=(req,res,next)=>{
 
         if(index==len){ // finish -> 등급별로 assets count!!! 
             console.log("hihi");
-            var json= ({"1":rate1,"2":rate2,"3":rate3,"4":rate4,"5":rate5});
-            console.log("DATA:",json)
+            var json= ({"1":rate1,"2":rate2,"3":rate3});
+            console.log("DATA1:",json)
             //const obj=JSON.parse(json)
             //console.log("obj:",obj)
             res.send(json)
@@ -104,22 +102,28 @@ exports.chart1=(req,res,next)=>{
         }else{
             db.query(select_sql,rate,function(err,rows,fields){
                 len=rows.length
-                var assets_rate=rows[index].usr_assets_rate;
-                console.log('asset rate is : ',assets_rate)
-                lsy2(assets_rate).then(lsy);
-                index++;
+                if(len==0){
+                    console.log("there's no assets")
+                    var not=({"1":0,"2":0,"3":0})
+                    res.send(not)
+                    return;
+                }
+                else{
+                    var assets_rate=rows[index].usr_assets_rate;
+                    console.log('asset rate is : ',assets_rate)
+                    lsy2(assets_rate).then(lsy);
+                    index++;
+                }
         })
 
     }
     }
 
-    function lsy2(item){// item means risk_rate
+    function lsy2(item){// item means risk_rate (위험 등급)
         return new Promise(function(resolve,reject){ //여기서는 item이 몇등급인지 확인해서 해당 변수 ++만 해주면 됨 
             if(item==1) rate1++;
             else if(item==2) rate2++;
-            else if(item==3) rate3++;
-            else if(item==4) rate4++;
-            else rate5++;
+            else rate3++;
             resolve();
         })
     }
@@ -152,7 +156,7 @@ exports.chart2=(req,res,next)=>{
         if(index==len){ // finish -> 등급별로 assets count!!! 
             console.log("hihi");
             var json= ({"1":rate1,"2":rate2,"3":rate3,"4":rate4});
-            console.log("DATA:",json)
+            console.log("DATA2:",json)
             //const obj=JSON.parse(json)
             //console.log("obj:",obj)
             res.send(json)
@@ -160,16 +164,24 @@ exports.chart2=(req,res,next)=>{
         }else{
             db.query(select_sql,rate,function(err,rows,fields){
                 len=rows.length
-                var assets_id=rows[index].usr_assets_rate;
-                console.log('asset id is : ',assets_id)
-                lsy2(assets_id).then(lsy);
-                index++;
+                if(len==0){
+                    console.log("there's no assets")
+                    var not=({"1":0,"2":0,"3":0,"4":0})
+                    res.send(not)
+                    return;
+                }
+                else{
+                    var assets_id=rows[index].big_assets_id;
+                    console.log('asset id is : ',assets_id)
+                    lsy2(assets_id).then(lsy);
+                    index++;
+                }
         })
 
     }
     }
 
-    function lsy2(item){// item means risk_rate
+    function lsy2(item){// item means 자산 대분류
         return new Promise(function(resolve,reject){ //여기서는 item이 몇등급인지 확인해서 해당 변수 ++만 해주면 됨 
             if(item==1) rate1++;
             else if(item==2) rate2++;
@@ -203,12 +215,12 @@ exports.table=(req,res,next)=>{
     function lsy(){
 
         if(index==len){ // finish
-            console.log("hihi");
+           // console.log("hihi");
             json=json.slice(0,-1)
             json+=']'
-            console.log("PARSHING ARRAY:",json)
+            //console.log("PARSHING ARRAY:",json)
             const obj=JSON.parse(json)
-            console.log("obj:",obj)
+           // console.log("obj:",obj)
             res.send(obj)
             return console.log("done");
         }
@@ -218,9 +230,9 @@ exports.table=(req,res,next)=>{
                 if(len==0){
                     console.log("there's no risks")
                     var not='{"rate":0,"risk":"NO DATA"}'
-                    console.log(not)
+                    //console.log(not)
                     not=JSON.parse(not)
-                    console.log("not:",not)
+                    //console.log("not:",not)
                     res.send(not)
                     return;
                 }
@@ -230,20 +242,20 @@ exports.table=(req,res,next)=>{
                     var threats_id=rows[index].threats_id;
                     var usr_risk_mng_id=rows[index].usr_risk_mng_id;
 
-                    console.log(assets_id,vulns_id,threats_id,usr_risk_mng_id);
+                  //  console.log(assets_id,vulns_id,threats_id,usr_risk_mng_id);
 
                     var select_assets_sql="SELECT name_assets FROM data_db.assets WHERE id_assets=?"
                     db.query(select_assets_sql,assets_id,function(err,rows,fields){
                         var name_assets=rows[0].name_assets
-                        console.log("asset name: ",name_assets)
+                       // console.log("asset name: ",name_assets)
                         var select_vulns_sql="SELECT name_vulns FROM data_db.vulns WHERE id_vulns=?"
                         db.query(select_vulns_sql,vulns_id,function(err,rows,fields){
                             var name_vulns=rows[0].name_vulns
-                            console.log("vulns name: ",name_vulns)
+                           // console.log("vulns name: ",name_vulns)
                             var select_threats_sql="SELECT name_threats FROM data_db.threats WHERE id_threats=?"
                             db.query(select_threats_sql,threats_id,function(err,rows,fields){
                                 var name_threats=rows[0].name_threats
-                                console.log("threats name: ",name_threats)
+                              //  console.log("threats name: ",name_threats)
                                 lsy2(name_assets,name_vulns,name_threats,usr_risk_mng_id,vulns_id).then(lsy)
                             })
                         })
@@ -262,7 +274,7 @@ exports.table=(req,res,next)=>{
             db.query(select_manage_sql,item4,function(err,rows,fields){
                 var name_manage=rows[0].name_manage;
                 json+='{"rate":'+rate+',"risk":"'+item+'의 '+item2+'으로 인해 '+item3+' 발생 가능","manage":"'+name_manage+'","id_vulns":'+item5+'},'
-                console.log(json)
+               // console.log(json)
                 resolve();
             })
         })
