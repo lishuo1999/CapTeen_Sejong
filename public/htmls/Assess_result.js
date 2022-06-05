@@ -194,15 +194,13 @@ function change(obj){ //select box 다른 옵션 클릭했을때
     var num=obj.closest("tr").childNodes[2].innerText; //감춰진 위험 고유번호 가져오기 
     console.log(num);
 
-    var obj={"selected":sel,"num":num}; //{변경한 값, 위험 고유번호} 전송
+    var obj=({"selected":sel,"num":num}); //{변경한 값, 위험 고유번호} 전송
 
     $.ajax({
         type: 'POST',   //post방식으로 명시
-        url : 'https://jsonplaceholder.typicode.com/comments',  //서버 주소 
+        url : '/assess/changeMethod',  //서버 주소 
         dataType:'json',
-        data:({
-            obj
-        }),
+        data: obj,
         success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
             //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
             console.log(data);
@@ -218,7 +216,7 @@ function bringDoA(){ //select box 다른 옵션 클릭했을때
 
     $.ajax({
         type: 'GET',   //post방식으로 명시
-        url : 'https://jsonplaceholder.typicode.com/comments',  //서버 주소 
+        url : '/assess/bringDoA',  //서버 주소 
         dataType:'json',
         success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
             //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 

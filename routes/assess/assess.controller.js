@@ -226,6 +226,20 @@ async function howMuchSecBudget (id_md5, secBudget) {
     return baseBudget;
 }
 
+exports.bringDoA=(req, res, next)=>{
+    let id_md5=md5(req.session.userName);
+    let doaSql='SELECT usr_doa FROM usr_db.users WHERE usr_id_md5=\''+id_md5+'\'';
+    db.query(doaSql, function(err, rows, fields){
+        if(err){
+            console.log(err);
+        }
+        else{
+            const obj = {DoA: rows[0].usr_doa};
+            res.send(obj);
+        }
+    })
+}
+
 
 //and check which manage strategy table user wants to see,
 //then send the matched data set
@@ -325,6 +339,26 @@ async function showTables(req, res, next, strategy, id_md5){
     })
     .then((result)=>{
         res.send(result);
+    })
+
+}
+
+//if the request comes in, then change the strategy number in the DB to the selected number
+exports.changeStrategy = (req, res, next)=>{
+    let id_md5 = md5(req.session.userName);
+    let id_strategy = req.body.selected;
+    let id_risk = req.body.num;
+    let strategyUpdateSql='UPDATE usr_db.table_'+id_md5+' SET usr_risk_mng_id =? WHERE usr_risk_id = ?'
+    console.log(req.body);
+    console.log(id_strategy+' '+id_risk);
+
+    db.query(strategyUpdateSql, [id_strategy, id_risk], function(err, rows, fields){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log("user strategy update completed");
+        }
     })
 
 }

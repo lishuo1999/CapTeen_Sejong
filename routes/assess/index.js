@@ -10,5 +10,8 @@ router.post('/userInput', controller.input);
 //Assess_result
 router.get('/manage',controller.manage);
 
+router.get('/bringDoA', controller.bringDoA);
+
+router.post('/changeMethod', controller.changeStrategy);
 
 module.exports = router;
