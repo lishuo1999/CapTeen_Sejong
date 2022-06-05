@@ -121,24 +121,34 @@ $(function(){
 
 
         $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
+            url:"/finalresult/table",
             type:"get",
             data:{"level":"1"},
             dataType:"json",
             success:function(data){
                 var html='';
-                for(key in data){
-                    html+='<tr>';
-                    html+='<td>'+data[key].id+'</td>'; //위험도
-                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //위험명
-                    html+='<td>'+data[key].userId+'</td>';//위험 처리전략
-                    html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
-                    html+='</tr>';
+                console.log(data)
+                var check=data.risk
+                if(check=="NO DATA"){
+                    html+='<tr>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='</tr>'
                 }
-
+                else{
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].rate+'</td>'; //위험도
+                        html+='<td id="riskName" onclick="change(this)">'+data[key].risk+'</td>'; //위험명
+                        html+='<td>'+data[key].manage+'</td>';//위험 처리전략
+                        html+='<td id="riskNum">'+data[key].id_vulns+'</td>'; //이게 vuln 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }}
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
-                sort();
+                //sort();
             }
         });
         $("#box2").fadeIn(1000);
@@ -240,23 +250,34 @@ $(function(){
 
 
         $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
+            url:"/finalresult/table",
             type:"get",
-            data:{"level":"2등급"},
+            data:{"level":"2"},
             dataType:"json",
             success:function(data){
                 var html='';
-                for(key in data){
-                    html+='<tr>';
-                    html+='<td>'+data[key].id+'</td>'; //위험도
-                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //위험
-                    html+='<td>'+data[key].userId+'</td>';//위험 처리전략
-                    html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
-                    html+='</tr>';
+                console.log(data)
+                var check=data.risk
+                if(check=="NO DATA"){
+                    html+='<tr>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='</tr>'
                 }
+                else{
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].rate+'</td>'; //위험도
+                        html+='<td id="riskName" onclick="change(this)">'+data[key].risk+'</td>'; //위험명
+                        html+='<td>'+data[key].manage+'</td>';//위험 처리전략
+                        html+='<td id="riskNum">'+data[key].id_vulns+'</td>'; //이게 vuln 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }}
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
-                sort();
+                //sort();
             }
         });
 
@@ -362,23 +383,34 @@ $(function(){
         //몇등급인지 전송, 해당 등급별 위험 받아오기 
      
         $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
+            url:"/finalresult/table",
             type:"get",
-            data:{"level":"3등급"},
+            data:{"level":"3"},
             dataType:"json",
             success:function(data){
                 var html='';
-                for(key in data){
-                    html+='<tr>';
-                    html+='<td>'+data[key].id+'</td>'; //위험도
-                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //위험명
-                    html+='<td>'+data[key].userId+'</td>';//위험 처리전략
-                    html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
-                    html+='</tr>';
+                console.log(data)
+                var check=data.risk
+                if(check=="NO DATA"){
+                    html+='<tr>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='</tr>'
                 }
+                else{
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].rate+'</td>'; //위험도
+                        html+='<td id="riskName" onclick="change(this)">'+data[key].risk+'</td>'; //위험명
+                        html+='<td>'+data[key].manage+'</td>';//위험 처리전략
+                        html+='<td id="riskNum">'+data[key].id_vulns+'</td>'; //이게 vuln 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                }}
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
-                sort();
+                //sort();
             }
         })
 
@@ -488,23 +520,34 @@ $(function(){
         //몇등급인지 전송, 해당 등급별 위험 받아오기 
 
         $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
+            url:"/finalresult/table",
             type:"get",
-            data:{"level":"4등급"},
+            data:{"level":"4"},
             dataType:"json",
             success:function(data){
                 var html='';
-                for(key in data){
-                    html+='<tr>';
-                    html+='<td>'+data[key].id+'</td>'; //위험도
-                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //위험명
-                    html+='<td>'+data[key].userId+'</td>';//위험 처리전략
-                    html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
-                    html+='</tr>';
+                console.log(data)
+                var check=data.risk
+                if(check=="NO DATA"){
+                    html+='<tr>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='</tr>'
                 }
+                else{
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].rate+'</td>'; //위험도
+                        html+='<td id="riskName" onclick="change(this)">'+data[key].risk+'</td>'; //위험명
+                        html+='<td>'+data[key].manage+'</td>';//위험 처리전략
+                        html+='<td id="riskNum">'+data[key].id_vulns+'</td>'; //이게 vuln 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }}
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
-                sort();
+               // sort();
             }
         })
 
@@ -611,23 +654,34 @@ $(function(){
 
 
         $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts",
+            url:"/finalresult/table",
             type:"get",
-            data:{"level":"5등급"},
+            data:{"level":"5"},
             dataType:"json",
             success:function(data){
                 var html='';
-                for(key in data){
-                    html+='<tr>';
-                    html+='<td>'+data[key].id+'</td>'; //위험도
-                    html+='<td id="riskName" onclick="change(this)">'+data[key].title+'</td>'; //위험명
-                    html+='<td>'+data[key].userId+'</td>';//위험 처리전략
-                    html+='<td id="riskNum">'+data[key].id+'</td>'; //이게 위험 고유 번호, 숨겨짐 
-                    html+='</tr>';
+                console.log(data)
+                var check=data.risk
+                if(check=="NO DATA"){
+                    html+='<tr>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='<td>-</td>'
+                    html+='</tr>'
                 }
+                else{
+                    for(key in data){
+                        html+='<tr>';
+                        html+='<td>'+data[key].rate+'</td>'; //위험도
+                        html+='<td id="riskName" onclick="change(this)">'+data[key].risk+'</td>'; //위험명
+                        html+='<td>'+data[key].manage+'</td>';//위험 처리전략
+                        html+='<td id="riskNum">'+data[key].id_vulns+'</td>'; //이게 vuln 고유 번호, 숨겨짐 
+                        html+='</tr>';
+                    }}
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
-                sort();
+                //sort();
              
             }
         })
@@ -650,21 +704,24 @@ function change(obj){ //위험명 클릭시 !!
     //var money=obj.closest("tr").childNodes[2].firstChild;
     //money=money.value;
     var num=obj.closest("tr").childNodes[3].innerText;  
-    console.log(num); //얘가 고유 번호 !! 
+    console.log(num); //얘가 vuln 고유 번호 !! 
    
 // 해당 위험명에 해당하는 고유 번호를 보내서, 걔의 취약성과 처리 방법 가져오기 (get)
 
     $.ajax({
         type: 'get',
-        url : 'https://jsonplaceholder.typicode.com/comments',  //위험 정보 보낼 서버 주소 
+        url : '/finalresult/modal',  //위험 정보 보낼 서버 주소 
         dataType:'json',
-        data:{"riskNum":num},
+        data:{"vulnNum":num},
         success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
             // 취약성과 처리 방법이 넘어온다 
 
             console.log(data);
-            $("#text1").text("취약성 내용이 들어갈 부분");
-            $("#text2").text("취약성 조치 방법이 들어갈 부분");
+            var t1=data.name_vulns;
+            var t2=data.manage_vulns;
+
+            $("#text1").text("취약성 : "+t1);
+            $("#text2").text("해결책 : "+t2);
 
         },
         error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
@@ -675,7 +732,13 @@ function change(obj){ //위험명 클릭시 !!
 
     $(".modal").fadeIn(1000);
 }
-  
+
+$(function(){
+    $(".modal_content").click(function(){
+        $(".modal").fadeOut();
+    })
+})
+/*
 function sort(){ // 비용을 기준으로 내림차순 정렬
 
     var trs=document.getElementById("dynamicTbody").getElementsByTagName("tr");
@@ -719,4 +782,4 @@ function sort(){ // 비용을 기준으로 내림차순 정렬
         }
     }
 
-}
+}*/

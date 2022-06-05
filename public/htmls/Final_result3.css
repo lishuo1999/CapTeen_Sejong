@@ -398,6 +398,10 @@ a { text-decoration:none;}
     align-items : center;
 }
 
+#riskName{
+    text-align:left;
+}
+
 #table{
     position:absolute;
     top:2%;
@@ -418,6 +422,11 @@ a { text-decoration:none;}
     top:0px;
     background-color:#ed7c31fb;
     color:white;
+}
+
+thead{
+    font-size:20px;
+    font-weight:900;
 }
 
 #chart1-name{

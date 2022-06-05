@@ -13,4 +13,12 @@ router.get('/chart1',controller.chart1);
 //chart2
 router.get('/chart2',controller.chart2);
 
+//table
+router.get('/table',controller.table);
+
+//modal
+router.get('/modal',controller.modal);
+
 module.exports = router;
+
+

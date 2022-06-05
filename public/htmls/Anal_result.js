@@ -83,14 +83,14 @@ $(function(){
 
 
 
-            //columnDefs: [
-            //   
-            //    { targets: 0, width: 5 },
+            columnDefs: [
+              
+                { targets: 1, className: 'dt-body-left' },
             //    { targets: 1, width: 5 },
             //    { targets: 2, width: 15 },
             //    { targets: 3, width: 20 },
             //    { targets: 4, width: 25 }
-            //]
+            ]
 
         });
 
@@ -122,19 +122,20 @@ $(function(){
 
 
 
-            //columnDefs: [
-            //   
+            columnDefs: [
+               
+                { targets: 1, className: 'dt-body-left' },
             //    { targets: 0, width: 5 },
             //    { targets: 1, width: 5 },
             //    { targets: 2, width: 15 },
             //    { targets: 3, width: 20 },
             //    { targets: 4, width: 25 }
-            //]
+            ]
 
         });
 
     });
-    $('#head .tooltip3').on('click',function(){ //1등급
+    $('#head .tooltip3').on('click',function(){ //3등급
         $("#caption").text("3등급");
         $("#caption").fadeIn(1000);
         $("#table_right").fadeIn(1000);
@@ -161,14 +162,14 @@ $(function(){
 
 
 
-            //columnDefs: [
+            columnDefs: [
             //   
-            //    { targets: 0, width: 5 },
+               { targets: 1, className: 'dt-body-left' },
             //    { targets: 1, width: 5 },
             //    { targets: 2, width: 15 },
             //    { targets: 3, width: 20 },
             //    { targets: 4, width: 25 }
-            //]
+            ]
 
         });
 
@@ -200,14 +201,15 @@ $(function(){
 
 
 
-            //columnDefs: [
-            //   
+            columnDefs: [
+            
+                { targets: 1, className: 'dt-body-left' },
             //    { targets: 0, width: 5 },
             //    { targets: 1, width: 5 },
             //    { targets: 2, width: 15 },
             //    { targets: 3, width: 20 },
             //    { targets: 4, width: 25 }
-            //]
+            ]
 
         });
 
@@ -239,14 +241,15 @@ $(function(){
 
 
 
-            //columnDefs: [
-            //   
+            columnDefs: [
+            
+                { targets: 1, className: 'dt-body-left' },
             //    { targets: 0, width: 5 },
             //    { targets: 1, width: 5 },
             //    { targets: 2, width: 15 },
             //    { targets: 3, width: 20 },
             //    { targets: 4, width: 25 }
-            //]
+            ]
 
         });
 

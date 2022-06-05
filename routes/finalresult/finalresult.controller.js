@@ -61,7 +61,7 @@ exports.count= (req, res, next) => {
             else if(item==2) rate2++;
             else if(item==3) rate3++;
             else if(item==4) rate4++;
-            else rate5++;
+            else if(item==5) rate5++;
             resolve();
         })
     }
@@ -69,7 +69,7 @@ exports.count= (req, res, next) => {
 
 }
 
-
+// draw chat1 : risk rate - asset rate 
 exports.chart1=(req,res,next)=>{
 
     var usr_id=req.session.userName;
@@ -126,6 +126,7 @@ exports.chart1=(req,res,next)=>{
 
 }
 
+//chart2: risk rate - asset category rate
 exports.chart2=(req,res,next)=>{
 
     var usr_id=req.session.userName;
@@ -180,3 +181,119 @@ exports.chart2=(req,res,next)=>{
 
 }
 
+//table : risk rate - risk 
+exports.table=(req,res,next)=>{
+    var usr_id=req.session.userName;
+    const md5_id=md5(usr_id);
+
+    var rate=req.query.level;
+    console.log("rate:",rate);
+    //select all
+    var select_sql="SELECT * FROM usr_db.table_"+md5_id+" WHERE usr_risk_rate=?;"
+    console.log(select_sql)
+
+
+
+    var json="["
+    let index=0
+    let len=-1
+    let check=0
+    lsy();
+
+    function lsy(){
+
+        if(index==len){ // finish
+            console.log("hihi");
+            json=json.slice(0,-1)
+            json+=']'
+            console.log("PARSHING ARRAY:",json)
+            const obj=JSON.parse(json)
+            console.log("obj:",obj)
+            res.send(obj)
+            return console.log("done");
+        }
+        else{
+            db.query(select_sql,rate,function(err,rows,fields){
+                len=rows.length
+                if(len==0){
+                    console.log("there's no risks")
+                    var not='{"rate":0,"risk":"NO DATA"}'
+                    console.log(not)
+                    not=JSON.parse(not)
+                    console.log("not:",not)
+                    res.send(not)
+                    return;
+                }
+                else{
+                    var assets_id=rows[index].assets_id;
+                    var vulns_id=rows[index].vulns_id;
+                    var threats_id=rows[index].threats_id;
+                    var usr_risk_mng_id=rows[index].usr_risk_mng_id;
+
+                    console.log(assets_id,vulns_id,threats_id,usr_risk_mng_id);
+
+                    var select_assets_sql="SELECT name_assets FROM data_db.assets WHERE id_assets=?"
+                    db.query(select_assets_sql,assets_id,function(err,rows,fields){
+                        var name_assets=rows[0].name_assets
+                        console.log("asset name: ",name_assets)
+                        var select_vulns_sql="SELECT name_vulns FROM data_db.vulns WHERE id_vulns=?"
+                        db.query(select_vulns_sql,vulns_id,function(err,rows,fields){
+                            var name_vulns=rows[0].name_vulns
+                            console.log("vulns name: ",name_vulns)
+                            var select_threats_sql="SELECT name_threats FROM data_db.threats WHERE id_threats=?"
+                            db.query(select_threats_sql,threats_id,function(err,rows,fields){
+                                var name_threats=rows[0].name_threats
+                                console.log("threats name: ",name_threats)
+                                lsy2(name_assets,name_vulns,name_threats,usr_risk_mng_id,vulns_id).then(lsy)
+                            })
+                        })
+                    })
+
+                
+                    index++;
+                }
+        })
+
+    }
+    }
+    function lsy2(item,item2,item3,item4,item5){// item means assets_id
+        return new Promise(function(resolve,reject){
+            var select_manage_sql="SELECT name_manage FROM data_db.risk_manage WHERE id_manage=?"
+            db.query(select_manage_sql,item4,function(err,rows,fields){
+                var name_manage=rows[0].name_manage;
+                json+='{"rate":'+rate+',"risk":"'+item+'의 '+item2+'으로 인해 '+item3+' 발생 가능","manage":"'+name_manage+'","id_vulns":'+item5+'},'
+                console.log(json)
+                resolve();
+            })
+        })
+    }
+
+
+}
+
+// show modal
+exports.modal=(req,res,next)=>{
+
+    var select_sql="SELECT * FROM data_db.vulns WHERE id_vulns=?"
+    var num=req.query.vulnNum;
+    console.log("vul num: ",num)
+
+    var select_asset_sql="SELECT * FROM data_db.assets WHERE id_assets=?"
+
+    db.query(select_sql,num,function(err,rows,fields){
+        var name_vulns=rows[0].name_vulns
+        var manage_vulns=rows[0].manage_vulns
+        var id_assets=rows[0].id_assets
+
+        db.query(select_asset_sql,id_assets,function(err,rows,fields){
+            var name_assets=rows[0].name_assets;
+            name_vulns=name_assets+"의 "+name_vulns
+            var json=({"name_vulns":name_vulns,"manage_vulns":manage_vulns})
+            console.log("DATA: ",json)
+            res.send(json)
+            console.log("done!")
+        })
+    })
+
+
+}

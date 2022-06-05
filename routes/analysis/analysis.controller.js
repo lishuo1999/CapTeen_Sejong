@@ -47,7 +47,7 @@ exports.vuln = (req, res, next) => { //get method
     const md5_id = md5(usr_id);
     //console.log(md5_id);
 
-    var select_assets_sql = 'SELECT assets_id FROM usr_db.table_' + md5_id + ' WHERE big_assets_id=?' // bring assets id 
+    var select_assets_sql='SELECT distinct assets_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring assets id 
     //console.log(select_assets_sql);
 
 
@@ -148,13 +148,15 @@ exports.save_vuln = (req, res, next) => {
     const md5_id = md5(usr_id);
     //console.log(md5_id);
 
-    var update_vulns_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate
+    var update_vulns_sql='UPDATE usr_db.table_'+md5_id+' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate . several ...
     console.log(update_vulns_sql);
 
-    db.query(update_vulns_sql, [grade, id_vulns], function (err, rows, fields) {
-        if (err) console.log(err)
-        else {
-            console.log("Vulnerability Rate updated!")
+    db.query(update_vulns_sql,[grade,id_vulns],function(err,rows,fields){
+        if(err) console.log(error)
+        else{
+            console.log(rows);
+            /*for(var i=0;i<rows.length;i++){
+                console.log("Vulnerability grade"+i+" updated!!");}*/
         }
     })
 }
@@ -168,7 +170,7 @@ exports.threat = (req, res, next) => { //get method
     const md5_id = md5(usr_id);
     //console.log(md5_id);
 
-    var select_assets_sql = 'SELECT assets_id FROM usr_db.table_' + md5_id + ' WHERE big_assets_id=?' // bring vulnerability id 
+    var select_assets_sql='SELECT distinct assets_id FROM usr_db.table_'+md5_id+' WHERE big_assets_id=?' // bring vulnerability id 
     //console.log(select_threats_sql);
 
 
@@ -236,12 +238,12 @@ exports.threat = (req, res, next) => { //get method
     }
 }
 
-//Anal_4 : saving data and making grade
-exports.save_threat = (req, res, next) => {
-    var id_threats = req.body.num;
-    var serious_threats = req.body.money;
-    var exposed_threats = req.body.frequency;
-    console.log(id_threats, serious_threats, exposed_threats);
+//Anal_4 : saving data and making grade 
+exports.save_threat=(req,res,next)=>{
+    var id_threats=req.body.num;
+    var serious_threats=req.body.money; // store !!!! 
+    var exposed_threats=req.body.frequency;
+    console.log(id_threats,serious_threats,exposed_threats);
 
     //grading .. [exp,ser,grade]
     var saved1 = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
@@ -265,13 +267,13 @@ exports.save_threat = (req, res, next) => {
     const md5_id = md5(usr_id);
     //console.log(md5_id);
 
-    var update_threats_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_threats_rate=? WHERE threats_id=?' // update vulnerability rate
+    var update_threats_sql='UPDATE usr_db.table_'+md5_id+' SET usr_threats_rate=?, usr_threats_spend=? WHERE threats_id=?' // update vulnerability rate
     console.log(update_threats_sql);
 
-    db.query(update_threats_sql, [grade, id_threats], function (err, rows, fields) {
-        if (err) console.log(err)
-        else {
-            console.log("Threat Rate updated!")
+    db.query(update_threats_sql,[grade,serious_threats,id_threats],function(err,rows,fields){
+        if(err) console.log(err)
+        else{
+            console.log(rows)
         }
     })
 }
