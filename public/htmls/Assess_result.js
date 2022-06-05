@@ -5,11 +5,13 @@ window.onload = function () {
     $("#fadeinText2").hide();
     $("#fadeinText3").hide();
     $("#fadeinText4").hide();
+    bringDoA();
 }
 
 //위험 수용박스를 클릭했을 때 
 $(function(){
     $('#box1').on('click',function(){ // 위험 수용 
+        $("#box0").hide();
         $("#box1").hide();
         $("#box2").hide();
         $("#box3").hide();
@@ -53,6 +55,7 @@ $(function(){
 //위험 전가 박스를 클릭했을 때 
 $(function(){
     $('#box2').on('click',function(){ // 위험 전가
+        $("#box0").hide();
         $("#box1").hide();
         $("#box2").hide();
         $("#box3").hide();
@@ -95,6 +98,7 @@ $(function(){
 //위험 회피 박스를 클릭했을 때 
 $(function(){
     $('#box3').on('click',function(){ // 위험 회피
+        $("#box0").hide();
         $("#box1").hide();
         $("#box2").hide();
         $("#box3").hide();
@@ -138,6 +142,7 @@ $(function(){
 //위험 감소 박스를 클릭했을 때 
 $(function(){
     $('#box4').on('click',function(){ // 위험 감소
+        $("#box0").hide();
         $("#box1").hide();
         $("#box2").hide();
         $("#box3").hide();
@@ -208,3 +213,21 @@ function change(obj){ //select box 다른 옵션 클릭했을때
     })
 }
 
+
+function bringDoA(){ //select box 다른 옵션 클릭했을때
+
+    $.ajax({
+        type: 'GET',   //post방식으로 명시
+        url : 'https://jsonplaceholder.typicode.com/comments',  //서버 주소 
+        dataType:'json',
+        success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
+            //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
+            console.log(data);
+            var doa=data.DoA;
+            $("#DoA").text(doa);
+        },
+        error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+            console.log(error);
+        }
+    })
+}

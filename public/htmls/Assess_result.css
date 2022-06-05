@@ -52,10 +52,28 @@ a { text-decoration:none;}
     width: 90%;
     height: 80%;
     z-index:1;
-    /*background-color: #FBFBFB;
+    /*background-color: gray;
     border:2px lightgray solid;
     border-radius:50px;
     box-shadow: 2px 2px 0.5px -0.5px lightgray;*/
+}
+
+#box0{
+    position:absolute;
+    top:5%;
+    height:10%;
+    width:44%;
+    left:28%;
+   /*background-color: white;
+    border:2px #EEEEEE solid;
+    border-radius:20px;
+    box-shadow: 2px 2px 3px 3px #CBCBCB;*/
+    /*가운데 정렬을 위한 조건들 */
+    display:flex;
+    flex-direction:row;
+    justify-content:center; 
+    align-items : center;
+    cursor:pointer;
 }
 
 #box1{
@@ -163,7 +181,19 @@ a { text-decoration:none;}
     color:#686560;
 }
 
+#exp{
+   /* color:#686560;*/
+    font-size:20px;
+    margin:0px 0px 0px;
+    font-weight:700;
+}
 
+#DoA{
+    font-size:20px;
+    margin:0px 0px 0px;
+    font-weight:900;
+    color:#ED7D31;
+}
 
 #table_right{
     overflow:auto;
