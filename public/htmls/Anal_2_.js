@@ -243,22 +243,22 @@ $(function () { //담기 버튼 클릭 시
                 var X_child_val = X_par_val.find('input[name="a"]:checked').attr("value"); //핵심자산
                 var send_val1 = $('#send_last').attr("value");//자산id
                 var send_val2 = $('#send_last').attr("name");//자산 대분류 id
-
-                var data = ({
+                
+                var obj = ({
                     "assets_id": send_val1, //자산id
                     "big_assets_id": send_val2, //자산 대분류 id
                     "usr_assets_imp": X_child_val, //핵심자산
                     "usr_assets_rate": grade //자산 가치 등급
                 });
-                data = JSON.stringify(data);
-                //alert(data);
+                //obj = JSON.stringify(obj);;
+            
                 $.ajax({
                     type: "post",
                     url: "/analysis/save_ass", //서버에서 입력할 것
                     datatype: "json",
-                    contentType: "application/json",
-                    data: data,
-                    success: function (data) { //data: 서버로부터 받아온 json data 
+                    //contentType: "application/json",
+                    data: obj,
+                    success: function () { //data: 서버로부터 받아온 json data 
                         console.log('success');
                     },
                     error: function (error) {
