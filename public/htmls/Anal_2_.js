@@ -13,8 +13,10 @@ $(function () { //자산분류 선택 시 -> 해당 자산그룹명 리스트를
                 "id_big_assets": data_send //대분류
             },
             success: function (data) { //data: 서버로부터 받아온 json data 
+                $('#sel_2').empty();
+                $('#sel_2').append("<option value='0' selected>-선택-</option>");
                 for (var i = 0; i < data.length; i++) {
-                    $('#sel_2').append("<option value=" + data[i].id_m_cat_ass + ">" + data[i].name_m_cat_ass + "</option>"); //groupname: 자산그룹명, groupId: 해당 그룹명의 value값
+                    $('#sel_2').append("<option value='" + data[i].id_m_cat_ass + "'>" + data[i].name_m_cat_ass + "</option>"); //groupname: 자산그룹명, groupId: 해당 그룹명의 value값
                 }
             },
             error: function () {
@@ -26,24 +28,22 @@ $(function () { //자산분류 선택 시 -> 해당 자산그룹명 리스트를
 $(function () { //조회 버튼 클릭 시
     $('#search_button').click(function () {
         $("#asset_list_table").show();
+        var id_big = $('#sel_1 option:selected').val();
+        var id_mid = $('#sel_2 option:selected').val();
         $.ajax({ //서버 측에서 자산 리스트 가져오기
             type: "get",
-            url: "https://jsonplaceholder.typicode.com/posts", //서버에서 입력할 것
+            url: "/analysis/asset_big_mid", //서버에서 입력할 것
             datatype: "json",
             contentType: "application/json",
             data: { //보내는 데이터
-                //자산 대분류
-                //자산 그룹명
+                "id_big_assets": id_big,//자산 대분류 id
+                "id_mid_assets": id_mid//자산 중분류 id
             },
             success: function (data) { //data: 서버로부터 받아온 json data
-                /*$.each(data, function (index, item) { // 데이터 =item
-                    $('#asset_list_table>tbody').append("<tr><td id='index' style=" + "'width: 60px;text-align: center;'" + ">" + item.index + "</td><td id='groupname' style=" + "'width: 90px;text-align: center;'" + ">" + item.groupname + "</td><td id='name_assets' style=" + "'width: 90px;text-align: center;'" + ">" + item.name_assets +
-                        "</td><td style=" + "'width: 90px;text-align: center;'" + "><input type='checkbox' value='"+ item.id_assets +"' name='user_checkbox' style='width: 100px' checked></td></tr>");
-                });*/
-                $.each(data, function (index, item) { // 데이터 =item
-                    $('#asset_list_table>tbody').append("<tr><td id='userId' style=" + "'width: 60px;text-align: center;'" + ">" + item.userId + "</td><td id='id' style=" + "'width: 90px;text-align: center;'" + ">" + item.id + "</td><td id='title' style=" + "'width: 90px;text-align: center;'" + ">" + item.title +
-                        "</td><td style=" + "'width: 90px;text-align: center;'" + "><input type='checkbox' value='"+ item.userId +"' name='user_checkbox' style='width: 100px' checked></td></tr>");
-                });
+                for (var i = 0; i < data.length; i++) {
+                    $('#asset_list_table>tbody').append("<tr><td id='big_name' value=''style=" + "'width: 60px;text-align: center;'" + ">" + data[i].name_b_cat_ass + "</td><td id='groupname' style=" + "'width: 90px;text-align: center;'" + ">" + data[i].name_m_cat_ass + "</td><td id='name_assets' value = '" + id_big + "' style=" + "'width: 90px;text-align: center;'" + ">" + data[i].name_assets +
+                        "</td><td style=" + "'width: 90px;text-align: center;'" + "><input type='checkbox' value='" + data[i].id_assets + "' name='user_checkbox' style='width: 100px' checked></td></tr>");
+                }
             },
             error: function () {
                 console.log(error);
@@ -53,53 +53,6 @@ $(function () { //조회 버튼 클릭 시
 });
 var data = [];
 var C, I, A;
-$(function () { //담기 버튼 클릭 시
-    $('#collect').click(function () {
-        $('input:checkbox[name=user_checkbox]').each(function (i) {
-            if ($(this).is(":checked") == true) { //보유 자산 리스트 출력
-                //var parent = $(this).closest("tr");
-                //var col_1 = parent.children('#index').text();
-                //var col_2 = parent.children('#groupname').text();
-                //var col_3 = parent.children('#name_assets').text();
-                var parent = $(this).closest("tr");
-                var col_1 = parent.children('#userId').text();
-                var col_2 = parent.children('#id').text();
-                var col_3 = parent.children('#title').text();
-                $(".users_asset_list_table>tbody").append("<tr><td style=" + "'width: 60px;text-align: center;'" + ">" + col_1 + "</td><td style=" + "'width: 90px;text-align: center;'" + ">" + col_2 + "</td><td style=" + "'width: 90px;text-align: center;'" + ">" + "test" +
-                    "</td><td style=" + "'width: 90px;text-align: center;'" + "><div class='cia_div' value='" + i + "'><a class='cia'>CIA 산출</a></div></td><td style=" + "'width: 90px;text-align: center;'" + "><form>상<input type='checkbox' value='1'>중<input type='checkbox' value='2'>하<input type='checkbox' value='3'></form></td><td style=" + "'width: 70px;text-align: center;'" + "><span class='delete'>[삭제]</span></td></tr>"
-                );
-                /*$(".users_asset_list_table>tbody").append("<tr><td style=" + "'width: 60px;text-align: center;'" + ">" + col_1 + "</td><td style=" + "'width: 90px;text-align: center;'" + ">" + col_2 + "</td><td value='"+ $(this).value() +"' style=" + "'width: 90px;text-align: center;'" + ">" + "test" +
-                    "</td><td style=" + "'width: 90px;text-align: center;'" + "><div class='cia_div' value='" + i + "'><a class='cia'>CIA 산출</a></div></td><td style=" + "'width: 90px;text-align: center;'" + "><form>상<input type='checkbox' value='1'>중<input type='checkbox' value='2'>하<input type='checkbox' value='3'></form></td><td style=" + "'width: 70px;text-align: center;'" + "><span class='delete'>[삭제]</span></td></tr>"
-                );*/
-            }
-        });
-
-        $('.cia_div').each(function (i, item) {
-            $('div[class="cia_div"][value="' + i + '"]').click(function () { //CIA 산출 클릭 시
-                $(".modal-wrapper").show()
-                $('#exit_btn').attr('value', i);
-                $('img[id="exit_btn"][value="' + i + '"]').click(function () { //취소 버튼 클릭 시
-                    $(".modal-wrapper").hide();
-                    $('div[class="cia_div"][value="' + i + '"]').html("<a class='cia'>완료</a>");
-                    $('div[class="cia_div"][value="' + i + '"]').attr('value', -1);
-                    $('input[type="checkbox"][name="c_form"]').prop("checked", false);
-                    $('input[type="checkbox"][name="i_form"]').prop("checked", false);
-                    $('input[type="checkbox"][name="a_form"]').prop("checked", false);
-                    $('.score').empty();
-                    $("#c_cal").hide();
-                    $("#c_save").hide();
-                    $("#i_cal").hide();
-                    $("#i_save").hide();
-                    $("#a_cal").hide();
-                    $("#a_save").hide();
-                    $("#c_label").css("color", "black");
-                    $("#i_label").css("color", "black");
-                    $("#a_label").css("color", "black");
-                })
-            })
-        });
-    });
-});
 $(function () {
     $("#c_label").click(function () { //기밀성 지표 클릭
         $("#c_label").css("color", "#ED7D31");
@@ -113,6 +66,7 @@ $(function () {
             $("#c_cal").show();
             $("#c_save").show();
         }
+
     });
 });
 $(function () {
@@ -136,7 +90,8 @@ $(function () {
     });
     $('#c_save').click(function () {
         if (confirm("저장하시겠습니까?")) { //확인 버튼 클릭 시
-            C = parseInt(sum / 14);
+            C = sum / 14;
+            C = Math.round(C);
             alert("기밀성 평균점수는 " + C + " 입니다.");
             sum = Number(0);
         }
@@ -181,7 +136,8 @@ $(function () {
     });
     $('#i_save').click(function () {
         if (confirm("저장하시겠습니까?")) { //확인 버튼 클릭 시
-            I = parseInt(sum / 13);
+            I = sum / 13;
+            I = Math.round(I);
             alert("무결성 평균점수는 " + I + " 입니다.");
             sum = Number(0);
         }
@@ -226,7 +182,8 @@ $(function () {
     });
     $('#a_save').click(function () {
         if (confirm("저장하시겠습니까?")) { //확인 버튼 클릭 시
-            A = parseInt(sum / 13);
+            A = sum / 13;
+            A = Math.round(A);
             alert("가용성 평균점수는 " + A + " 입니다.");
             sum = Number(0);
         }
@@ -235,7 +192,87 @@ $(function () {
         }
     });
 });
-$(function () { //다음 클릭 시 모든 데이터 리스트 POST
+$(function () { //담기 버튼 클릭 시
+    $('#collect').click(function () {
+        $('input:checkbox[name=user_checkbox]').each(function (i) {
+            if ($(this).is(":checked") == true) { //보유 자산 리스트 출력sss
+                var parent = $(this).closest("tr");
+                var col_1 = parent.children('#name_assets').text();
+                var send_1 = $(this).val();//자산id
+                var send_2 = parent.children('#name_assets').attr("value");//자산 대분류 id
+                $(".users_asset_list_table>tbody").append("<tr><td id='send_last' name = '" + send_2 + "' value = '" + send_1 + "' style=" + "'width: 90px;text-align: center;'" + ">" + col_1 +
+                    "</td><td style=" + "'width: 90px;text-align: center;'" + "><div class='cia_div' value='" + i + "'><a class='cia'>CIA 산출</a></div></td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send' value='" + i + "'>상<input type='radio' name='b' value='3'>중<input type='radio' name='b' value='2'>하<input type='radio' name='b' value='1'></form></td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send_val' value='" + i + "'>예<input type='radio' name='a' value='1'>아니요<input type='radio' name='a' value='0'><form></td><td style=" + "'width: 70px;text-align: center;'" + "><button class='save_ass_list' value='" + i + "'>저장</button></td></tr>"
+                );
+            }
+        })
+        $('.cia_div').each(function (i, item) {
+            $('div[class="cia_div"][value="' + i + '"]').click(function () { //CIA 산출 클릭 시
+                C = 0;
+                I = 0;
+                A = 0;
+                $(".modal-wrapper").show()
+                $('#exit_btn').attr('value', i);
+                $('img[id="exit_btn"][value="' + i + '"]').click(function () { //취소 버튼 클릭 시
+                    $(".modal-wrapper").hide();
+                    $('div[class="cia_div"][value="' + i + '"]').html("<a class='cia'>완료</a>");
+                    $('div[class="cia_div"][value="' + i + '"]').attr('value', -1);
+                    $('input[type="checkbox"][name="c_form"]').prop("checked", false);
+                    $('input[type="checkbox"][name="i_form"]').prop("checked", false);
+                    $('input[type="checkbox"][name="a_form"]').prop("checked", false);
+                    $('.score').empty();
+                    $("#c_cal").hide();
+                    $("#c_save").hide();
+                    $("#i_cal").hide();
+                    $("#i_save").hide();
+                    $("#a_cal").hide();
+                    $("#a_save").hide();
+                    $("#c_label").css("color", "black");
+                    $("#i_label").css("color", "black");
+                    $("#a_label").css("color", "black");
+                })
+            })
+        });
+        $('.save_ass_list').each(function (i, item) {
+            $('button[class="save_ass_list"][value="' + i + '"]').click(function () {  //리스트에서 저장버튼 클릭 시
+                var X_par = $('form[class="send"][value="' + i + '"]');
+                var X_child = X_par.find('input[name="b"]:checked').attr("value");
+                var grade = (Number(C) + Number(I) + Number(A) + Number(X_child)) / 4
+                grade = Math.round(grade); //자산 가치 등급
+
+                var X_par_val = $('form[class="send_val"][value="' + i + '"]');
+                var X_child_val = X_par_val.find('input[name="a"]:checked').attr("value"); //핵심자산
+                var send_val1 = $('#send_last').attr("value");//자산id
+                var send_val2 = $('#send_last').attr("name");//자산 대분류 id
+
+                var data = ({
+                    "assets_id": send_val1, //자산id
+                    "big_assets_id": send_val2, //자산 대분류 id
+                    "usr_assets_imp": X_child_val, //핵심자산
+                    "usr_assets_rate": grade //자산 가치 등급
+                });
+                data = JSON.stringify(data);
+                //alert(data);
+                $.ajax({
+                    type: "post",
+                    url: "/analysis/save_ass", //서버에서 입력할 것
+                    datatype: "json",
+                    contentType: "application/json",
+                    data: data,
+                    success: function (data) { //data: 서버로부터 받아온 json data 
+                        console.log('success');
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+
+            });
+
+        });
+    });
+});
+
+/*$(function () { //다음 클릭 시 모든 데이터 리스트 POST
     $('#next').click(function () {
         $.ajax({
             type: "post",
@@ -244,11 +281,10 @@ $(function () { //다음 클릭 시 모든 데이터 리스트 POST
             contentType: "application/json",
             data: data,
             success: function (data) { //data: 서버로부터 받아온 json data 
-
             },
             error: function () {
                 console.log(error);
             }
         });
     });
-});
+});*/
