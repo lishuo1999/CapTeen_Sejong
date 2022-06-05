@@ -185,8 +185,7 @@ $(function(){
 
 });
 
-function change(obj){ //select box 다른 옵션 클릭했을때
-
+function change(obj){ 
     //var index=obj.closest("tr").rowIndex;
     //console.log(index); //클릭한 애의 rowindex 가져오기
 
