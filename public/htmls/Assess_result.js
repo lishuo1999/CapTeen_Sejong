@@ -69,7 +69,7 @@ $(function(){
 
     
             $.ajax({
-                url:"https://jsonplaceholder.typicode.com/posts",
+                url:"/assess/manage",
                 type:"get",
                 dataType:"json",
                 data:{"method":2},//transfer

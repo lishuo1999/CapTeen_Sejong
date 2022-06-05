@@ -8,7 +8,7 @@ const controller = require('./assess.controller');
 router.post('/userInput', controller.input);
 
 //Assess_result
-router.post('/manage',controller.manage);
+router.get('/manage',controller.manage);
 
 
 module.exports = router;

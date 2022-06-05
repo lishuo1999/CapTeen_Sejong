@@ -2,6 +2,7 @@ const db=require('../serverConfig');
 const session = require('express-session');
 const md5 = require('md5');
 const async = require('async');
+const res = require('express/lib/response');
 
 //DoA를 받아서 DB의 사용자 테이블에 저장
 //body에 저장되어 들어오고, 해당 값을 텍스트로 받아오도록 해둠
@@ -228,6 +229,102 @@ async function howMuchSecBudget (id_md5, secBudget) {
 
 //and check which manage strategy table user wants to see,
 //then send the matched data set
-exports.manage=(req, res, next)=>{
+exports.manage=async function(req, res, next){
+    let strategy= Number(req.query.method);
+    let id_md5=md5(req.session.userName);
+
+    switch(strategy){
+        case 1:
+            let a = await showTables(req, res, next, strategy, id_md5);
+            break;
+        case 2:
+            let b = await showTables(req, res, next, strategy, id_md5);
+            break;
+        case 3:
+            let c = await showTables(req, res, next, strategy, id_md5);
+            break;
+        case 4:
+            let d = await showTables(req, res, next, strategy, id_md5);
+            break;
+        default:
+            console.log("getting strategy number failed: "+strategy);
+    }
+}
+
+
+//send data according to the given strategy number
+//send usr_risk id too
+async function showTables(req, res, next, strategy, id_md5){
+    // get data from DB -> make it [{}] form
+
+    let getDataIDSql='SELECT usr_risk_id, assets_id, vulns_id, threats_id FROM usr_db.table_'+id_md5+' WHERE usr_risk_mng_id=?';
+    let return_arr=[];
+    let name_arr=[];
+
+    new Promise(async function(resolve, reject){
+        const mysql = require('mysql2/promise');
+        try {
+            const connection = await mysql.createConnection({
+                host: "14.40.31.222",
+                user: 'dev', //for now it is the root user, but gotta make a new user with limited privileged role 
+                password: '1918password',
+                port: 3306,
+                database: 'data_db'
+            });
+            let [rows, fields] = await connection.execute(getDataIDSql, [strategy]);
+                rows.forEach(function (k, value) {
+                    return_arr.push([k.usr_risk_id, k.assets_id, k.vulns_id, k.threats_id])
+                });
+    
+            resolve([return_arr, rows.length]);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    })
+    .then(async function(result){
+        let id_arr=result[0]; //0) usr_risk_id, 1) assets_id, 2)vulns_id, 3)threats_id
+        let maxIdx=result[1];
+        let makeRiskSql=`SELECT 
+        data_db.assets.name_assets, data_db.assets.id_assets, 
+        data_db.threats.name_threats, data_db.threats.id_threats, 
+        data_db.vulns.name_vulns, data_db.vulns.id_vulns 
+        FROM 
+        data_db.threats 
+        RIGHT JOIN data_db.assets 
+        ON data_db.assets.id_assets=data_db.threats.id_assets 
+        RIGHT JOIN data_db.vulns 
+        ON data_db.vulns.id_assets=data_db.assets.id_assets 
+        WHERE 
+        data_db.assets.id_assets=? AND data_db.vulns.id_vulns=? AND data_db.threats.id_threats=?`;
+        const mysql = require('mysql2/promise');
+        try {
+            const connection = await mysql.createConnection({
+                host: "14.40.31.222",
+                user: 'dev', //for now it is the root user, but gotta make a new user with limited privileged role 
+                password: '1918password',
+                port: 3306,
+                database: 'data_db'
+            });
+            for (var i = 0; i < maxIdx; i++) {
+                let [rows, fields] = await connection.execute(makeRiskSql, [id_arr[i][1]/*assets_id*/, id_arr[i][2]/*vulns_id*/, id_arr[i][3]/*threats_id*/]); //function(err, rows, fields){
+
+                rows.forEach(function (k, value) {
+                    let astname = k.name_assets;
+                    let vulname = k.name_vulns;
+                    let thrtname = k.name_threats;
+                    let id=id_arr[i][0];
+                    name_arr.push({ riskId: id, risk: '' + astname + '의 ' + thrtname + '으로 인해 ' + vulname + ' 발생 가능' });
+                });
+            }
+            return (name_arr);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    })
+    .then((result)=>{
+        res.send(result);
+    })
 
 }
