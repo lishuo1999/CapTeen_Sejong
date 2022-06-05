@@ -30,6 +30,14 @@ router.get('/risk3', controller.risk3_list);
 router.get('/risk4', controller.risk4_list);
 router.get('/risk5', controller.risk5_list);
 
+//anal_2.html 대분류 선택시 중분류 리스트 보내줌
+router.get('/asset_big', controller.asset_big);
 
+//anal_2.html 대분류, 중분류에 해당된 자산 리스트 보여줌
+router.get('/asset_big_mid', controller.asset_big_mid);
+module.exports = router;
+
+//anal_2.html 저장버튼 클릭 시
+router.post('/save_ass', controller.save_ass);
 
 module.exports = router;

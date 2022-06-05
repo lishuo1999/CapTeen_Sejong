@@ -295,7 +295,7 @@ a {
 .cia_div {
     background-color: black;
     width: 75px;
-    margin-left: 17px;
+    margin-left: 54.1085px;
     border-radius: 15px;
 }
 
@@ -321,7 +321,7 @@ a {
     right: 0;
     background: rgba(0, 0, 0, 0.6);
     opacity: 1;
-    display:none;
+    display: none;
 }
 
 .modal-content {
@@ -337,11 +337,13 @@ a {
     margin: auto;
     margin-top: 70px;
 }
-.cia_bar a:hover{
-    color:#ED7D31;
+
+.cia_bar a:hover {
+    color: #ED7D31;
     cursor: pointer;
     font-weight: 900;
 }
+
 .cia_table {
     border-collapse: collapse;
     text-align: left;
@@ -361,20 +363,23 @@ a {
     font-weight: bold;
     vertical-align: top;
     color: balck;
-    border-bottom:1px solid #808080;
+    border-bottom: 1px solid #808080;
     margin: 20px 10px;
     text-align: center;
 }
+
 .cia_table thead th span:hover {
     cursor: pointer;
-    color:#ED7D31;
+    color: #ED7D31;
 }
+
 .cia_table td {
-    width: 30   0px;
+    width: 30 0px;
     padding: 10px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
+
 .cia_save {
     border: none;
     background-color: black;
@@ -385,10 +390,12 @@ a {
     margin: auto;
     display: none;
 }
+
 .cia_save:hover {
-    background-color:#ED7D31;
+    background-color: #ED7D31;
     cursor: pointer;
 }
+
 #asset_list_table {
     border-collapse: collapse;
     text-align: left;
@@ -398,6 +405,7 @@ a {
     height: 100%;
     width: 100%;
 }
+
 #asset_list_table thead th {
     width: 150px;
     padding: 10px;
@@ -407,6 +415,7 @@ a {
     background: #ED7D31;
     margin: 20px 10px;
 }
+
 #asset_list_table td {
     width: 350px;
     padding: 10px;
