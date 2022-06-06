@@ -1198,14 +1198,14 @@ exports.asset_big = (req, res, next) => {
 exports.asset_big_mid = (req, res, next) => {
     var big_index = req.query.id_big_assets; //대분류 id 받아옴
     var mid_index = req.query.id_mid_assets; //중분류 id 받아옴
-    var DB_select_big = 'SELECT data_db.assets.name_assets, data_db.assets.id_assets, data_db.big_category_assets.name_b_cat_ass FROM data_db.assets LEFT OUTER JOIN data_db.big_category_assets ON data_db.assets.id_big_assets = data_db.big_category_assets.id_b_cat_ass WHERE data_db.assets.id_big_assets = ?';
-    var DB_select_mid = 'SELECT data_db.mid_category_assets.name_m_cat_ass, data_db.mid_category_assets.id_m_cat_ass FROM data_db.mid_category_assets WHERE data_db.mid_category_assets.id_m_cat_ass = ? AND data_db.mid_category_assets.id_m_cat_ass = ?;';
+    var DB_select_big = 'SELECT data_db.assets.name_assets, data_db.assets.id_assets, data_db.big_category_assets.name_b_cat_ass FROM data_db.assets LEFT OUTER JOIN data_db.big_category_assets ON data_db.assets.id_big_assets = data_db.big_category_assets.id_b_cat_ass WHERE data_db.assets.id_big_assets = ? AND data_db.assets.id_mid_assets = ?';
+    var DB_select_mid = 'SELECT data_db.mid_category_assets.name_m_cat_ass, data_db.mid_category_assets.id_m_cat_ass FROM data_db.mid_category_assets WHERE data_db.mid_category_assets.id_m_cat_ass = ? AND data_db.mid_category_assets.id_m_cat_ass = ?';
     var data = '[';
     var obj; //비어있는 객체 생성
     var mid_name = [];
 
     new Promise(function (resolve, reject) {
-        db.query(DB_select_big, big_index, function (err, rows, fields) {
+        db.query(DB_select_big, [big_index, mid_index], function (err, rows, fields) {
             for (var i = 0; i < rows.length; i++) {
                 mid_name.push(rows[i].name_assets);
                 mid_name.push(rows[i].id_assets);
@@ -1224,7 +1224,7 @@ exports.asset_big_mid = (req, res, next) => {
                     port: 3306,
                     database: 'data_db'
                 });
-
+                
                 for (var i = 0; i < result.length; i += 3) {
                     let [rows, field] = await connection.execute(DB_select_mid, [mid_index, mid_index]);
                     rows.forEach(function (k, value) {
@@ -1238,7 +1238,7 @@ exports.asset_big_mid = (req, res, next) => {
                 }
                 data = data.slice(0, -1);
                 data += ']';
-
+                console.log(data);
                 const json = JSON.parse(data);
                 res.send(json);
 
