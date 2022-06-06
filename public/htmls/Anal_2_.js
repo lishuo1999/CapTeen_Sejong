@@ -26,7 +26,7 @@ $(function () { //자산분류 선택 시 -> 해당 자산그룹명 리스트를
     });
 });
 $(function () { //조회 버튼 클릭 시
-    $('#search_button').click(function () {
+    $('#search_button').off('click').on('click', function() {
         $("#asset_list_table").show();
         var id_big = $('#sel_1 option:selected').val();
         var id_mid = $('#sel_2 option:selected').val();
@@ -55,7 +55,7 @@ $(function () { //조회 버튼 클릭 시
 var data = [];
 var C, I, A;
 $(function () {
-    $("#c_label").click(function () { //기밀성 지표 클릭
+    $("#c_label").off('click').on('click', function() {//기밀성 지표 클릭
         $("#c_label").css("color", "#ED7D31");
         $("#i_label").css("color", "black");
         $("#a_label").css("color", "black");
@@ -72,7 +72,7 @@ $(function () {
 });
 $(function () {
     var sum = 0;
-    $('input[type="checkbox"][name="c_form"]').click(function () {
+    $('input[type="checkbox"][name="c_form"]').off('click').on('click', function() {
         if ($(this).prop('checked')) {
             $(this).closest("tr").children('input[type="checkbox"][name="cs_biz_form"]').prop('checked', false);
             //$('input[type="checkbox"][name="cs_biz_form"]').prop('checked', false);
@@ -89,7 +89,7 @@ $(function () {
             children.empty();
         }
     });
-    $('#c_save').click(function () {
+    $('#c_save').off('click').on('click', function() {
         if (confirm("저장하시겠습니까?")) { //확인 버튼 클릭 시
             C = sum / 14;
             C = Math.round(C);
@@ -102,7 +102,7 @@ $(function () {
     });
 });
 $(function () {
-    $("#i_label").click(function () { //무결성 지표 클릭
+    $("#i_label").off('click').on('click', function() { //무결성 지표 클릭
         $("#c_label").css("color", "black");
         $("#i_label").css("color", "#ED7D31");
         $("#a_label").css("color", "black");
@@ -118,7 +118,7 @@ $(function () {
 });
 $(function () {
     var sum = 0;
-    $('input[type="checkbox"][name="i_form"]').click(function () {
+    $('input[type="checkbox"][name="i_form"]').off('click').on('click', function() {
         if ($(this).prop('checked')) {
             $(this).closest("tr").children('input[type="checkbox"][name="cs_biz_form"]').prop('checked', false);
             //$('input[type="checkbox"][name="cs_biz_form"]').prop('checked', false);
@@ -135,7 +135,7 @@ $(function () {
             children.empty();
         }
     });
-    $('#i_save').click(function () {
+    $('#i_save').off('click').on('click', function() {
         if (confirm("저장하시겠습니까?")) { //확인 버튼 클릭 시
             I = sum / 13;
             I = Math.round(I);
@@ -148,7 +148,7 @@ $(function () {
     });
 });
 $(function () {
-    $("#a_label").click(function () { //가용성 지표 클릭
+    $("#a_label").off('click').on('click', function() { //가용성 지표 클릭
         $("#c_label").css("color", "black");
         $("#i_label").css("color", "black");
         $("#a_label").css("color", "#ED7D31");
@@ -164,7 +164,7 @@ $(function () {
 });
 $(function () {
     var sum = 0;
-    $('input[type="checkbox"][name="a_form"]').click(function () {
+    $('input[type="checkbox"][name="a_form"]').off('click').on('click', function() {
         if ($(this).prop('checked')) {
             $(this).closest("tr").children('input[type="checkbox"][name="cs_biz_form"]').prop('checked', false);
             //$('input[type="checkbox"][name="cs_biz_form"]').prop('checked', false);
@@ -181,7 +181,7 @@ $(function () {
             children.empty();
         }
     });
-    $('#a_save').click(function () {
+    $('#a_save').off('click').on('click', function() {
         if (confirm("저장하시겠습니까?")) { //확인 버튼 클릭 시
             A = sum / 13;
             A = Math.round(A);
@@ -194,8 +194,8 @@ $(function () {
     });
 });
 var cnt = 0;
-$(function () { //담기 버튼 클릭 시
-    $('#collect').click(function () {
+$(function () { 
+    $('#collect').off('click').on('click', function() {//담기 버튼 클릭 시
         $('input:checkbox[name=user_checkbox]').each(function (i) {
             if ($(this).is(":checked") == true) { //보유 자산 리스트 출력
                 var parent = $(this).closest("tr");
@@ -209,13 +209,13 @@ $(function () { //담기 버튼 클릭 시
             }
         })
         $('.cia_div').each(function (i, item) {
-            $('div[class="cia_div"][value="' + i + '"]').click(function () { //CIA 산출 클릭 시
+            $('div[class="cia_div"][value="' + i + '"]').off('click').on('click', function() { //CIA 산출 클릭 시
                 C = 0;
                 I = 0;
                 A = 0;
                 $(".modal-wrapper").show()
                 $('#exit_btn').attr('value', i);
-                $('img[id="exit_btn"][value="' + i + '"]').click(function () { //취소 버튼 클릭 시
+                $('img[id="exit_btn"][value="' + i + '"]').off('click').on('click', function() { //취소 버튼 클릭 시
                     $(".modal-wrapper").hide();
                     $('div[class="cia_div"][value="' + i + '"]').html("<a class='cia'>완료</a>");
                     $('div[class="cia_div"][value="' + i + '"]').attr('value', -1);
@@ -236,7 +236,8 @@ $(function () { //담기 버튼 클릭 시
             })
         });
         $('.save_ass_list').each(function (i, item) {
-            $('button[class="save_ass_list"][value="' + i + '"]').click(function () {  //리스트에서 저장버튼 클릭 시
+            console.log("**");
+            $('button[class="save_ass_list"][value="' + i + '"]').off('click').on('click', function() {  //리스트에서 저장버튼 클릭 시
                 var X_par = $('form[class="send"][value="' + i + '"]');
                 var X_child = X_par.find('input[name="b"]:checked').attr("value");
                 var grade = (Number(C) + Number(I) + Number(A) + Number(X_child)) / 4
@@ -254,9 +255,7 @@ $(function () { //담기 버튼 클릭 시
                     "usr_assets_imp": X_child_val, //핵심자산
                     "usr_assets_rate": grade //자산 가치 등급
                 });
-                //obj = JSON.stringify(obj);;
-        
-                console.log(send_val1);
+                
                 $.ajax({
                     type: "post",
                     url: "/analysis/save_ass", //서버에서 입력할 것
@@ -270,6 +269,7 @@ $(function () { //담기 버튼 클릭 시
                         console.log(error);
                     }
                 });
+                console.log(send_val1);
 
             });
 

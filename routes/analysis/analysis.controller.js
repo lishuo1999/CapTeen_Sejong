@@ -1252,6 +1252,7 @@ exports.asset_big_mid = (req, res, next) => {
 exports.save_ass = (req, res, next) => {
     var usr_id = req.session.userName;
     const usr_id_md5 = md5(usr_id);
+    console.log(req);
     let val1 = req.body.assets_id; //자산id
     let val2 = req.body.big_assets_id; //자산대분류id
     let val3 = req.body.usr_assets_imp; //핵심자산여부
