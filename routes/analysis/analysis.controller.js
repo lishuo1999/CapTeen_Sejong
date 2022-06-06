@@ -1256,7 +1256,7 @@ exports.save_ass = (req, res, next) => {
     var val2 = req.body.big_assets_id; //자산대분류id
     var val3 = req.body.usr_assets_imp; //핵심자산여부
     var val4 = req.body.usr_assets_rate; //자산중요도등급
-    
+    console.log(val1, val2, val3, val4);
     var update_sql = 'insert into usr_db.table_' + usr_id_md5 + '(assets_id, big_assets_id, usr_assets_imp, usr_assets_rate, vulns_id, threats_id) value (?,?,?,?,?,?)';
     //자산id, 자산대분류id, 핵심자산여부, 자산중요도등급, 취약성id, 위협id
     var select_id = 'select id_vulns, id_threats from data_db.concerns where id_assets = ?';

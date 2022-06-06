@@ -40,6 +40,7 @@ $(function () { //조회 버튼 클릭 시
                 "id_mid_assets": id_mid//자산 중분류 id
             },
             success: function (data) { //data: 서버로부터 받아온 json data
+                $('#asset_list_table>tbody').empty();
                 for (var i = 0; i < data.length; i++) {
                     $('#asset_list_table>tbody').append("<tr><td id='big_name' value=''style=" + "'width: 60px;text-align: center;'" + ">" + data[i].name_b_cat_ass + "</td><td id='groupname' style=" + "'width: 90px;text-align: center;'" + ">" + data[i].name_m_cat_ass + "</td><td id='name_assets' value = '" + id_big + "' style=" + "'width: 90px;text-align: center;'" + ">" + data[i].name_assets +
                         "</td><td style=" + "'width: 90px;text-align: center;'" + "><input type='checkbox' value='" + data[i].id_assets + "' name='user_checkbox' style='width: 100px' checked></td></tr>");
@@ -192,17 +193,19 @@ $(function () {
         }
     });
 });
+var cnt = 0;
 $(function () { //담기 버튼 클릭 시
     $('#collect').click(function () {
         $('input:checkbox[name=user_checkbox]').each(function (i) {
-            if ($(this).is(":checked") == true) { //보유 자산 리스트 출력sss
+            if ($(this).is(":checked") == true) { //보유 자산 리스트 출력
                 var parent = $(this).closest("tr");
                 var col_1 = parent.children('#name_assets').text();
                 var send_1 = $(this).val();//자산id
                 var send_2 = parent.children('#name_assets').attr("value");//자산 대분류 id
-                $(".users_asset_list_table>tbody").append("<tr><td id='send_last' name = '" + send_2 + "' value = '" + send_1 + "' style=" + "'width: 90px;text-align: center;'" + ">" + col_1 +
-                    "</td><td style=" + "'width: 90px;text-align: center;'" + "><div class='cia_div' value='" + i + "'><a class='cia'>CIA 산출</a></div></td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send' value='" + i + "'>상<input type='radio' name='b' value='3'>중<input type='radio' name='b' value='2'>하<input type='radio' name='b' value='1'></form></td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send_val' value='" + i + "'>예<input type='radio' name='a' value='1'>아니요<input type='radio' name='a' value='0'><form></td><td style=" + "'width: 70px;text-align: center;'" + "><button class='save_ass_list' value='" + i + "'>저장</button></td></tr>"
+                $(".users_asset_list_table>tbody").append("<tr value = '" + cnt + "'><td id='send_last' name = '" + send_2 + "' value = '" + send_1 + "' style=" + "'width: 90px;text-align: center;'" + ">" + col_1 +
+                    "</td><td style=" + "'width: 90px;text-align: center;'" + "><div class='cia_div' value='" + cnt + "'><a class='cia'>CIA 산출</a></div></td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send' value='" + cnt + "'>상<input type='radio' name='b' value='3'>중<input type='radio' name='b' value='2'>하<input type='radio' name='b' value='1'></form></td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send_val' value='" + cnt + "'>예<input type='radio' name='a' value='1'>아니요<input type='radio' name='a' value='0'><form></td><td style=" + "'width: 70px;text-align: center;'" + "><button class='save_ass_list' value='" + cnt + "'>저장</button></td></tr>"
                 );
+                cnt += 1;
             }
         })
         $('.cia_div').each(function (i, item) {
@@ -238,12 +241,13 @@ $(function () { //담기 버튼 클릭 시
                 var X_child = X_par.find('input[name="b"]:checked').attr("value");
                 var grade = (Number(C) + Number(I) + Number(A) + Number(X_child)) / 4
                 grade = Math.round(grade); //자산 가치 등급
-
+    
                 var X_par_val = $('form[class="send_val"][value="' + i + '"]');
                 var X_child_val = X_par_val.find('input[name="a"]:checked').attr("value"); //핵심자산
-                var send_val1 = $('#send_last').attr("value");//자산id
-                var send_val2 = $('#send_last').attr("name");//자산 대분류 id
-                
+                var parent = $(this).closest("tr");
+
+                var send_val1 = parent.children('#send_last').attr("value");//자산id
+                var send_val2 = parent.children('#send_last').attr("name");//자산 대분류 id
                 var obj = ({
                     "assets_id": send_val1, //자산id
                     "big_assets_id": send_val2, //자산 대분류 id
@@ -251,7 +255,8 @@ $(function () { //담기 버튼 클릭 시
                     "usr_assets_rate": grade //자산 가치 등급
                 });
                 //obj = JSON.stringify(obj);;
-            
+        
+                console.log(send_val1);
                 $.ajax({
                     type: "post",
                     url: "/analysis/save_ass", //서버에서 입력할 것
