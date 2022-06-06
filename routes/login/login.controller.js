@@ -4,6 +4,7 @@ const session = require('express-session');
 const { resolve } = require('path');
 
 exports.login = async(req, res, next) => {
+    if(req.body.userId){
     const usr_id=req.body.userId.replace("'", "");
     const usr_pw=req.body.userPw.replace("'", "");
     const usr_pw_sha512 = crypto.createHash('sha512').update(usr_pw).digest('hex');
@@ -27,6 +28,8 @@ exports.login = async(req, res, next) => {
         res.send(`<script>alert('Please Register');location.href='/Join.html';</script>`);
     }
 }
+else{}
+}
 
 //function which searches whether there's a user matches with the given parameter(id, pw)
 isThereUser=(id, pw)=>{
@@ -47,5 +50,6 @@ isThereUser=(id, pw)=>{
             else resolve(-1); //id is not exist
         })
     })
+
 
 }
