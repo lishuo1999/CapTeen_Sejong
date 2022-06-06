@@ -1252,24 +1252,56 @@ exports.asset_big_mid = (req, res, next) => {
 exports.save_ass = (req, res, next) => {
     var usr_id = req.session.userName;
     const usr_id_md5 = md5(usr_id);
-    var val1 = req.body.assets_id; //자산id
-    var val2 = req.body.big_assets_id; //자산대분류id
-    var val3 = req.body.usr_assets_imp; //핵심자산여부
-    var val4 = req.body.usr_assets_rate; //자산중요도등급
+    let val1 = req.body.assets_id; //자산id
+    let val2 = req.body.big_assets_id; //자산대분류id
+    let val3 = req.body.usr_assets_imp; //핵심자산여부
+    let val4 = req.body.usr_assets_rate; //자산중요도등급
     console.log(val1, val2, val3, val4);
     var update_sql = 'insert into usr_db.table_' + usr_id_md5 + '(assets_id, big_assets_id, usr_assets_imp, usr_assets_rate, vulns_id, threats_id) value (?,?,?,?,?,?)';
     //자산id, 자산대분류id, 핵심자산여부, 자산중요도등급, 취약성id, 위협id
     var select_id = 'select id_vulns, id_threats from data_db.concerns where id_assets = ?';
     //취약성id, 위협id 조회
-    db.query(select_id, val1, function (err, rows, field) {
-        for(var i = 0; i < rows.length; i++) {
-            db.query(update_sql, [val1, val2, val3, val4, rows[i].id_vulns, rows[i].id_threats], function (err, rows, field) {
-                if (err) console.log(error)
-                else {
-                    console.log('Success');
+    var con_name = [];
+    var final_result = [];
+    new Promise(function (resolve, reject) {
+        db.query(select_id, val1, function (err, rows, fields) {
+            for(var i = 0; i < rows.length; i++) {
+                con_name.push(rows[i].id_vulns);
+                con_name.push(rows[i].id_threats);
+            }
+            final_result.push(con_name);
+            final_result.push(val1);
+            final_result.push(val2);
+            final_result.push(val3);
+            final_result.push(val4);
+            resolve(final_result);
+        })
+    })
+        .then(async function (result_fin) {
+            let result = result_fin[0];
+            const mysql = require('mysql2/promise');
+            try {
+                const connection = await mysql.createConnection({
+                    host: "14.40.31.222",
+                    user: 'dev', //for now it is the root user, but gotta make a new user with limited privileged role 
+                    password: '1918password',
+                    port: 3306,
+                    database: 'data_db'
+                });
+                
+                for (var i = 0; i < result.length/2; i +=2) {
+                    console.log(result_fin[1], result_fin[2], result_fin[3], result_fin[4], result.length, result[i], result[i+1]);
+                    let [rows, field] = await connection.execute(update_sql, [result_fin[1], result_fin[2], result_fin[3], result_fin[4], result[i], result[i+1]]);
+    
                 }
-            });
-        }
+                console.log('end');
+
+            } catch (err) {
+                console.log(err);
+            }
+        })
+
+
+
         
-    });
 }
