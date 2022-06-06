@@ -28,6 +28,7 @@ $(function(){
     success:function(data){
       console.log("success");
       console.log(data);
+      localStorage.clear();
       localStorage.setItem("data1",JSON.stringify(data)); // "data" 라는 저장소 이름은 변경될거임 ,,,,!!! 
     },
     error:function(){

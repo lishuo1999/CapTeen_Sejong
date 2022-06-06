@@ -29,6 +29,7 @@ $(function(){
         success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
             console.log("success");
             console.log(data);
+            localStorage.clear();
             localStorage.setItem("data",JSON.stringify(data));
         },
         error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
