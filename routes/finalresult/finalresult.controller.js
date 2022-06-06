@@ -218,7 +218,7 @@ exports.table=(req,res,next)=>{
            // console.log("hihi");
             json=json.slice(0,-1)
             json+=']'
-            //console.log("PARSHING ARRAY:",json)
+            console.log("PARSHING ARRAY:",json)
             const obj=JSON.parse(json)
            // console.log("obj:",obj)
             res.send(obj)

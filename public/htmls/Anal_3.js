@@ -1,6 +1,8 @@
 $(document).ready(function(){
     $("#vulTable").hide(); //일단 table 숨기기 
     $('[data-toggle="tooltip"]').tooltip();   
+
+    
 });
 
 $(function(){
@@ -50,10 +52,12 @@ $(function(){
 
 });
 
+
+var id=[]
+var i=0
+var len=-1
 $(function(){
     $('#box2').on('click',function(){         
-        
-
         $.ajax({
             url:"/analysis/vuln",
             type:"get",
@@ -62,6 +66,9 @@ $(function(){
             success:function(data){
                 var html='';
                 console.log(data)
+                var arr=Object.keys(data)
+                len=arr.length
+                //var i=0
                 var check=data.name_vulns
                 if(check=="NO DATA"){
                     html+='<tr>';
@@ -77,22 +84,44 @@ $(function(){
                 else{
                     for(key in data){
                         html+='<tr>';
-                        html+='<td>'+data[key].name_assets+'</td>'; //이게 취약성 명 
+                        html+='<td>'+data[key].name_assets+'</td>'; //이게 자산 명 
                         html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td><button id="save" type="submit" onclick="change(this)">저장</button></td>';
                         html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
                         html+='</tr>';
+                        i++;
+                        //id.push(data[key].id_vulns)
+                        //console.log(id)
+
+                        var idx='save'+data[key].id_vulns;
+                        console.log(idx)
+                        id.push(idx)
+                        console.log(id)
+                        //var obj=document.getElementById(idx)
+                        //console.log(obj)
+                        //obj.addEventListener("submit",change(obj));
+
                     }
+
+                    $("#dynamicTbody").empty();
+                    $("#dynamicTbody").append(html);
+
                 }
 
-                $("#dynamicTbody").empty();
-                $("#dynamicTbody").append(html);
+
+        $("#vulTable").fadeIn(1000);
+        console.log("i는",i)
+        console.log("len은",len)
+        if(i==len){
+            console.log("Add Event Listener로 갑니다. i:",i)
+            change()
+        }
+
             }
         })
 
-        $("#vulTable").fadeIn(1000);
     });
 
 });
@@ -188,8 +217,8 @@ $(function(){
 
 });
 
-function change(obj){ //select box 다른 옵션 클릭했을때
 
+function change(obj){ 
     //var index=obj.closest("tr").rowIndex;
     //console.log(index); //클릭한 애의 rowindex 가져오기
 
@@ -199,9 +228,134 @@ function change(obj){ //select box 다른 옵션 클릭했을때
     money=money.value;
     var num=obj.closest("tr").childNodes[5].innerText;
     
-    console.log(frequency);
-    console.log(money);
+    console.log(frequency);//발생가능성
+    console.log(money);//영향정도
     console.log(num);
+
+   
+    var obj=({"frequency":frequency,"money":money,"num":num});
+
+    $.ajax({
+        type: 'POST',   //post방식으로 명시
+        url : '/analysis/save_vuln',  //취약성 정보 보낼 서버 주소 
+        dataType:'json',
+        data:obj,
+        success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
+            //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
+            console.log(data);
+        },
+        error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+            console.log(error);
+        }
+    })
+}
+
+
+/*
+function change(){ // 각각의 save 버튼에 addeventlistener 달아줘 
+
+    //var index=obj.closest("tr").rowIndex;
+    //console.log(index); //클릭한 애의 rowindex 가져오기
+    console.log(id)
+    for(var i=0;i<id.length;i++)
+        idx='save'+id[i]
+        console.log(idx)
+        var obj=document.getElementById(idx)
+        console.log(obj)
+        console.log("전역변수배열:",id)
+
+        for(var i=0;i<id.length;i++){
+            //console.log("요소 이름:",'save'+id[i])
+            console.log("id[i]:",id[i])
+            var obj=document.getElementById(id[i])
+            console.log("인자로 들어온 아이",obj)
+            obj.addEventListener("submit",lsy(obj));
+        }{
+    
+            var frequency=obj.closest("tr").childNodes[2].firstChild;
+            frequency=frequency.value;
+            var money=obj.closest("tr").childNodes[3].firstChild;
+            money=money.value;
+            var num=obj.closest("tr").childNodes[5].innerText;
+        
+            console.log(frequency);
+            console.log(money);
+            console.log(num);
+        
+        //var obj='{"frequency":'+frequency+',"money":'+money+',"num":'+num+'}';
+            var obj=({
+                "frequency":frequency,
+                "money":money,
+                "num":num
+            });
+            console.log(obj);
+            $.ajax({
+                type: 'POST',   //post방식으로 명시
+                url : '/analysis/save_vuln',  //취약성 정보 보낼 서버 주소 
+                //url:"/analysis/save_vuln"
+                dataType:'json',
+                data:obj,
+                success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
+                    //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
+                    console.log(data);
+                },
+                error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+                    console.log(error);
+                }
+            })
+})
+   // })*/
+
+
+
+/*function lsy(obj){
+    console.log("클릭된요소:",obj)
+    var frequency=obj.closest("tr").childNodes[2].firstChild;
+            frequency=frequency.value;
+            var money=obj.closest("tr").childNodes[3].firstChild;
+            money=money.value;
+            var num=obj.closest("tr").childNodes[5].innerText;
+        
+            console.log(frequency);
+            console.log(money);
+            console.log(num);
+        
+        //var obj='{"frequency":'+frequency+',"money":'+money+',"num":'+num+'}';
+            var obj=({
+                "frequency":frequency,
+                "money":money,
+                "num":num
+            });
+            console.log(obj);
+            $.ajax({
+                type: 'POST',   //post방식으로 명시
+                url : '/analysis/save_vuln',  //취약성 정보 보낼 서버 주소 
+                //url:"/analysis/save_vuln"
+                dataType:'json',
+                data:obj,
+                success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
+                    //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
+                    console.log(data);
+                },
+                error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+                    console.log(error);
+                }
+            })
+}*/
+
+/*
+$(function(){
+$('#save').off('click').on('click',function(){
+    
+    var frequency=$(this).closest("tr").children('#input1');
+    frequency=frequency.val();
+    var money=$(this).closest("tr").children('#input2')
+    money=money.val();
+    var num=$(this).closest("tr").children('#vulNum').val();
+    
+    console.log("빈도:",frequency);
+    console.log("돈:",money);
+    console.log("숫자:",num);
 
     //var obj='{"frequency":'+frequency+',"money":'+money+',"num":'+num+'}';
     var obj=({
@@ -224,4 +378,93 @@ function change(obj){ //select box 다른 옵션 클릭했을때
             console.log(error);
         }
     })
-}
+    })
+})*/
+
+
+/*$(document).on('click','#save',function(){
+    //$(document).off("click").on("click","#save",function(){
+            var close=$(this).closest("tr")
+            console.log("가장 가까운 아이: ",close)
+        
+            var frequency=$(this).closest("tr").find('#input1');
+            console.log("frequency:",frequency)
+            frequency=frequency.val();
+            var money=$(this).closest("tr").find('#input2')
+            console.log("money:",money);
+            money=money.val();
+            var num=$(this).closest("tr").find('#vulNum');
+            console.log("취약점 넘버:",num)
+            num=num.text();
+            console.log("빈도:",frequency);
+            console.log("돈:",money);
+            console.log("숫자:",num);
+        
+            //var obj='{"frequency":'+frequency+',"money":'+money+',"num":'+num+'}';
+            var obj=({
+                "frequency":frequency,
+                "money":money,
+                "num":num
+            });
+            console.log(obj);
+            $.ajax({
+                type: 'POST',   //post방식으로 명시
+                url : '/analysis/save_vuln',  //취약성 정보 보낼 서버 주소 
+                //url:"/analysis/save_vuln"
+                dataType:'json',
+                data:obj,
+                success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
+                    //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
+                    console.log(data);
+                },
+                error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+                    console.log(error);
+                }
+            })
+            $('#save').off('click');
+        })
+    
+            */
+
+/*$(document).on('click','#save',function(e){
+    e.preventDefault();
+    var close=$(this).closest("tr")
+            console.log("가장 가까운 아이: ",close)
+        
+            var frequency=$(this).closest("tr").find('#input1');
+            console.log("frequency:",frequency)
+            frequency=frequency.val();
+            var money=$(this).closest("tr").find('#input2')
+            console.log("money:",money);
+            money=money.val();
+            var num=$(this).closest("tr").find('#vulNum');
+            console.log("취약점 넘버:",num)
+            num=num.text();
+            console.log("빈도:",frequency);
+            console.log("돈:",money);
+            console.log("숫자:",num);
+        
+            //var obj='{"frequency":'+frequency+',"money":'+money+',"num":'+num+'}';
+            var obj=({
+                "frequency":frequency,
+                "money":money,
+                "num":num
+            });
+            console.log(obj);
+            $.ajax({
+                type: 'POST',   //post방식으로 명시
+                url : '/analysis/save_vuln',  //취약성 정보 보낼 서버 주소 
+                //url:"/analysis/save_vuln"
+                dataType:'json',
+                data:obj,
+                success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
+                    //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
+                    console.log(data);
+                },
+                error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+                    console.log(error);
+                }
+            })
+            $('#save').off('click');
+        })
+*/

@@ -229,6 +229,11 @@ exports.threat = (req, res, next) => { //get method
                     //console.log(id_threats)
                     let name_threats = rows[i].name_threats
                     //console.log(name_threats)
+                    name_threats.replace('\\\\','//')
+                    name_threats.replace('\\','//')
+                    
+
+
                     json += '{"id_threats":' + id_threats + ',"name_threats":"' + name_threats + '","name_assets":"' + item2 + '"},'
                 }
                 console.log(json)

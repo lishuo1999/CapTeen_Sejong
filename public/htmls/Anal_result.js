@@ -1,4 +1,4 @@
-var real=JSON.parse(localStorage.getItem("data"));
+var real=JSON.parse(sessionStorage.getItem("data"));
 var result=Object.keys(real); //전송받은 데이터 result 변수에 저장~ 
 var datas=[]
 for(var i=0;i<5;i++){ 
