@@ -36,7 +36,7 @@ $(function(){
                         html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td><button type="button" id="save">저장</button></td>';
                         html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
@@ -66,8 +66,6 @@ $(function(){
             success:function(data){
                 var html='';
                 console.log(data)
-                var arr=Object.keys(data)
-                len=arr.length
                 //var i=0
                 var check=data.name_vulns
                 if(check=="NO DATA"){
@@ -88,42 +86,32 @@ $(function(){
                         html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                        html+='<td><button id="save" type="submit" onclick="change(this)">저장</button></td>';
+                        html+='<td><button id="save" type="submit">저장</button></td>';
                         html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
                         html+='</tr>';
                         i++;
                         //id.push(data[key].id_vulns)
                         //console.log(id)
-
-                        var idx='save'+data[key].id_vulns;
-                        console.log(idx)
-                        id.push(idx)
-                        console.log(id)
                         //var obj=document.getElementById(idx)
                         //console.log(obj)
                         //obj.addEventListener("submit",change(obj));
 
                     }
 
-                    $("#dynamicTbody").empty();
-                    $("#dynamicTbody").append(html);
 
                 }
 
 
-        $("#vulTable").fadeIn(1000);
-        console.log("i는",i)
-        console.log("len은",len)
-        if(i==len){
-            console.log("Add Event Listener로 갑니다. i:",i)
-            change()
-        }
+        $("#dynamicTbody").empty();
+        $("#dynamicTbody").append(html);
 
-            }
-        })
 
-    });
+    }
+})
 
+$("#vulTable").fadeIn(1000);
+
+});
 });
 
 
@@ -157,7 +145,7 @@ $(function(){
                         html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td><button type="button" id="save">저장</button></td>';
                         html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
@@ -202,7 +190,7 @@ $(function(){
                         html+='<td>'+data[key].name_vulns+'</td>'; //이게 취약성 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td><button type="button" id="save">저장</button></td>';
                         html+='<td id="vulNum">'+data[key].id_vulns+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
@@ -218,7 +206,7 @@ $(function(){
 });
 
 
-function change(obj){ 
+/*function change(obj){ 
     //var index=obj.closest("tr").rowIndex;
     //console.log(index); //클릭한 애의 rowindex 가져오기
 
@@ -235,7 +223,7 @@ function change(obj){
    
     var obj=({"frequency":frequency,"money":money,"num":num});
 
-    $.ajax({
+/*    $.ajax({
         type: 'POST',   //post방식으로 명시
         url : '/analysis/save_vuln',  //취약성 정보 보낼 서버 주소 
         dataType:'json',
@@ -247,8 +235,8 @@ function change(obj){
         error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
             console.log(error);
         }
-    })
-}
+    })*
+}*/
 
 
 /*

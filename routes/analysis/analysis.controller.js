@@ -120,6 +120,7 @@ exports.vuln = (req, res, next) => { //get method
 
 
 //Anal_3 : saving data and making grade
+/*
 exports.save_vuln = (req, res, next) => {
     var id_vulns = req.body.num;
     var serious_vulns = req.body.money;
@@ -156,10 +157,10 @@ exports.save_vuln = (req, res, next) => {
         else {
             console.log(rows);
             /*for(var i=0;i<rows.length;i++){
-                console.log("Vulnerability grade"+i+" updated!!");}*/
+                console.log("Vulnerability grade"+i+" updated!!");}*
         }
     })
-}
+}*/
 
 //Anal_4.html => show threats 
 exports.threat = (req, res, next) => { //get method
@@ -243,6 +244,7 @@ exports.threat = (req, res, next) => { //get method
     }
 }
 
+/*
 //Anal_4 : saving data and making grade 
 exports.save_threat = (req, res, next) => {
     var id_threats = req.body.num;
@@ -281,7 +283,7 @@ exports.save_threat = (req, res, next) => {
             console.log(rows)
         }
     })
-}
+}*/
 
 //위험도 계산해서 위험도 분류, DB와의 인터렉션 필요
 //async sync check. if error occurs, then use Promise

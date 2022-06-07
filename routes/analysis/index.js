@@ -11,13 +11,13 @@ router.post('/business', controller.business);
 //anal_3.html by sy
 router.get('/vuln',controller.vuln);
 
-router.post('/save_vuln',controller.save_vuln);
+//router.post('/save_vuln',controller.save_vuln);
 
 
 //anal_4.html by sy 
 router.get('/threat',controller.threat);
 
-router.post('/save_threat',controller.save_threat);
+//router.post('/save_threat',controller.save_threat);
 
 
 //anal_5.html로 보내줄 값 처리(위험도별로 위험이 몇 개인지)

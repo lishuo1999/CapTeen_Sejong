@@ -33,7 +33,7 @@ $(function(){
                         html+='<td>'+data[key].name_threats+'</td>'; //이게 위협 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td><button type="button" id="save">저장</button></td>';
                         html+='<td id="threatNum">'+data[key].id_threats+'</td>'; //이게 위협 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
@@ -78,7 +78,7 @@ $(function(){
                         html+='<td>'+data[key].name_threats+'</td>'; //이게 취약성 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td><button type="button" id="save">저장</button></td>';
                         html+='<td id="threatNum">'+data[key].id_threats+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
@@ -124,7 +124,7 @@ $(function(){
                         html+='<td>'+data[key].name_threats+'</td>'; //이게 취약성 명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td><button type="button" id="save">저장</button></td>';
                         html+='<td id="threatNum">'+data[key].id_threats+'</td>'; //이게 취약성 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
@@ -169,7 +169,7 @@ $(function(){
                         html+='<td>'+data[key].name_threats+'</td>'; //이게 위협명 
                         html+='<td><input id="input1" style="text-align:center" type="text"></input></td>';
                         html+='<td><input id="input2" style="text-align:center" type="text"></input></td>';
-                        html+='<td><button type="button" id="save" onclick="change(this)">저장</button></td>';
+                        html+='<td><button type="button" id="save">저장</button></td>';
                         html+='<td id="threatNum">'+data[key].id_threats+'</td>'; //이게 위협 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
@@ -185,7 +185,7 @@ $(function(){
 
 });
 
-function change(obj){ 
+/*function change(obj){ 
     //var index=obj.closest("tr").rowIndex;
     //console.log(index); //클릭한 애의 rowindex 가져오기
 
@@ -202,7 +202,7 @@ function change(obj){
    
     var obj=({"frequency":frequency,"money":money,"num":num});
 
-    $.ajax({
+/*    $.ajax({
         type: 'POST',   //post방식으로 명시
         url : '/analysis/save_threat',  //취약성 정보 보낼 서버 주소 
         dataType:'json',
@@ -214,5 +214,5 @@ function change(obj){
         error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
             console.log(error);
         }
-    })
-}
+    })*
+}*/
