@@ -339,16 +339,17 @@ a { text-decoration:none;}
 
 #pie-chart1{
     position:absolute;
-    bottom:5%;
-    left:15%;
+    bottom:12%;
+    left:25%;
 }
 
 #chart1-name{
     position:absolute;
-    left:15%;
-    top:3%;
+    left:21%;
+    top:10%;
     font-weight:700;
     color:#686560;
+    font-size:20px;
 }
 
 #chart2{
@@ -369,16 +370,17 @@ a { text-decoration:none;}
 
 #pie-chart2{
     position:absolute;
-    bottom:5%;
-    left:15%;
+    bottom:12%;
+    left:25%;
 }
 
 #chart2-name{
     position:absolute;
-    left:15%;
-    top:3%;
+    left:21%;
+    top:10%;
     font-weight:700;
     color:#686560;
+    font-size:20px;
 }
 
 #box3{
