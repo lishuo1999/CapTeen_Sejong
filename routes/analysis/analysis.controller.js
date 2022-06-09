@@ -1308,3 +1308,56 @@ exports.save_ass = (req, res, next) => {
             }
         })
 }
+
+// will be changed to internal function
+//gets doubel-layered array
+exports.grade = async function(req, res, next/* numRate = [[]] */){
+    let numRate = [[1, 12], [191, 27], [20, 1]];
+    let maxIdx=numRate.length
+    const spawn = require('child_process').spawn;
+    let rate=[];
+    let id=[];
+    let rate_result=[];
+
+    for(var i=0;i<maxIdx;i++){
+        id.push(numRate[i][0]);
+        rate.push(numRate[i][1]);
+    }
+
+    const result= spawn('python', ['routes/analysis/grade_Calculate.py', rate]);
+    result.stdout.on('data', function(data){
+        console.log(data.toString());
+        let temp=data.toString().replace("[", "");
+        temp=temp.replace("]", "")
+        temp=temp.split(", ");
+
+        for(var i=0;i<maxIdx;i++){
+            rate_result.push(Number(temp[i]));
+        }
+        // ============data preprocessing end=============
+        console.log(rate_result);
+
+        //compare data with the standard normal distribution chart, and input it into the new array which will be result_arr=[[id, rate]]
+        let result_arr=[];
+        for(var i=0;i<maxIdx;i++){
+            if(0>=rate_result[i]) // rate 1: 50% from min (-inf~0]
+            {
+                result_arr.push([id[i], 1]);
+            }
+            else{
+                if(rate_result[i]>0 && 0.95404>=rate_result[i]){ //rate 2: 33% from the end of rate 1 (0~0.95404]
+                    result_arr.push([id[i], 2]);
+                }
+                else{ // rate 3: (0.95404~inf)
+                    result_arr.push([id[i], 3]);
+                }
+            }
+        }
+        console.log(result_arr);
+        return(result_arr);
+    })
+    result.stderr.on('data', function(data){
+        console.log(data.toString());
+        return(-1)
+    })
+}

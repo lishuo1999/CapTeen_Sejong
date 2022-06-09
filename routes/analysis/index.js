@@ -40,4 +40,6 @@ module.exports = router;
 //anal_2.html 저장버튼 클릭 시
 router.post('/save_ass', controller.save_ass);
 
+router.get('/test', controller.grade);
+
 module.exports = router;
