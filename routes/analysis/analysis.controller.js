@@ -120,47 +120,62 @@ exports.vuln = (req, res, next) => { //get method
 
 
 //Anal_3 : saving data and making grade
-/*
+
 exports.save_vuln = (req, res, next) => {
-    var id_vulns = req.body.num;
-    var serious_vulns = req.body.money;
-    var exposed_vulns = req.body.frequency;
-    console.log(id_vulns, serious_vulns, exposed_vulns);
 
-    //grading .. [exp,ser,grade]
-    var saved1 = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
-    var saved2 = [[2, 1, 2], [2, 2, 3], [2, 3, 4]]
-    var saved3 = [[3, 1, 3], [3, 2, 4], [3, 3, 5]]
+    var data=req.body.data
+    console.log("요청 데이터",data)
+    console.log("파싱",JSON.parse(data))
 
-    if (exposed_vulns == 1) {
-        var grade = saved1[serious_vulns - 1][2]
-    }
-    else if (exposed_vulns == 2) {
-        var grade = saved2[serious_vulns - 1][2]
-    }
-    else {
-        var grade = saved3[serious_vulns - 1][2]
-    }
-    console.log("grade:", grade);
+    var data=JSON.parse(data)
+    console.log("크기",data.length)
 
+    for(var i=0;i<data.length;i++){
+        //console.log(i,data[i].frequency,data[i].money,data[i].num)
+        //console.log(i)
+        var id_vulns = data[i].num;
+        console.log(id_vulns)
+        var serious_vulns = data[i].money;
+        console.log(serious_vulns)
+        var exposed_vulns = data[i].frequency;
+        console.log(exposed_vulns)
+        console.log(id_vulns, serious_vulns, exposed_vulns);
 
-    var usr_id = req.session.userName;
-    //console.log(usr_id);
-    const md5_id = md5(usr_id);
-    //console.log(md5_id);
+        //grading .. [exp,ser,grade]
+        var saved1 = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
+        var saved2 = [[2, 1, 2], [2, 2, 3], [2, 3, 4]]
+        var saved3 = [[3, 1, 3], [3, 2, 4], [3, 3, 5]]
 
-    var update_vulns_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate . several ...
-    console.log(update_vulns_sql);
-
-    db.query(update_vulns_sql, [grade, id_vulns], function (err, rows, fields) {
-        if (err) console.log(error)
-        else {
-            console.log(rows);
-            /*for(var i=0;i<rows.length;i++){
-                console.log("Vulnerability grade"+i+" updated!!");}*
+        if (exposed_vulns == 1) {
+            var grade = saved1[serious_vulns - 1][2]
         }
-    })
-}*/
+        else if (exposed_vulns == 2) {
+            var grade = saved2[serious_vulns - 1][2]
+        }
+        else {
+            var grade = saved3[serious_vulns - 1][2]
+        }
+        console.log("grade:", grade);
+
+
+        var usr_id = req.session.userName;
+        //console.log(usr_id);
+        const md5_id = md5(usr_id);
+        //console.log(md5_id);
+
+        var update_vulns_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate . several ...
+        console.log(update_vulns_sql);
+
+        db.query(update_vulns_sql, [grade, id_vulns], function (err, rows, fields) {
+            if (err) console.log(error)
+            else {
+                console.log(rows);
+            }
+        })
+
+    }
+    
+}
 
 //Anal_4.html => show threats 
 exports.threat = (req, res, next) => { //get method
@@ -244,46 +259,58 @@ exports.threat = (req, res, next) => { //get method
     }
 }
 
-/*
+
 //Anal_4 : saving data and making grade 
 exports.save_threat = (req, res, next) => {
-    var id_threats = req.body.num;
-    var serious_threats = req.body.money; // store !!!! 
-    var exposed_threats = req.body.frequency;
-    console.log(id_threats, serious_threats, exposed_threats);
 
-    //grading .. [exp,ser,grade]
-    var saved1 = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
-    var saved2 = [[2, 1, 2], [2, 2, 3], [2, 3, 4]]
-    var saved3 = [[3, 1, 3], [3, 2, 4], [3, 3, 5]]
+    var data=req.body.data
+    console.log("요청 데이터",data)
+    console.log("파싱",JSON.parse(data))
 
-    if (exposed_threats == 1) {
-        var grade = saved1[serious_threats - 1][2]
-    }
-    else if (exposed_threats == 2) {
-        var grade = saved2[serious_threats - 1][2]
-    }
-    else {
-        var grade = saved3[serious_threats - 1][2]
-    }
-    console.log("grade:", grade);
+    var data=JSON.parse(data)
+    console.log("크기",data.length)
 
+    for(var i=0;i<data.length;i++){
+        var id_threats = data[i].num;
+        var serious_threats = data[i].money; // store !!!! 
+        var exposed_threats = data[i].frequency;
+        console.log(id_threats, serious_threats, exposed_threats);
 
-    var usr_id = req.session.userName;
-    //console.log(usr_id);
-    const md5_id = md5(usr_id);
-    //console.log(md5_id);
+        //grading .. [exp,ser,grade]
+        var saved1 = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
+        var saved2 = [[2, 1, 2], [2, 2, 3], [2, 3, 4]]
+        var saved3 = [[3, 1, 3], [3, 2, 4], [3, 3, 5]]
 
-    var update_threats_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_threats_rate=?, usr_threats_spend=? WHERE threats_id=?' // update vulnerability rate
-    console.log(update_threats_sql);
-
-    db.query(update_threats_sql, [grade, serious_threats, id_threats], function (err, rows, fields) {
-        if (err) console.log(err)
-        else {
-            console.log(rows)
+        if (exposed_threats == 1) {
+            var grade = saved1[serious_threats - 1][2]
         }
-    })
-}*/
+        else if (exposed_threats == 2) {
+            var grade = saved2[serious_threats - 1][2]
+        }
+        else {
+            var grade = saved3[serious_threats - 1][2]
+        }
+        console.log("grade:", grade);
+
+
+        var usr_id = req.session.userName;
+        //console.log(usr_id);
+        const md5_id = md5(usr_id);
+        //console.log(md5_id);
+            
+        var update_threats_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_threats_rate=?, usr_threats_spend=? WHERE threats_id=?' // update vulnerability rate
+        console.log(update_threats_sql);
+
+        db.query(update_threats_sql, [grade, serious_threats, id_threats], function (err, rows, fields) {
+            if (err) console.log(err)
+            else {
+                    console.log(rows)
+            }
+        })
+    }
+
+    
+}
 
 //위험도 계산해서 위험도 분류, DB와의 인터렉션 필요
 //async sync check. if error occurs, then use Promise
