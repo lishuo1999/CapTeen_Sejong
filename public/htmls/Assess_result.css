@@ -321,3 +321,13 @@ a { text-decoration:none;}
 #riskNum{
     display:none;
 }
+
+#save:hover{
+    font-weight:700;
+    background-color:#ED7D31;
+    cursor:pointer;
+}
+
+#save{
+    border-radius:10px;
+}

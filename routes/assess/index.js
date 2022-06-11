@@ -12,6 +12,6 @@ router.get('/manage',controller.manage);
 
 router.get('/bringDoA', controller.bringDoA);
 
-router.post('/changeMethod', controller.changeStrategy);
+router.post('/changeStrategy', controller.changeStrategy);
 
 module.exports = router;
