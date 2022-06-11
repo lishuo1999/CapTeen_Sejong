@@ -38,10 +38,11 @@ $(function(){
                 for(key in data){
                     html+='<tr>';
                     html+='<td>'+data[key].risk+'</td>'; //이게 위험 명 
-                    html+='<td><select id="choice" onchange="change(this);"><option value=1>위험 수용</option><option value=2>위험 전가</option><option value=3>위험 회피</option><option value=4>위험 감소</option></select></td>';
+                    html+='<td><select id="choice"><option value=1>위험 수용</option><option value=2>위험 전가</option><option value=3>위험 회피</option><option value=4>위험 감소</option></select></td>';
                     html+='<td id="riskNum">'+data[key].riskId+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                     html+='</tr>';
                 }
+                html+='<tr><td colspan="2"><button type-"button" id="save">저장</td></tr>'
                 $("#dynamicTbody").empty();
                 $("#dynamicTbody").append(html);
             }
@@ -81,10 +82,11 @@ $(function(){
                     for(key in data){
                         html+='<tr>';
                         html+='<td>'+data[key].risk+'</td>'; //이게 위험 명 
-                        html+='<td><select id="choice" onchange="change(this);"><option value=2>위험 전가</option><option value=1>위험 수용</option><option value=3>위험 회피</option><option value=4>위험 감소</option></select></td>';
+                        html+='<td><select id="choice"><option value=2>위험 전가</option><option value=1>위험 수용</option><option value=3>위험 회피</option><option value=4>위험 감소</option></select></td>';
                         html+='<td id="riskNum">'+data[key].riskId+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
+                    html+='<tr><td colspan="2"><button type-"button" id="save">저장</td></tr>'
                     $("#dynamicTbody").empty();
                     $("#dynamicTbody").append(html);
                 }
@@ -124,10 +126,11 @@ $(function(){
                     for(key in data){
                         html+='<tr>';
                         html+='<td>'+data[key].risk+'</td>'; //이게 위험 명 
-                        html+='<td><select id="choice" onchange="change(this);"><option value=3>위험 회피</option><option value=1>위험 수용</option><option value=2>위험 전가</option><option value=4>위험 감소</option></select></td>';
+                        html+='<td><select id="choice"><option value=3>위험 회피</option><option value=1>위험 수용</option><option value=2>위험 전가</option><option value=4>위험 감소</option></select></td>';
                         html+='<td id="riskNum">'+data[key].riskId+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
+                    html+='<tr><td colspan="2"><button type-"button" id="save">저장</td></tr>'
                     $("#dynamicTbody").empty();
                     $("#dynamicTbody").append(html);
                 }
@@ -167,10 +170,11 @@ $(function(){
                     for(key in data){
                         html+='<tr>';
                         html+='<td>'+data[key].risk+'</td>'; //이게 위험 명 
-                        html+='<td><select id="choice" onchange="change(this);"><option value=4>위험 감소</option><option value=1>위험 수용</option><option value=2>위험 전가</option><option value=3>위험 회피</option></select></td>';
+                        html+='<td><select id="choice"><option value=4>위험 감소</option><option value=1>위험 수용</option><option value=2>위험 전가</option><option value=3>위험 회피</option></select></td>';
                         html+='<td id="riskNum">'+data[key].riskId+'</td>'; //이게 위험 고유 번호, 숨겨짐 
                         html+='</tr>';
                     }
+                    html+='<tr><td colspan="2"><button type-"button" id="save">저장</td></tr>'
                     $("#dynamicTbody").empty();
                     $("#dynamicTbody").append(html);
                 }
@@ -182,8 +186,57 @@ $(function(){
 
 });
 
+$(document).off("click").on("click","#save",function(){ //지금까지 입력한 값들 모두 받아야함
+    var close=$(this).closest("tr")
+    console.log("가장 가까운 아이: ",close)
+    
+    var table=close.parent() // (상위)테이블을 찾아가기
+    console.log("parent: ",table);
+    var size=$('#methodTable>tbody tr').length //rows 수
+    console.log("표의 크기: ",size)
+    
+    var json='['
 
-function change(obj){ //select box 다른 옵션 클릭했을때
+    $('#methodTable>tbody tr').each(function(index){
+        var tr=$(this)
+        //console.log("인덱스:",index)
+        if(index==size-1)
+            return false;
+        var td=tr.children();
+        var sel=td.find('#choice').val();
+        var num=td.eq(2).text(); // 숨겨진 위협 번호 
+        console.log("선택한 값:",sel);
+        console.log("위험 숫자:",num);
+        console.log(index);
+        json+='{"Selected":'+sel+',"num":'+num+'},'
+        //json+='{"frequency":1,"money":2,"num":3},'
+    }) //each 문 
+    json=json.slice(0,-1)
+    json+=']'
+    console.log(json)
+    console.log(JSON.parse(json))
+ 
+
+
+    $.ajax({
+        type: 'POST',   //post방식으로 명시
+        url : '/assess/changeStrategy',  //취약성 정보 보낼 서버 주소 
+        dataType:'json',
+        data:{data:json},
+        success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과, data는 서버로부터 받은 데이터 
+            //function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
+            console.log(JSON.parse(data));
+        },
+        error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+            console.log(error);
+        }
+    })
+
+})
+
+
+
+/*function change(obj){ //select box 다른 옵션 클릭했을때
 
     //var index=obj.closest("tr").rowIndex;
     //console.log(index); //클릭한 애의 rowindex 가져오기 
@@ -209,7 +262,9 @@ function change(obj){ //select box 다른 옵션 클릭했을때
             console.log(error);
         }
     })
-}
+}*/
+
+
 
 
 function bringDoA(){ //select box 다른 옵션 클릭했을때
