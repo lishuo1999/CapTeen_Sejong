@@ -1311,8 +1311,8 @@ exports.save_ass = (req, res, next) => {
 
 // will be changed to internal function
 //gets doubel-layered array
-exports.grade = async function(req, res, next/* numRate = [[]] */){
-    let numRate = [[1, 12], [191, 27], [20, 1]];
+grade = async function(num_Rate){
+    let numRate = num_Rate
     let maxIdx=numRate.length
     const spawn = require('child_process').spawn;
     let rate=[];
