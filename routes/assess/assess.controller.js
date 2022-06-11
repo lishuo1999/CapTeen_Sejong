@@ -346,19 +346,27 @@ async function showTables(req, res, next, strategy, id_md5){
 //if the request comes in, then change the strategy number in the DB to the selected number
 exports.changeStrategy = (req, res, next)=>{
     let id_md5 = md5(req.session.userName);
-    let id_strategy = req.body.selected;
-    let id_risk = req.body.num;
     let strategyUpdateSql='UPDATE usr_db.table_'+id_md5+' SET usr_risk_mng_id =? WHERE usr_risk_id = ?'
-    console.log(req.body);
-    console.log(id_strategy+' '+id_risk);
+    
+    var data=req.body.data
+    console.log("요청 데이터",data)
+    var data=JSON.parse(data)
+    console.log("크기",data.length)
 
-    db.query(strategyUpdateSql, [id_strategy, id_risk], function(err, rows, fields){
-        if(err){
-            console.log(err);
-        }
-        else{
-            console.log("user strategy update completed");
-        }
-    })
+    for(var i=0;i<data.length;i++){
+        var selected=data[i].Selected
+        var num=data[i].num
+        console.log(selected,num)
+        db.query(strategyUpdateSql, [selected,num], function(err, rows, fields){
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log(rows)
+                console.log("i:"+i+"/ user strategy update completed");
+            }
+        })
+    }
+
 
 }

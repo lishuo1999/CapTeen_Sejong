@@ -61,7 +61,7 @@ app.use(function(err, req, res, next){
     res.render('error');
 })
 
-//starting server
+//starting servers
 // app.listen(PORT, () =>{
 //     console.log(`Listen : ${PORT}`);
 // });

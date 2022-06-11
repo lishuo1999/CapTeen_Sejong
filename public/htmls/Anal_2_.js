@@ -52,8 +52,8 @@ $(function () { //조회 버튼 클릭 시
         });
     });
 });
-var data = [];
 var C, I, A;
+var data_res = []
 $(function () {
     $("#c_label").off('click').on('click', function() {//기밀성 지표 클릭
         $("#c_label").css("color", "#ED7D31");
@@ -71,7 +71,9 @@ $(function () {
     });
 });
 $(function () {
-    var sum = 0;
+    var cnt1 = 0;
+    var cnt2 = 0;
+    var cnt3 = 0;
     $('input[type="checkbox"][name="c_form"]').off('click').on('click', function() {
         if ($(this).prop('checked')) {
             $(this).closest("tr").children('input[type="checkbox"][name="cs_biz_form"]').prop('checked', false);
@@ -80,21 +82,36 @@ $(function () {
             var parent = $(this).closest("tr");
             var children = parent.children('.score');
             children.text($(this).val());
-            sum += Number($(this).val());
+            if ($(this).val() == 1) {
+                cnt1 += Number(1)
+            }
+            else if ($(this).val() == 2) {
+                cnt2 += Number(1)
+            }
+            else if ($(this).val() == 3) {
+                cnt3 += Number(1)
+            }
         }
         else {
-            sum -= Number($(this).val());
             var parent = $(this).closest("tr");
             var children = parent.children('.score');
             children.empty();
+            if ($(this).val() == 1) {
+                cnt1 -= Number(1)
+            }
+            else if ($(this).val() == 2) {
+                cnt2 -= Number(1)
+            }
+            else if ($(this).val() == 3) {
+                cnt3 -= Number(1)
+            }
         }
     });
     $('#c_save').off('click').on('click', function() {
         if (confirm("저장하시겠습니까?")) { //확인 버튼 클릭 시
-            C = sum / 14;
-            C = Math.round(C);
+            C = (cnt1 + 2*cnt2 + 3*cnt3)/(cnt1 + cnt2 + cnt3);
+            C = Math.round(C * 10000) / 10000;
             alert("기밀성 평균점수는 " + C + " 입니다.");
-            sum = Number(0);
         }
         else { //취소 버튼 클릭 시
 
@@ -117,7 +134,9 @@ $(function () {
     })
 });
 $(function () {
-    var sum = 0;
+    var cnt1 = 0;
+    var cnt2 = 0;
+    var cnt3 = 0;
     $('input[type="checkbox"][name="i_form"]').off('click').on('click', function() {
         if ($(this).prop('checked')) {
             $(this).closest("tr").children('input[type="checkbox"][name="cs_biz_form"]').prop('checked', false);
@@ -126,21 +145,36 @@ $(function () {
             var parent = $(this).closest("tr");
             var children = parent.children('.score');
             children.text($(this).val());
-            sum += Number($(this).val());
+            if ($(this).val() == 1) {
+                cnt1 += Number(1)
+            }
+            else if ($(this).val() == 2) {
+                cnt2 += Number(1)
+            }
+            else if ($(this).val() == 3) {
+                cnt3 += Number(1)
+            }
         }
         else {
-            sum -= Number($(this).val());
             var parent = $(this).closest("tr");
             var children = parent.children('.score');
             children.empty();
+            if ($(this).val() == 1) {
+                cnt1 -= Number(1)
+            }
+            else if ($(this).val() == 2) {
+                cnt2 -= Number(1)
+            }
+            else if ($(this).val() == 3) {
+                cnt3 -= Number(1)
+            }
         }
     });
     $('#i_save').off('click').on('click', function() {
         if (confirm("저장하시겠습니까?")) { //확인 버튼 클릭 시
-            I = sum / 13;
-            I = Math.round(I);
+            I = (cnt1 + 2*cnt2 + 3*cnt3)/(cnt1 + cnt2 + cnt3);
+            I = Math.round(I * 10000) / 10000;
             alert("무결성 평균점수는 " + I + " 입니다.");
-            sum = Number(0);
         }
         else { //취소 버튼 클릭 시
 
@@ -163,7 +197,9 @@ $(function () {
     })
 });
 $(function () {
-    var sum = 0;
+    var cnt1 = 0;
+    var cnt2 = 0;
+    var cnt3 = 0;
     $('input[type="checkbox"][name="a_form"]').off('click').on('click', function() {
         if ($(this).prop('checked')) {
             $(this).closest("tr").children('input[type="checkbox"][name="cs_biz_form"]').prop('checked', false);
@@ -172,21 +208,36 @@ $(function () {
             var parent = $(this).closest("tr");
             var children = parent.children('.score');
             children.text($(this).val());
-            sum += Number($(this).val());
+            if ($(this).val() == 1) {
+                cnt1 += Number(1)
+            }
+            else if ($(this).val() == 2) {
+                cnt2 += Number(1)
+            }
+            else if ($(this).val() == 3) {
+                cnt3 += Number(1)
+            }
         }
         else {
-            sum -= Number($(this).val());
             var parent = $(this).closest("tr");
             var children = parent.children('.score');
             children.empty();
+            if ($(this).val() == 1) {
+                cnt1 -= Number(1)
+            }
+            else if ($(this).val() == 2) {
+                cnt2 -= Number(1)
+            }
+            else if ($(this).val() == 3) {
+                cnt3 -= Number(1)
+            }
         }
     });
     $('#a_save').off('click').on('click', function() {
         if (confirm("저장하시겠습니까?")) { //확인 버튼 클릭 시
-            A = sum / 13;
-            A = Math.round(A);
+            A = (cnt1 + 2*cnt2 + 3*cnt3)/(cnt1 + cnt2 + cnt3);
+            A = Math.round(A * 10000) / 10000;
             alert("가용성 평균점수는 " + A + " 입니다.");
-            sum = Number(0);
         }
         else { //취소 버튼 클릭 시
 
@@ -203,19 +254,35 @@ $(function () {
                 var send_1 = $(this).val();//자산id
                 var send_2 = parent.children('#name_assets').attr("value");//자산 대분류 id
                 $(".users_asset_list_table>tbody").append("<tr value = '" + cnt + "'><td id='send_last' name = '" + send_2 + "' value = '" + send_1 + "' style=" + "'width: 90px;text-align: center;'" + ">" + col_1 +
-                    "</td><td style=" + "'width: 90px;text-align: center;'" + "><div class='cia_div' value='" + cnt + "'><a class='cia'>CIA 산출</a></div></td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send' value='" + cnt + "'>상<input type='radio' name='b' value='3'>중<input type='radio' name='b' value='2'>하<input type='radio' name='b' value='1'></form></td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send_val' value='" + cnt + "'>예<input type='radio' name='a' value='1'>아니요<input type='radio' name='a' value='0'><form></td><td style=" + "'width: 70px;text-align: center;'" + "><button class='save_ass_list' value='" + cnt + "'>저장</button></td></tr>"
+                    "</td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send' value='" + cnt + "'>상<input type='radio' name='b' value='3'>중<input type='radio' name='b' value='2'>하<input type='radio' name='b' value='1'></form></td><td style=" + "'width: 90px;text-align: center;'" + "><form class='send_val' value='" + cnt + "'>예<input type='radio' name='a' value='1'>아니요<input type='radio' name='a' value='0'><form></td><td style=" + "'width: 90px;text-align: center;'" + "><div class='cia_div' value='" + cnt + "'><a class='cia'>CIA 산출</a></div></td></tr>"
                 );
                 cnt += 1;
             }
         })
         $('.cia_div').each(function (i, item) {
             $('div[class="cia_div"][value="' + i + '"]').off('click').on('click', function() { //CIA 산출 클릭 시
-                C = 0;
-                I = 0;
-                A = 0;
+                var parent = $(this).closest("tr");
                 $(".modal-wrapper").show()
                 $('#exit_btn').attr('value', i);
                 $('img[id="exit_btn"][value="' + i + '"]').off('click').on('click', function() { //취소 버튼 클릭 시
+                    //자산id 가져와야 함
+                    var send_val1 = parent.children('#send_last').attr("value");//자산id
+                    var send_val2 = parent.children('#send_last').attr("name");//자산 대분류 id
+                    var X_par_val = $('form[class="send_val"][value="' + i + '"]');
+                    var X_child_val = X_par_val.find('input[name="a"]:checked').attr("value"); //핵심자산 여부
+                    var Y_par_val = $('form[class="send"][value="' + i + '"]');
+                    var Y_child_val = Y_par_val.find('input[name="b"]:checked').attr("value"); //업무의존도
+                    
+                    var obj = {};
+                    obj.assets_id = send_val1; //자산id
+                    obj.big_assets_id = send_val2; //자산 대분류 id
+                    obj.usr_assets_imp = X_child_val; //핵심자산 여부
+                    obj.score = Math.round(C*I*A*Number(Y_child_val) * 10000) / 10000;
+                    data_res.push(obj);
+                    console.log(obj);
+                    C = 0;
+                    I = 0;
+                    A = 0;
                     $(".modal-wrapper").hide();
                     $('div[class="cia_div"][value="' + i + '"]').html("<a class='cia'>완료</a>");
                     $('div[class="cia_div"][value="' + i + '"]').attr('value', -1);
@@ -235,61 +302,24 @@ $(function () {
                 })
             })
         });
-        $('.save_ass_list').each(function (i, item) {
-            console.log("**");
-            $('button[class="save_ass_list"][value="' + i + '"]').off('click').on('click', function() {  //리스트에서 저장버튼 클릭 시
-                var X_par = $('form[class="send"][value="' + i + '"]');
-                var X_child = X_par.find('input[name="b"]:checked').attr("value");
-                var grade = (Number(C) + Number(I) + Number(A) + Number(X_child)) / 4
-                grade = Math.round(grade); //자산 가치 등급
-    
-                var X_par_val = $('form[class="send_val"][value="' + i + '"]');
-                var X_child_val = X_par_val.find('input[name="a"]:checked').attr("value"); //핵심자산
-                var parent = $(this).closest("tr");
-
-                var send_val1 = parent.children('#send_last').attr("value");//자산id
-                var send_val2 = parent.children('#send_last').attr("name");//자산 대분류 id
-                var obj = ({
-                    "assets_id": send_val1, //자산id
-                    "big_assets_id": send_val2, //자산 대분류 id
-                    "usr_assets_imp": X_child_val, //핵심자산
-                    "usr_assets_rate": grade //자산 가치 등급
-                });
-                
-                $.ajax({
-                    type: "post",
-                    url: "/analysis/save_ass", //서버에서 입력할 것
-                    datatype: "json",
-                    //contentType: "application/json",
-                    data: obj,
-                    success: function () { //data: 서버로부터 받아온 json data 
-                        console.log('success');
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-                console.log(send_val1);
-
-            });
-
-        });
     });
 });
 
-/*$(function () { //다음 클릭 시 모든 데이터 리스트 POST
+$(function () { //다음 클릭 시 모든 데이터 리스트 POST
     $('#next').click(function () {
         $.ajax({
             type: "post",
-            url: "/", //서버에서 입력할 것
+            url: "/analysis/grade", //서버에서 입력할 것
             datatype: "json",
             contentType: "application/json",
-            data: data,
+            data: data_res,
             success: function (data) { //data: 서버로부터 받아온 json data 
             },
             error: function () {
                 console.log(error);
             }
         });
+        //alert(JSON.stringify(data_res));
     });
-});*/
+});
+
