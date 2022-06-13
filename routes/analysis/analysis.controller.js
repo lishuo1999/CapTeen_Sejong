@@ -325,7 +325,7 @@ exports.result = async (req, res, next) => {
     let risk_rate_for_web = [];
     let riskRate = 0;
     let usr_id_md5 = md5(req.session.userName);
-    let getRateSql = 'SELECT assets_id, usr_assets_rate, usr_vulns_rate, usr_threats_rate FROM usr_db.table_' + usr_id_md5;
+    let getRateSql = 'SELECT usr_risk_id, usr_assets_rate, usr_vulns_rate, usr_threats_rate FROM usr_db.table_' + usr_id_md5;
 
     //get the rates of assets, threats, vulnerabilities in order and put them in the array: arr_rate
     new Promise(function (resolve, reject) {
@@ -337,63 +337,55 @@ exports.result = async (req, res, next) => {
                 maxIdx = rows.length;
                 for (var idx = 0; idx < maxIdx; idx++) {
                     cursor = rows[idx];
-                    arr_rate.push([cursor.assets_id, cursor.usr_assets_rate, cursor.usr_vulns_rate, cursor.usr_threats_rate]);
+                    arr_rate.push([cursor.usr_risk_id, cursor.usr_assets_rate*cursor.usr_vulns_rate*cursor.usr_threats_rate]);
                 }
                 resolve(arr_rate);
             }
         })
     })
 
-        //give the array as a parameter of riskAssess()
-        //store the risk rate into the array: risk_rate
-        .then(async function (result) {
-            console.log(result);
-            for (var idx = 0; idx < maxIdx; idx++) {
-                assetId = result[idx][0];
-                asset = result[idx][1];
-                vuln = result[idx][2];
-                threat = result[idx][3];
-                riskRate = await riskAssess(asset, vuln, threat);
-                risk_rate.push([assetId, riskRate]);
-            }
-            return (risk_rate);
-        })
-        .then(function (result) {
-            //all data is in order, so don't need to check whether the risk rate is the right risk rate for (asset, threat, vuln)
-            const updateSql = 'UPDATE usr_db.table_' + usr_id_md5 + ' SET usr_risk_rate=? WHERE usr_risk_id=?';
-            //send the risk rate to the database
-            for (var idx = 0; idx < maxIdx; idx++) {
-                //this will be executed at the very last moment, but never mind; the data dependency is over at here
-                db.query(updateSql, [result[idx][1], idx + 1], function (err, rows, field) {
-                    if (err) {
-                        console.log(err);
-                    }
-                    else {
-                        console.log('risk rate update trial[' + idx + '] success');
-                    }
-                })
-            }
-            for (var idx = 0; idx < maxIdx; idx++) {
-                risk_rate_for_web.push(result[idx][1]);
-            }
-            return (risk_rate_for_web);
-        })
-        .then(async function (result) {
-            //count the number of risks per each rate
-            let risk_1 = await result.filter(element => 1 === element).length;
-            let risk_2 = await result.filter(element => 2 === element).length;
-            let risk_3 = await result.filter(element => 3 === element).length;
-            let risk_4 = await result.filter(element => 4 === element).length;
-            let risk_5 = await result.filter(element => 5 === element).length;
-            console.log("the very last one: " + result);
+    //give the array as a parameter of riskAssess()
+    //store the risk rate into the array: risk_rate
+    .then(async function (result) {
+        let temp=await grade_5(result);
+        return (temp);
+    })
+    .then(function (result) {
+        //all data is in order, so don't need to check whether the risk rate is the right risk rate for (asset, threat, vuln)
+        const updateSql = 'UPDATE usr_db.table_' + usr_id_md5 + ' SET usr_risk_rate=? WHERE usr_risk_id=?';
+        //send the risk rate to the database
+        for (var idx = 0; idx < maxIdx; idx++) {
+            //this will be executed at the very last moment, but never mind; the data dependency is over at here
+            db.query(updateSql, [result[idx][1], result[idx][0]], function (err, rows, field) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    console.log('risk rate update trial[' + idx + '] success');
+                }
+            })
+        }
+        for (var idx = 0; idx < maxIdx; idx++) {
+            risk_rate_for_web.push(result[idx][1]);
+        }
+        return (risk_rate_for_web);
+    })
+    .then(async function (result) {
+        //count the number of risks per each rate
+        let risk_1 = await result.filter(element => 1 === element).length;
+        let risk_2 = await result.filter(element => 2 === element).length;
+        let risk_3 = await result.filter(element => 3 === element).length;
+        let risk_4 = await result.filter(element => 4 === element).length;
+        let risk_5 = await result.filter(element => 5 === element).length;
+        console.log("the very last one: " + result);
 
-            //차례대로 1등급, 2등급, 3등급, 4등급, 5등급 개수를 보내주면 됨
-            const json = '{"1":' + risk_1 + ', "2":' + risk_2 + ', "3":' + risk_3 + ', "4":' + risk_4 + ', "5":' + risk_5 + '}';
-            const obj = JSON.parse(json);
-            //GET /analysis/result?1=3&2=4&3=5&4=6&5=0 이런 식으로 response됨.
-            console.log(obj);
-            return (res.send(obj));
-        });
+        //차례대로 1등급, 2등급, 3등급, 4등급, 5등급 개수를 보내주면 됨
+        const json = '{"1":' + risk_1 + ', "2":' + risk_2 + ', "3":' + risk_3 + ', "4":' + risk_4 + ', "5":' + risk_5 + '}';
+        const obj = JSON.parse(json);
+        //GET /analysis/result?1=3&2=4&3=5&4=6&5=0 이런 식으로 response됨.
+        console.log(obj);
+        return (res.send(obj));
+    });
 }
 
 
@@ -1338,53 +1330,105 @@ exports.save_ass = (req, res, next) => {
 
 // will be changed to internal function
 //gets doubel-layered array
-grade = async function(num_Rate){
+grade = (num_Rate)=>{
     let numRate = num_Rate
     let maxIdx=numRate.length
-    const spawn = require('child_process').spawn;
+    const spawnSync=require('child_process').spawnSync;
     let rate=[];
     let id=[];
     let rate_result=[];
+    let result_arr=[];
 
     for(var i=0;i<maxIdx;i++){
         id.push(numRate[i][0]);
         rate.push(numRate[i][1]);
     }
 
-    const result= spawn('python', ['routes/analysis/grade_Calculate.py', rate]);
-    result.stdout.on('data', function(data){
-        console.log(data.toString());
-        let temp=data.toString().replace("[", "");
-        temp=temp.replace("]", "")
-        temp=temp.split(", ");
+    const result= spawnSync('python', ['routes/analysis/grade_Calculate.py', rate]);
+    let data= result.stdout.toString();    
+    let temp=data.toString().replace("[", "");
+    temp=temp.replace("]", "")
+    temp=temp.split(", ");
 
-        for(var i=0;i<maxIdx;i++){
-            rate_result.push(Number(temp[i]));
+    for(var i=0;i<maxIdx;i++){
+        rate_result.push(Number(temp[i]));
+    }
+    // ============data preprocessing end=============
+    console.log(rate_result);
+
+    //compare data with the standard normal distribution chart, and input it into the new array which will be result_arr=[[id, rate]]
+    for(var i=0;i<maxIdx;i++){
+        if(0>=rate_result[i]) // rate 1: 50% from min (-inf~0]
+        {
+            result_arr.push([id[i], 1]);
         }
-        // ============data preprocessing end=============
-        console.log(rate_result);
-
-        //compare data with the standard normal distribution chart, and input it into the new array which will be result_arr=[[id, rate]]
-        let result_arr=[];
-        for(var i=0;i<maxIdx;i++){
-            if(0>=rate_result[i]) // rate 1: 50% from min (-inf~0]
-            {
-                result_arr.push([id[i], 1]);
+        else{
+            if(rate_result[i]>0 && 0.95404>=rate_result[i]){ //rate 2: 33% from the end of rate 1 (0~0.95404]
+                result_arr.push([id[i], 2]);
             }
-            else{
-                if(rate_result[i]>0 && 0.95404>=rate_result[i]){ //rate 2: 33% from the end of rate 1 (0~0.95404]
-                    result_arr.push([id[i], 2]);
-                }
-                else{ // rate 3: (0.95404~inf)
+            else{ // rate 3: (0.95404~inf)
+                result_arr.push([id[i], 3]);
+            }
+        }
+    }
+    console.log(result_arr);
+    console.log('error occurred: \n'+result.stderr);
+    return(result_arr);
+}
+
+grade_5 = async function (num_Rate){
+    let numRate = num_Rate
+    let maxIdx=numRate.length
+    const spawnSync=require('child_process').spawnSync;
+    let rate=[];
+    let id=[];
+    let rate_result=[];
+    let result_arr=[];
+
+    for(var i=0;i<maxIdx;i++){
+        id.push(numRate[i][0]);
+        rate.push(numRate[i][1]);
+    }
+
+    const result= spawnSync('python', ['routes/analysis/grade_Calculate.py', rate]);
+    let data= result.stdout.toString();    
+    let temp=data.toString().replace("[", "");
+    temp=temp.replace("]", "")
+    temp=temp.split(", ");
+
+    for(var i=0;i<maxIdx;i++){
+        rate_result.push(Number(temp[i]));
+    }
+    // ============data preprocessing end=============
+    console.log(rate_result);
+
+    //compare data with the standard normal distribution chart, and input it into the new array which will be result_arr=[[id, rate]]
+    for(var i=0;i<maxIdx;i++){
+        if(-0.4648>=rate_result[i]) // rate 1: 32% from min (-inf~0]
+        {
+            result_arr.push([id[i], 1]);
+        }
+        else{
+            if(rate_result[i]>-0.4648 && 0.2045>=rate_result[i]){ //rate 2: 26% from the end of rate 1 (0~0.95404]
+                result_arr.push([id[i], 2]);
+            }
+            else{ // rate 3: 20%
+                if(rate_result[i]>0.2045 && 0.7758>=rate_result[i]){
                     result_arr.push([id[i], 3]);
                 }
+                else{
+                    //rate 4: 14%
+                    if(rate_result[i]>0.7758 && 1.41229>=rate_result[i]){
+                        result_arr.push([id[i], 4]);
+                    }
+                    else{ //rate 5: 8%
+                        result_arr.push([id[i], 5]);
+                    }
+                }
             }
         }
-        console.log(result_arr);
-        return(result_arr);
-    })
-    result.stderr.on('data', function(data){
-        console.log(data.toString());
-        return(-1)
-    })
+    }
+    console.log(result_arr);
+    console.log('error occurred: \n'+result.stderr);
+    return(result_arr);
 }
