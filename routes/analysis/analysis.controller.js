@@ -123,59 +123,51 @@ exports.vuln = (req, res, next) => { //get method
 
 exports.save_vuln = (req, res, next) => {
 
+    var Arr=[]
+
     var data=req.body.data
     console.log("요청 데이터",data)
-    console.log("파싱",JSON.parse(data))
-
-    var data=JSON.parse(data)
+    data=JSON.parse(data)
     console.log("크기",data.length)
+    
+    var usr_id = req.session.userName;
+    //console.log(usr_id);
+    const md5_id = md5(usr_id);
+    //console.log(md5_id);
+
+    var update_vulns_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate . several ...
+    console.log(update_vulns_sql);
 
     for(var i=0;i<data.length;i++){
         //console.log(i,data[i].frequency,data[i].money,data[i].num)
         //console.log(i)
-        var id_vulns = data[i].num;
+        var id_vulns = data[i].num; // 취약성 고유 번호
         console.log(id_vulns)
         var serious_vulns = data[i].money;
         console.log(serious_vulns)
         var exposed_vulns = data[i].frequency;
         console.log(exposed_vulns)
-        console.log(id_vulns, serious_vulns, exposed_vulns);
+        console.log(id_vulns, serious_vulns, exposed_vulns); // 입력 값들 전부 가져옴 
 
-        //grading .. [exp,ser,grade]
-        var saved1 = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
-        var saved2 = [[2, 1, 2], [2, 2, 3], [2, 3, 4]]
-        var saved3 = [[3, 1, 3], [3, 2, 4], [3, 3, 5]]
+        var innerArr=[id_vulns,serious_vulns*exposed_vulns]
+        Arr.push(innerArr)
+    }
 
-        if (exposed_vulns == 1) {
-            var grade = saved1[serious_vulns - 1][2]
-        }
-        else if (exposed_vulns == 2) {
-            var grade = saved2[serious_vulns - 1][2]
-        }
-        else {
-            var grade = saved3[serious_vulns - 1][2]
-        }
-        console.log("grade:", grade);
+    console.log("파라미터 생성:",Arr)
+    var result=grade(Arr)
+    console.log("등급 산정 결과:",result)
+    console.log("등급 배열 크기:",result.length)
 
-
-        var usr_id = req.session.userName;
-        //console.log(usr_id);
-        const md5_id = md5(usr_id);
-        //console.log(md5_id);
-
-        var update_vulns_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate . several ...
-        console.log(update_vulns_sql);
-
-        db.query(update_vulns_sql, [grade, id_vulns], function (err, rows, fields) {
+        /*db.query(update_vulns_sql, [grade, id_vulns], function (err, rows, fields) {
             if (err) console.log(error)
             else {
                 console.log(rows);
             }
-        })
+        })*/
 
     }
     
-}
+
 
 //Anal_4.html => show threats 
 exports.threat = (req, res, next) => { //get method
