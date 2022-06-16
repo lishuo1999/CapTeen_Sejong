@@ -121,8 +121,8 @@ exports.vuln = (req, res, next) => { //get method
 
 //Anal_3 : saving data and making grade
 
-exports.save_vuln = (req, res, next) => {
-
+exports.save_vuln = async function(req, res, next){
+       
     var Arr=[]
 
     var data=req.body.data
@@ -131,41 +131,39 @@ exports.save_vuln = (req, res, next) => {
     console.log("크기",data.length)
     
     var usr_id = req.session.userName;
-    //console.log(usr_id);
     const md5_id = md5(usr_id);
-    //console.log(md5_id);
 
     var update_vulns_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_vulns_rate=? WHERE vulns_id=?' // update vulnerability rate . several ...
-    console.log(update_vulns_sql);
+    
+
 
     for(var i=0;i<data.length;i++){
-        //console.log(i,data[i].frequency,data[i].money,data[i].num)
-        //console.log(i)
         var id_vulns = data[i].num; // 취약성 고유 번호
-        console.log(id_vulns)
         var serious_vulns = data[i].money;
-        console.log(serious_vulns)
         var exposed_vulns = data[i].frequency;
-        console.log(exposed_vulns)
-        console.log(id_vulns, serious_vulns, exposed_vulns); // 입력 값들 전부 가져옴 
+        console.log(id_vulns, serious_vulns, exposed_vulns); // 입력 값들 전부 출력 
 
         var innerArr=[id_vulns,serious_vulns*exposed_vulns]
         Arr.push(innerArr)
-    }
 
-    console.log("파라미터 생성:",Arr)
-    var result=grade(Arr)
-    console.log("등급 산정 결과:",result)
-    console.log("등급 배열 크기:",result.length)
-
-        /*db.query(update_vulns_sql, [grade, id_vulns], function (err, rows, fields) {
-            if (err) console.log(error)
-            else {
-                console.log(rows);
+        if(Arr.length==data.length){
+            console.log("파라미터:",Arr)
+            let result=await grade(Arr)
+            console.log("등급 산정 결과:",result)
+            console.log("등급 배열 크기:",result.length)
+            for(var j=0;j<result.length;j++){
+                db.query(update_vulns_sql,[result[j][1],result[j][0]],function(err,rows,fields){
+                    if(err) console.log(error)
+                    else{
+                        console.log(rows)
+                    }
+                })
             }
-        })*/
-
+        }
     }
+
+
+}
     
 
 
@@ -253,52 +251,48 @@ exports.threat = (req, res, next) => { //get method
 
 
 //Anal_4 : saving data and making grade 
-exports.save_threat = (req, res, next) => {
+exports.save_threat = async function(req, res, next){
 
+    var Arr=[]
+    var Arr_spend=[]
     var data=req.body.data
     console.log("요청 데이터",data)
-    console.log("파싱",JSON.parse(data))
-
-    var data=JSON.parse(data)
+    data=JSON.parse(data)
     console.log("크기",data.length)
 
+    var usr_id = req.session.userName;
+    const md5_id = md5(usr_id);
+        
+    var update_threats_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_threats_rate=?, usr_threats_spend=? WHERE threats_id=?' // update vulnerability rate
+
+
     for(var i=0;i<data.length;i++){
-        var id_threats = data[i].num;
+        var id_threats = data[i].num; // 위협 고유 번호
         var serious_threats = data[i].money; // store !!!! 
+        Arr_spend.push(serious_threats)
         var exposed_threats = data[i].frequency;
-        console.log(id_threats, serious_threats, exposed_threats);
+        console.log(id_threats,serious_threats,exposed_threats)
 
-        //grading .. [exp,ser,grade]
-        var saved1 = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
-        var saved2 = [[2, 1, 2], [2, 2, 3], [2, 3, 4]]
-        var saved3 = [[3, 1, 3], [3, 2, 4], [3, 3, 5]]
+        var innerArr=[id_threats,serious_threats,exposed_threats]
+        Arr.push(innerArr)
 
-        if (exposed_threats == 1) {
-            var grade = saved1[serious_threats - 1][2]
-        }
-        else if (exposed_threats == 2) {
-            var grade = saved2[serious_threats - 1][2]
-        }
-        else {
-            var grade = saved3[serious_threats - 1][2]
-        }
-        console.log("grade:", grade);
+        if(Arr.length==data.length){
+            console.log("파라미터",Arr)
+            let result=await grade(Arr)
+            console.log("등급 산정 결과:",result)
+            console.log("등급 배열 크기:",result.length)
+            console.log("위협 비용 배열:",Arr_spend)
 
-
-        var usr_id = req.session.userName;
-        //console.log(usr_id);
-        const md5_id = md5(usr_id);
-        //console.log(md5_id);
-            
-        var update_threats_sql = 'UPDATE usr_db.table_' + md5_id + ' SET usr_threats_rate=?, usr_threats_spend=? WHERE threats_id=?' // update vulnerability rate
-        console.log(update_threats_sql);
-
-        db.query(update_threats_sql, [grade, serious_threats, id_threats], function (err, rows, fields) {
-            if (err) console.log(err)
-            else {
-                    console.log(rows)
+            for(var j=0;j<result.length;j++){
+                db.query(update_threats_sql, [result[j][1],Arr_spend[j],result[j][0]], function (err, rows, fields) {
+                    if (err) console.log(err)
+                    else {
+                            console.log(rows)
+                    }
+                })
             }
-        })
+        }
+        
     }
 
     
@@ -1323,6 +1317,7 @@ exports.save_ass = (req, res, next) => {
 // will be changed to internal function
 //gets doubel-layered array
 grade = (num_Rate)=>{
+    console.log(num_Rate)
     let numRate = num_Rate
     let maxIdx=numRate.length
     const spawnSync=require('child_process').spawnSync;
@@ -1336,8 +1331,11 @@ grade = (num_Rate)=>{
         rate.push(numRate[i][1]);
     }
 
-    const result= spawnSync('python', ['routes/analysis/grade_Calculate.py', rate]);
-    let data= result.stdout.toString();    
+
+    const result= spawnSync('python3', ['routes/analysis/grade_Calculate.py', rate]); // python -> python3 변경함 
+    //console.log("result:",result.stdout);
+    let data= result.stdout.toString();   
+    //console.log("data:",data) 
     let temp=data.toString().replace("[", "");
     temp=temp.replace("]", "")
     temp=temp.split(", ");
@@ -1382,7 +1380,7 @@ grade_5 = async function (num_Rate){
         rate.push(numRate[i][1]);
     }
 
-    const result= spawnSync('python', ['routes/analysis/grade_Calculate.py', rate]);
+    const result= spawnSync('python3', ['routes/analysis/grade_Calculate.py', rate]);
     let data= result.stdout.toString();    
     let temp=data.toString().replace("[", "");
     temp=temp.replace("]", "")
