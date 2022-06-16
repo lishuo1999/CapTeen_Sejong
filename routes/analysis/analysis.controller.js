@@ -1362,7 +1362,6 @@ grade = (num_Rate)=>{
         }
     }
     console.log(result_arr);
-    console.log('error occurred: \n'+result.stderr);
     return(result_arr);
 }
 
