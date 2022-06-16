@@ -112,6 +112,9 @@ $(function () {
             C = (cnt1 + 2*cnt2 + 3*cnt3)/(cnt1 + cnt2 + cnt3);
             C = Math.round(C * 10000) / 10000;
             alert("기밀성 평균점수는 " + C + " 입니다.");
+            cnt1 = Number(0);
+            cnt2 = Number(0)
+            cnt3 = Number(0)
         }
         else { //취소 버튼 클릭 시
 
@@ -175,6 +178,9 @@ $(function () {
             I = (cnt1 + 2*cnt2 + 3*cnt3)/(cnt1 + cnt2 + cnt3);
             I = Math.round(I * 10000) / 10000;
             alert("무결성 평균점수는 " + I + " 입니다.");
+            cnt1 = Number(0);
+            cnt2 = Number(0)
+            cnt3 = Number(0)
         }
         else { //취소 버튼 클릭 시
 
@@ -238,6 +244,9 @@ $(function () {
             A = (cnt1 + 2*cnt2 + 3*cnt3)/(cnt1 + cnt2 + cnt3);
             A = Math.round(A * 10000) / 10000;
             alert("가용성 평균점수는 " + A + " 입니다.");
+            cnt1 = Number(0);
+            cnt2 = Number(0)
+            cnt3 = Number(0)
         }
         else { //취소 버튼 클릭 시
 
@@ -283,6 +292,7 @@ $(function () {
                     C = 0;
                     I = 0;
                     A = 0;
+                    
                     $(".modal-wrapper").hide();
                     $('div[class="cia_div"][value="' + i + '"]').html("<a class='cia'>완료</a>");
                     $('div[class="cia_div"][value="' + i + '"]').attr('value', -1);
@@ -307,19 +317,22 @@ $(function () {
 
 $(function () { //다음 클릭 시 모든 데이터 리스트 POST
     $('#next').click(function () {
+        console.log(data_res.length);
+        console.log(JSON.stringify(data_res));
         $.ajax({
             type: "post",
-            url: "/analysis/grade", //서버에서 입력할 것
+            url: "/analysis/save_ass", //서버에서 입력할 것
             datatype: "json",
+            traditional: true,
             contentType: "application/json",
-            data: data_res,
+            data: JSON.stringify(data_res), ////!!!!!!!!
             success: function (data) { //data: 서버로부터 받아온 json data 
             },
             error: function () {
                 console.log(error);
             }
         });
-        //alert(JSON.stringify(data_res));
+
     });
 });
 
