@@ -94,8 +94,15 @@ selectStrategy=(id_md5)=>{
         let transferBudgetR=result[3]; // The rate of risk transfer budget
 
         let riskStrategy=[];
+        
+        let temp=[];
+        temp=await howMuchSecBudget(id_md5, secBudget);
 
-        let baseSecBudget=await howMuchSecBudget(id_md5, secBudget);
+        let baseSecBudget=temp[0];
+        let numAssets=temp[1];
+        console.log("temp: "+temp);
+        console.log("BaseSecBudget: "+baseSecBudget);
+        console.log(numAssets);
 
         // if DoA changes, then do the for clause from the very first phase
         while(whetherDoaChanged){
@@ -106,9 +113,9 @@ selectStrategy=(id_md5)=>{
                 {
                     if(doaImp_arr[i][2]==0/*the asset is important*/){
 
-                        if(baseSecBudget*doaImp_arr[i][0]>transferBudgetV){
+                        if(baseSecBudget*(3-(doaImp_arr[i][0]-1))>(transferBudgetV/numAssets)*(3-(doaImp_arr[i][0]-1))){
 
-                            if(doaImp_arr[i][3]>transferBudgetV){
+                            if(doaImp_arr[i][3]>transferBudgetR){
                                 //risk transfer
                                 riskStrategy.push(2);
                                 if(i==maxIdx-1){
@@ -123,7 +130,8 @@ selectStrategy=(id_md5)=>{
                             }
                             }
                         else{
-                            if(doaImp_arr[i][3]>transferBudgetV){
+                            // the security budget spent for a asset corresponds to the rate of it
+                            if(doaImp_arr[i][3]>doaImp_arr[i][0]){
                                 //risk reduce
                                 riskStrategy.push(4);
                                 if(i==maxIdx-1){
@@ -220,7 +228,7 @@ async function howMuchSecBudget (id_md5, secBudget) {
         let rate3=await result.filter(element=>3 === element).length;
         console.log('howMuchSetBudget rate fetch: '+result);
 
-        return (secBudget/(rate1+2*rate2+3*rate3));
+        return ([secBudget/(rate1+2*rate2+3*rate3), (rate1+2*rate2+3*rate3)]);
     })
     console.log('howMuchSetBudge output: '+baseBudget);
     return baseBudget;
