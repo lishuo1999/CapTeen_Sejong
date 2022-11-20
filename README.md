@@ -4,7 +4,6 @@ Sejong Univ. CapTeen Project Repository
 - 주제 : ```기업의 정보보안 위험평가 도구```
 - 제작 기간 : ```2022.03 ~ 2022.06```
 - 참여 인원 : ```4명``` 
-- 역할 : ```Front-end / Back-end``` 
 
 </br>
 
