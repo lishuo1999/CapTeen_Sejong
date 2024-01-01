@@ -37,4 +37,4 @@ Sejong Univ. CapTeen Project Repository
 </br>
 
 ## 프로젝트 발표 영상
-[![Video Label](http://img.youtube.com/vi/QaNSObmxNdM/1.jpg)](https://youtu.be/QaNSObmxNdM)
+[![정보보호 CapTeen](http://img.youtube.com/vi/QaNSObmxNdM/0.jpg)](https://youtu.be/QaNSObmxNdM)
