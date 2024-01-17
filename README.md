@@ -37,5 +37,15 @@ Sejong Univ. CapTeen Project Repository
 
 </br>
 
+## 담당 역할 및 학습 내용
+- 위험관리 전반적인 프로세스 이론 학습
+- ISMS 의무 선정 대상 조사 및 법적 근거 학습
+- 위험관리 절차의 '위험분석' 단계에서 자산 중요도 등급 산정을 기밀성, 무결성, 가용성의 기대값과 업무의존도 네 가지 요소를 고려해 CIA 지표 작성하여 1~3등급으로 등급화
+- 회원가입/로그인/자산분석 페이지 Front-end/Back-end 개발
+- 최종 산출물 ppt 및 결과보고서 작성
+
+
+</br>
+
 ## 프로젝트 발표 영상
 [![정보보호 CapTeen](http://img.youtube.com/vi/QaNSObmxNdM/0.jpg)](https://youtu.be/QaNSObmxNdM)
